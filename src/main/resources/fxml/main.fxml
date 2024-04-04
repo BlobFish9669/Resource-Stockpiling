@@ -1,12 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0644836425781" minWidth="10.0" prefWidth="324.0644836425781" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.07028198242188" minWidth="10.0" prefWidth="75.93551635742188" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <Label layoutX="234.0" layoutY="92.0" text="Welcome To JavaFX!" />
-      <Label fx:id="defaultLabel" alignment="CENTER" layoutX="264.0" layoutY="122.0" prefHeight="16.0" prefWidth="73.0" AnchorPane.leftAnchor="264.0" AnchorPane.topAnchor="122.0" />
-      <Button fx:id="defaultButton" layoutX="264.0" layoutY="153.0" onMouseClicked="#onButtonClicked" text="Click Me" AnchorPane.leftAnchor="264.0" AnchorPane.topAnchor="153.0" />
+      <Label fx:id="nameDisplay" text="None yet" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <GridPane prefHeight="110.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.84661865234375" minWidth="10.0" prefWidth="228.84661865234375" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.95709228515625" minWidth="10.0" prefWidth="96.15338134765625" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextArea fx:id="nameInput" prefHeight="44.0" prefWidth="241.0" promptText="Name" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextArea>
+            <Label fx:id="nameInputNoteLabel" alignment="TOP_LEFT" prefHeight="44.0" prefWidth="332.0" text="Note: Must not include special characters" textOverrun="CLIP" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Button fx:id="nameSubmitButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="10.0" prefWidth="59.0" text="Submit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+            <Label fx:id="nameInstructionLabel" text="Enter a name between 3-15 characters:" />
+         </children>
+      </GridPane>
+      <Label fx:id="gameTitle" text="GAME" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="defaultLabel" text="Name:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
-</AnchorPane>
+</GridPane>
