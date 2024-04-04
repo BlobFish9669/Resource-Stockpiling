@@ -68,5 +68,38 @@ public class MainController {
             nameInput.setText("");
             System.out.println("Name is: " + nameInputService.getCurrentName());
         }
+
+        /*
+        @FXML
+        private Label defaultLabel;
+
+        @FXML
+        private Button defaultButton;
+
+        private CounterService counterService;
+
+        *//**
+         * Initialize the window
+         *
+         * @param stage Top level container for this window
+         *//*
+        public void init(Stage stage) {
+            counterService = new CounterService();
+        }
+
+        *//**
+         * Method to call when our counter button is clicked
+         *
+         *//*
+        @FXML
+        public void onButtonClicked() {
+            System.out.println("Button has been clicked");
+            counterService.incrementCounter();
+
+            int count = counterService.getCurrentCount();
+            defaultLabel.setText(Integer.toString(count));
+        }
+        */
     }
+
 }
