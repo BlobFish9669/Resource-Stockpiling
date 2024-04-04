@@ -25,6 +25,8 @@ public class MainController {
     @FXML
     public Label gameTitle;
     @FXML
+    public Label defaultLabel;
+    @FXML
     private TextArea nameInput;
     @FXML
     private Label nameDisplay;
