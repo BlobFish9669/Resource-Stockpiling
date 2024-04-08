@@ -27,8 +27,8 @@ public class MainWindow extends Application {
         MainController baseController = baseLoader.getController();
         baseController.init(primaryStage);
 
-        primaryStage.setTitle("SENG201 Example App");
-        Scene scene = new Scene(root, 600, 400);
+        primaryStage.setTitle("Group 15 Game");
+        Scene scene = new Scene(root, 800, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

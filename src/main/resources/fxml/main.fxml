@@ -2,55 +2,126 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0644836425781" minWidth="10.0" prefWidth="324.0644836425781" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.07028198242188" minWidth="10.0" prefWidth="75.93551635742188" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Label fx:id="nameDisplay" text="None yet" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <GridPane prefHeight="110.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.84661865234375" minWidth="10.0" prefWidth="228.84661865234375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.95709228515625" minWidth="10.0" prefWidth="96.15338134765625" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <TextArea fx:id="nameInput" prefHeight="44.0" prefWidth="241.0" promptText="Name" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></TextArea>
-            <Label fx:id="nameInputNoteLabel" alignment="TOP_LEFT" prefHeight="44.0" prefWidth="332.0" text="Note: Must not include special characters" textOverrun="CLIP" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Button fx:id="nameSubmitButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="10.0" prefWidth="59.0" text="Submit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-            <Label fx:id="nameInstructionLabel" text="Enter a name between 3-15 characters:" />
-         </children>
-      </GridPane>
-      <Label fx:id="gameTitle" text="GAME" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Comic Sans MS" size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="defaultLabel" text="Name:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-   </children>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.5" minWidth="10.0" prefWidth="472.5" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.5" minWidth="10.0" prefWidth="192.5" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="127.95693969726562" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="240.0" minHeight="10.0" prefHeight="240.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label fx:id="errorsLabelResult" text="Empty" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Label fx:id="errorsLabel" text="Errors:" GridPane.rowIndex="2" />
+        <Label fx:id="gameTitle" text="GAME MENU" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <font>
+                <Font name="Comic Sans MS" size="26.0" />
+            </font>
+        </Label>
+        <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onSubmitButtonClicked" text="Submit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <GridPane GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="217.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="255.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="55.0" minHeight="9.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="nameInputLabel" prefHeight="17.0" prefWidth="256.0" text="Enter a name between 3-15 characters:" />
+                <Label fx:id="roundsLabel" text="How many rounds (5-15):" GridPane.rowIndex="1" />
+                <Label fx:id="difficultyLabel" text="Difficulty:" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="difficultyDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Slider fx:id="roundsSlider" blockIncrement="1.0" majorTickUnit="1.0" max="15.0" min="5.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="selectTowersLabel" text="Select 3:" GridPane.rowIndex="3" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="towerButton6" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="6" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton3" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton2" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton4" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="4" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton5" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="5" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton1" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="182.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="126.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="nameInput" promptText="Name" />
+                        <Label fx:id="nameInputNoteLabel" alignment="CENTER" contentDisplay="TOP" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="136.0" text="Note: Must not include special characters" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Label>
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" percentWidth="65.0" prefWidth="95.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="8.0" percentWidth="35.0" prefWidth="63.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="75.0" minHeight="10.0" percentHeight="20.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="149.0" minHeight="10.0" percentHeight="16.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="149.0" minHeight="10.0" percentHeight="16.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="149.0" minHeight="10.0" percentHeight="16.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="161.0" minHeight="10.0" percentHeight="16.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="161.0" minHeight="10.0" percentHeight="16.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="selectedTowerTitle" text="Selected Tower Info">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="selectedTowerResourcesLabel" text="Resources" GridPane.rowIndex="1" />
+                <Label fx:id="selectedTowerReloadSpeedLabel" text="Reload Speed" GridPane.rowIndex="2" />
+                <Label fx:id="selectedTowerResourceTypeLabel" text="Resource Type" GridPane.rowIndex="3" />
+                <Label fx:id="selectedTowerLevelLabel" text="Level" GridPane.rowIndex="4" />
+                <Label fx:id="selectedTowerCostLabel" text="Cost" GridPane.rowIndex="5" />
+            </children>
+            <GridPane.margin>
+                <Insets left="5.0" />
+            </GridPane.margin>
+        </GridPane>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
 </GridPane>
