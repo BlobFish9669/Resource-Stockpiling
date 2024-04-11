@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 //import seng201.team0.services.CounterService;
+import seng201.team0.models.Tower;
+import seng201.team0.models.towertypes.*;
 import seng201.team0.services.NameInputService;
-
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -45,6 +47,7 @@ public class MainController {
 
     public int selectedRounds = 5;
     public List<Integer> selectedTowers = new ArrayList<>();
+    public List<Tower> towerTypes = new ArrayList<>();
 
 
     private NameInputService nameInputService;
@@ -62,12 +65,15 @@ public class MainController {
             selectedRounds = newValue.intValue();
         });
 
+        Collections.addAll(towerTypes, new TowerOne(), new TowerTwo(), new TowerThree(), new TowerFour(), new TowerFive(), new TowerSix());
+
         //Tutorial 2
         List<Button> towerButtons = List.of(towerButton1, towerButton2, towerButton3, towerButton4, towerButton5, towerButton6);
 
         for (int i = 0; i < 6; i++) {
             final int finalI = i;
             towerButtons.get(i).setOnAction(event -> {
+                showStats(finalI);
                 if (selectedTowers.contains(finalI + 1)) {
                     selectedTowers.remove(Integer.valueOf(finalI + 1)); // Use Integer.valueOf to remove by object (the value) not index
                     towerButtons.get(finalI).setStyle(""); // Reset style
@@ -81,6 +87,18 @@ public class MainController {
         }
     }
 
+    /**
+     * Method to show stats of the selected tower
+     */
+    private void showStats(int towerIndex) {
+        Tower selectedTower = towerTypes.get(towerIndex);
+        selectedTowerResourcesLabel.setText("Resources: " + selectedTower.getResourceAmount());
+        selectedTowerReloadSpeedLabel.setText("Reload Speed: " + selectedTower.getReloadSpeed());
+        selectedTowerResourceTypeLabel.setText("Resource Type: " + selectedTower.getResourceType());
+        selectedTowerLevelLabel.setText("Level: " + selectedTower.getLevel());
+        selectedTowerCostLabel.setText("Cost: " + selectedTower.getCost());
+    }
+
 
     /**
      * Method to call when the name submit button is clicked
@@ -89,6 +107,8 @@ public class MainController {
     @FXML
     private void onSubmitButtonClicked() {
         System.out.println("Button has been clicked");
+        // Resets error label each time button is clicked
+        errorsLabelResult.setText("Empty");
         /*
         Used code found on https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character to figure
         out how to find if a string contained special characters
