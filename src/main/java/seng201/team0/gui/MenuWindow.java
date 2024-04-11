@@ -12,19 +12,19 @@ import java.io.IOException;
  * Class starts the javaFX application window
  * @author seng201 teaching team
  */
-public class MainWindow extends Application {
+public class MenuWindow extends Application {
 
     /**
-     * Opens the gui with the fxml content specified in resources/fxml/main.fxml
+     * Opens the gui with the fxml content specified in resources/fxml/menu.fxml
      * @param primaryStage The current fxml stage, handled by javaFX Application class
      * @throws IOException if there is an issue loading fxml file
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent root = baseLoader.load();
 
-        MainController baseController = baseLoader.getController();
+        MenuController baseController = baseLoader.getController();
         baseController.init(primaryStage);
 
         primaryStage.setTitle("Group 15 Game");
