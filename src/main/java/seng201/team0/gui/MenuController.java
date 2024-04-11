@@ -4,21 +4,26 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 //import seng201.team0.services.CounterService;
+
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
+
 import seng201.team0.services.NameInputService;
 import java.util.Collections;
+import seng201.team0.services.RoundsSelectionService;
+import seng201.team0.services.DifficultySelectionService;
+import seng201.team0.services.TowerSelectionService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Controller for the main.fxml window
- * @author seng201 teaching team, expanded upon by Caleb Cooper
+ * Controller for the menu.fxml window
+ * @author Caleb Cooper, Quinn Le Lievre
  */
-public class MainController {
-    //New Testing
+public class MenuController {
     @FXML
     public Label gameTitle;
     public Label nameInputLabel;
@@ -46,11 +51,15 @@ public class MainController {
     public Button submitButton;
 
     public int selectedRounds = 5;
-    public List<Integer> selectedTowers = new ArrayList<>();
     public List<Tower> towerTypes = new ArrayList<>();
+    public ArrayList<Integer> selectedTowers = new ArrayList<>();
 
 
     private NameInputService nameInputService;
+    private RoundsSelectionService roundsSelectionService;
+    private DifficultySelectionService difficultySelectionService;
+    private TowerSelectionService towerSelectionService;
+
     /**
      * Initialize the window
      *
@@ -58,6 +67,9 @@ public class MainController {
      */
     public void init(Stage stage) {
         nameInputService = new NameInputService();
+        roundsSelectionService = new RoundsSelectionService();
+        difficultySelectionService = new DifficultySelectionService();
+        towerSelectionService = new TowerSelectionService();
 
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
 
@@ -79,8 +91,8 @@ public class MainController {
                     towerButtons.get(finalI).setStyle(""); // Reset style
                 } else {
                     if (selectedTowers.size() < 3) {
-                        selectedTowers.add(finalI + 1);
-                        towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                        selectedTowers.add(finalI + 1); // Add tower to the ArrayList
+                        towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;"); // Set button to look like it has been selected
                     }
                 }
             });
@@ -118,63 +130,22 @@ public class MainController {
 
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
-            //nameInputService.setNewName(nameInput.getText());
-            System.out.println("ERROR");
-            errorsLabelResult.setText("Name Selection Error");
+            errorsLabelResult.setText("Error - Please enter a valid name");
             nameInput.setText("");
+        } else if (difficultyDropdown.getValue() == null) {
+            errorsLabelResult.setText("Error - Please select a difficulty");
+        } else if (selectedTowers.size() != 3) {
+            errorsLabelResult.setText("Error - Please select at least 3 Towers");
         } else {
             nameInputService.setNewName(nameInput.getText());
-            //nameDisplay.setText(nameInput.getText());
-            nameInput.setText("");
+            roundsSelectionService.setRoundsSelection(selectedRounds);
+            difficultySelectionService.setDifficultySelection(difficultyDropdown.getValue());
+            towerSelectionService.setTowerSelection(selectedTowers);
+
             System.out.println("Name is: " + nameInputService.getCurrentName());
-        }
-
-        System.out.println("# of Rounds: " + selectedRounds);
-        if (difficultyDropdown.getValue() != null) {
-            System.out.println("Difficulty: " + difficultyDropdown.getValue());
-        } else {
-            System.out.println("ERROR");
-            errorsLabelResult.setText("Difficulty Selection Error");
-        }
-
-        if (selectedTowers.size() == 3) {
-            System.out.println("Towers Selected: " + selectedTowers);
-        } else {
-            System.out.println("ERROR");
-            errorsLabelResult.setText("Tower Selection Error");
+            System.out.println("# of Rounds: " + roundsSelectionService.getRoundsSelection());
+            System.out.println("Difficulty: " + difficultySelectionService.getDifficultySelection());
+            System.out.println("Towers Selected: " + towerSelectionService.getTowerSelection());
         }
     }
-
-        /*
-        @FXML
-        private Label defaultLabel;
-
-        @FXML
-        private Button defaultButton;
-
-        private CounterService counterService;
-
-        *//**
-         * Initialize the window
-         *
-         * @param stage Top level container for this window
-         *//*
-        public void init(Stage stage) {
-            counterService = new CounterService();
-        }
-
-        *//**
-         * Method to call when our counter button is clicked
-         *
-         *//*
-        @FXML
-        public void onButtonClicked() {
-            System.out.println("Button has been clicked");
-            counterService.incrementCounter();
-
-            int count = counterService.getCurrentCount();
-            defaultLabel.setText(Integer.toString(count));
-        }
-        */
-
 }
