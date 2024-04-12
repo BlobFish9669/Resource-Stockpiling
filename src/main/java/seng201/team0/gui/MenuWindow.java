@@ -21,16 +21,14 @@ public class MenuWindow extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
+        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/fx_wrapper.fxml"));
         Parent root = baseLoader.load();
-
-        MenuController baseController = baseLoader.getController();
-        baseController.init(primaryStage);
-
+        GameWrapper gameWrapper = baseLoader.getController();
         primaryStage.setTitle("Group 15 Game");
         Scene scene = new Scene(root, 800, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+        gameWrapper.init(primaryStage);
     }
 
     /**
