@@ -25,7 +25,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" mnemonicParsing="false" text="Back" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
    </children>
    <opaqueInsets>
       <Insets />

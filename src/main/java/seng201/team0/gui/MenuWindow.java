@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MenuWindow extends Application {
 
     /**
-     * Opens the gui with the fxml content specified in resources/fxml/menu.fxml
+     * Opens the gui with the fxml content specified in resources/fxml/fx_wrapper.fxml
      * @param primaryStage The current fxml stage, handled by javaFX Application class
      * @throws IOException if there is an issue loading fxml file
      */

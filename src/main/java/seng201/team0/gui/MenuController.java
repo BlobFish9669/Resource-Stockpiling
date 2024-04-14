@@ -63,16 +63,18 @@ public class MenuController {
     private RoundsSelectionService roundsSelectionService;
     private DifficultySelectionService difficultySelectionService;
     private TowerSelectionService towerSelectionService;
-
+    /**
+     * Constructor
+     * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
+     *                    all linked.
+     */
     public MenuController(GameManager gameManager) {
         this.gameManager = gameManager;
     }
-
     /**
      * Initialize the window
      */
     public void initialize() {
-
         nameInputService = new NameInputService();
         roundsSelectionService = new RoundsSelectionService();
         difficultySelectionService = new DifficultySelectionService();
@@ -105,9 +107,9 @@ public class MenuController {
             });
         }
     }
-
     /**
      * Method to show stats of the selected tower
+     * @param towerIndex the index of the intended tower to view
      */
     private void showStats(int towerIndex) {
         Tower selectedTower = towerTypes.get(towerIndex);
@@ -121,7 +123,6 @@ public class MenuController {
 
     /**
      * Method to call when the name submit button is clicked
-     *
      */
     @FXML
     private void onSubmitButtonClicked() {
