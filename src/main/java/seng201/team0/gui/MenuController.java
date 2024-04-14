@@ -2,9 +2,9 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 //import seng201.team0.services.CounterService;
 
+import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
 
@@ -24,6 +24,10 @@ import java.util.regex.Pattern;
  * @author Caleb Cooper, Quinn Le Lievre
  */
 public class MenuController {
+
+    private GameManager gameManager;
+
+
     @FXML
     public Label gameTitle;
     public Label nameInputLabel;
@@ -59,13 +63,18 @@ public class MenuController {
     private RoundsSelectionService roundsSelectionService;
     private DifficultySelectionService difficultySelectionService;
     private TowerSelectionService towerSelectionService;
-
+    /**
+     * Constructor
+     * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
+     *                    all linked.
+     */
+    public MenuController(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
     /**
      * Initialize the window
-     *
-     * @param stage Top level container for this window
      */
-    public void init(Stage stage) {
+    public void initialize() {
         nameInputService = new NameInputService();
         roundsSelectionService = new RoundsSelectionService();
         difficultySelectionService = new DifficultySelectionService();
@@ -98,9 +107,9 @@ public class MenuController {
             });
         }
     }
-
     /**
      * Method to show stats of the selected tower
+     * @param towerIndex the index of the intended tower to view
      */
     private void showStats(int towerIndex) {
         Tower selectedTower = towerTypes.get(towerIndex);
@@ -114,7 +123,6 @@ public class MenuController {
 
     /**
      * Method to call when the name submit button is clicked
-     *
      */
     @FXML
     private void onSubmitButtonClicked() {
@@ -146,6 +154,8 @@ public class MenuController {
             System.out.println("# of Rounds: " + roundsSelectionService.getRoundsSelection());
             System.out.println("Difficulty: " + difficultySelectionService.getDifficultySelection());
             System.out.println("Towers Selected: " + towerSelectionService.getTowerSelection());
+
+            gameManager.resetAndLaunchMainScreen();
         }
     }
 }
