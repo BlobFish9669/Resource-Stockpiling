@@ -8,11 +8,9 @@ import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
 
-import seng201.team0.services.NameInputService;
+import seng201.team0.services.*;
+
 import java.util.Collections;
-import seng201.team0.services.RoundsSelectionService;
-import seng201.team0.services.DifficultySelectionService;
-import seng201.team0.services.TowerSelectionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,10 @@ import java.util.regex.Pattern;
 public class MenuController {
 
     private GameManager gameManager;
-
+    private DifficultySelectionService difficultyService;
+    private NameInputService nameService;
+    private RoundsSelectionService roundsService;
+    private TowerSelectionService towerService;
 
     @FXML
     public Label gameTitle;
@@ -58,27 +59,26 @@ public class MenuController {
     public List<Tower> towerTypes = new ArrayList<>();
     public ArrayList<Integer> selectedTowers = new ArrayList<>();
 
-
-    private NameInputService nameInputService;
-    private RoundsSelectionService roundsSelectionService;
-    private DifficultySelectionService difficultySelectionService;
-    private TowerSelectionService towerSelectionService;
     /**
      * Constructor
-     * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
-     *                    all linked.
+     *
+     * @param gameManager         an instance of GameManger that is linked through the entirety of the game in order to keep it
+     *                            all linked.
+     * @param moneyService
+     * @param currentRoundService
      */
-    public MenuController(GameManager gameManager) {
+    public MenuController(GameManager gameManager, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService) {
         this.gameManager = gameManager;
+        this.difficultyService = difficultyService;
+        this.nameService = nameService;
+        this.roundsService = roundsService;
+        this.towerService = towerService;
     }
+
     /**
      * Initialize the window
      */
     public void initialize() {
-        nameInputService = new NameInputService();
-        roundsSelectionService = new RoundsSelectionService();
-        difficultySelectionService = new DifficultySelectionService();
-        towerSelectionService = new TowerSelectionService();
 
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
 
@@ -145,15 +145,18 @@ public class MenuController {
         } else if (selectedTowers.size() != 3) {
             errorsLabelResult.setText("Error - Please select at least 3 Towers");
         } else {
-            nameInputService.setNewName(nameInput.getText());
-            roundsSelectionService.setRoundsSelection(selectedRounds);
-            difficultySelectionService.setDifficultySelection(difficultyDropdown.getValue());
-            towerSelectionService.setTowerSelection(selectedTowers);
+            nameService.setNewName(nameInput.getText());
+            roundsService.setRoundsSelection(selectedRounds);
+            difficultyService.setDifficultySelection(difficultyDropdown.getValue());
+            towerService.setTowerSelection(selectedTowers);
 
-            System.out.println("Name is: " + nameInputService.getCurrentName());
-            System.out.println("# of Rounds: " + roundsSelectionService.getRoundsSelection());
-            System.out.println("Difficulty: " + difficultySelectionService.getDifficultySelection());
-            System.out.println("Towers Selected: " + towerSelectionService.getTowerSelection());
+            System.out.println("--------------------------------------");
+            System.out.println("Name is: " + nameService.getCurrentName());
+            System.out.println("# of Rounds: " + roundsService.getRoundsSelection());
+            System.out.println("Difficulty: " + difficultyService.getDifficultySelection());
+            System.out.println("Towers Selected: " + towerService.getTowerSelection());
+            System.out.println("--------------------------------------");
+
 
             gameManager.resetAndLaunchMainScreen();
         }

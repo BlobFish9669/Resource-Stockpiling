@@ -4,6 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import seng201.team0.GameManager;
+import seng201.team0.services.*;
+
+import java.util.Objects;
+
 /**
  * Controller for the main.fxml window
  * @author Caleb Cooper
@@ -11,24 +15,57 @@ import seng201.team0.GameManager;
 public class MainController {
 
     private GameManager gameManager;
+    private DifficultySelectionService difficultyService;
+    private NameInputService nameService;
+    private RoundsSelectionService roundsService;
+    private TowerSelectionService towerService;
+    private MoneyBalanceService moneyService;
+    private CurrentRoundService currentRoundService;
+
 
     @FXML
     public Button shopButton;
     public Button inventoryButton;
     public Label mainLabel;
+    public Label currentMoney;
+    public Label currentMoneyLabel;
+    public Label currentRound;
+    public Label currentRoundLabel;
+    public Label roundsRemaining;
+    public Label roundsRemainingLabel;
     /**
      * Constructor
-     * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
-     *                    all linked.
+     * @param gameManager an instance of GameManger that is linked through the entirety of the game
      */
-    public MainController(GameManager gameManager) {
+    public MainController(GameManager gameManager, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService) {
         this.gameManager = gameManager;
+        this.difficultyService = difficultyService;
+        this.nameService = nameService;
+        this.roundsService = roundsService;
+        this.towerService = towerService;
+        this.moneyService = moneyService;
+        this.currentRoundService = currentRoundService;
     }
     /**
      * Initialize the window
      */
     public void initialize() {
-        System.out.println("Main Page");
+        String difficulty = difficultyService.getDifficultySelection();
+        currentRoundService.setCurrentRound(1);
+        int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
+
+        if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
+            moneyService.setNewBalance(100);
+        } else if (Objects.equals(difficulty, "Medium")) {
+            moneyService.setNewBalance(75);
+        } else if (Objects.equals(difficulty, "Hard")) {
+            moneyService.setNewBalance(50);
+        } else  {
+            moneyService.setNewBalance(25);
+        }
+        currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
+        currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
+        roundsRemainingLabel.setText(Integer.toString(remainingRounds));
     }
     /**
      * Method to call when the shop button is clicked
