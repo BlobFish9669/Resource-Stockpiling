@@ -7,6 +7,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import seng201.team0.GameManager;
 
+import seng201.team0.services.*;
+
 import java.io.IOException;
 
 /**
@@ -18,13 +20,21 @@ public class GameWrapper {
     private Pane pane;
     private Stage stage;
 
+
     /**
      * Initializes the interface and sets up the game environment on the provided stage
      * @param stage The primary stage on which the application's elements are displayed
      */
     public void init(Stage stage) {
         this.stage = stage;
-        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane);
+        DifficultySelectionService difficultyService = new DifficultySelectionService();
+        NameInputService nameService = new NameInputService();
+        RoundsSelectionService roundsService = new RoundsSelectionService();
+        TowerSelectionService towerService = new TowerSelectionService();
+        MoneyBalanceService moneyService = new MoneyBalanceService();
+        CurrentRoundService currentRoundService = new CurrentRoundService();
+
+        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane, difficultyService, nameService, roundsService, towerService, moneyService, currentRoundService);
     }
     /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
@@ -34,7 +44,7 @@ public class GameWrapper {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new MenuController(gameManager));
+            setupLoader.setControllerFactory(param -> new MenuController(gameManager, gameManager.getDifficultyService(), gameManager.getNameService(), gameManager.getRoundsService(), gameManager.getTowerService(), gameManager.getMoneyService(), gameManager.getCurrentRoundService()));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Menu");
@@ -55,7 +65,7 @@ public class GameWrapper {
     public void launchMainScreen(GameManager gameManager) {
         try {
             FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-            mainScreenLoader.setControllerFactory(param -> new MainController(gameManager));
+            mainScreenLoader.setControllerFactory(param -> new MainController(gameManager, gameManager.getDifficultyService(), gameManager.getNameService(), gameManager.getRoundsService(), gameManager.getTowerService(), gameManager.getMoneyService(), gameManager.getCurrentRoundService()));
             Parent setupParent  = mainScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Main");
