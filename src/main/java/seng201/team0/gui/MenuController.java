@@ -67,12 +67,12 @@ public class MenuController {
      * @param moneyService
      * @param currentRoundService
      */
-    public MenuController(GameManager gameManager, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService) {
+    public MenuController(GameManager gameManager) {
         this.gameManager = gameManager;
-        this.difficultyService = difficultyService;
-        this.nameService = nameService;
-        this.roundsService = roundsService;
-        this.towerService = towerService;
+        this.difficultyService = gameManager.getDifficultyService();
+        this.nameService = gameManager.getNameService();
+        this.roundsService = gameManager.getRoundsService();
+        this.towerService = gameManager.getTowerService();
     }
 
     /**

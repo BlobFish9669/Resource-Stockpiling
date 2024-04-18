@@ -33,8 +33,9 @@ public class GameWrapper {
         TowerSelectionService towerService = new TowerSelectionService();
         MoneyBalanceService moneyService = new MoneyBalanceService();
         CurrentRoundService currentRoundService = new CurrentRoundService();
+        ShopAvailabilityService shopAvailabilityService = new ShopAvailabilityService();
 
-        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane, difficultyService, nameService, roundsService, towerService, moneyService, currentRoundService);
+        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane, difficultyService, nameService, roundsService, towerService, moneyService, currentRoundService, shopAvailabilityService);
     }
     /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
@@ -44,7 +45,7 @@ public class GameWrapper {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new MenuController(gameManager, gameManager.getDifficultyService(), gameManager.getNameService(), gameManager.getRoundsService(), gameManager.getTowerService(), gameManager.getMoneyService(), gameManager.getCurrentRoundService()));
+            setupLoader.setControllerFactory(param -> new MenuController(gameManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Menu");
@@ -65,7 +66,7 @@ public class GameWrapper {
     public void launchMainScreen(GameManager gameManager) {
         try {
             FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-            mainScreenLoader.setControllerFactory(param -> new MainController(gameManager, gameManager.getDifficultyService(), gameManager.getNameService(), gameManager.getRoundsService(), gameManager.getTowerService(), gameManager.getMoneyService(), gameManager.getCurrentRoundService()));
+            mainScreenLoader.setControllerFactory(param -> new MainController(gameManager));
             Parent setupParent  = mainScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Main");

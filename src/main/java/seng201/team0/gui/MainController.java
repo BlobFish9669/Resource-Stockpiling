@@ -37,14 +37,14 @@ public class MainController {
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game
      */
-    public MainController(GameManager gameManager, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService) {
+    public MainController(GameManager gameManager) {
         this.gameManager = gameManager;
-        this.difficultyService = difficultyService;
-        this.nameService = nameService;
-        this.roundsService = roundsService;
-        this.towerService = towerService;
-        this.moneyService = moneyService;
-        this.currentRoundService = currentRoundService;
+        this.difficultyService = gameManager.getDifficultyService();
+        this.nameService = gameManager.getNameService();
+        this.roundsService = gameManager.getRoundsService();
+        this.towerService = gameManager.getTowerService();
+        this.moneyService = gameManager.getMoneyService();
+        this.currentRoundService = gameManager.getCurrentRoundService();
     }
     /**
      * Initialize the window
