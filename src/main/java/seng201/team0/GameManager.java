@@ -22,6 +22,7 @@ public class GameManager {
     private final TowerSelectionService towerService;
     private final MoneyBalanceService moneyService;
     private final CurrentRoundService currentRoundService;
+    private final ShopAvailabilityService shopAvailabilityService;
     /**
      * Constructor
      * @param menuScreenLauncher Action to execute to display the menu screen.
@@ -30,7 +31,7 @@ public class GameManager {
      * @param inventoryScreenLauncher Action to execute to display the inventory screen.
      * @param clearScreen Action to execute to clear the screen
      */
-    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService) {
+    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
         this.menuScreenLauncher = menuScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
@@ -42,6 +43,7 @@ public class GameManager {
         this.towerService = towerService;
         this.moneyService = moneyService;
         this.currentRoundService = currentRoundService;
+        this.shopAvailabilityService = shopAvailabilityService;
         resetAndLaunchMenuScreen();
     }
 
@@ -97,4 +99,6 @@ public class GameManager {
     public CurrentRoundService getCurrentRoundService() {
         return currentRoundService;
     }
+
+    public ShopAvailabilityService getShopAvailabilityService() { return shopAvailabilityService; }
 }
