@@ -61,11 +61,8 @@ public class MenuController {
 
     /**
      * Constructor
-     *
-     * @param gameManager         an instance of GameManger that is linked through the entirety of the game in order to keep it
-     *                            all linked.
-     * @param moneyService
-     * @param currentRoundService
+     * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
+     *                    all linked.
      */
     public MenuController(GameManager gameManager) {
         this.gameManager = gameManager;
