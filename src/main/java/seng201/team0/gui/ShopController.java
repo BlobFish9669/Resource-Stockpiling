@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import seng201.team0.GameManager;
+import seng201.team0.models.Tower;
+import seng201.team0.models.towertypes.*;
 import seng201.team0.services.*;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * Controller for the shop.fxml window
@@ -66,6 +68,8 @@ public class ShopController {
     private MoneyBalanceService moneyService;
     private CurrentRoundService currentRoundService;
     private ShopAvailabilityService shopAvailabilityService;
+
+    public List<Tower> shopTowers = new ArrayList<>();
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
@@ -85,21 +89,21 @@ public class ShopController {
      * Initialize the window
      */
     public void initialize() {
-        int towersAvailable = shopAvailabilityService.getTowersAvailable();
-        if (towersAvailable == 4) {
+        int numTowersAvailable = shopAvailabilityService.getNumberTowersAvailable();
+        if (numTowersAvailable == 4) {
             towerButton4.setDisable(false);
-        } else if (towersAvailable == 5) {
+        } else if (numTowersAvailable == 5) {
             towerButton4.setDisable(false);
             towerButton5.setDisable(false);
         }
 
-        int upgradesAvailable = shopAvailabilityService.getUpgradesAvailable();
-        if (upgradesAvailable == 4) {
+        int numUpgradesAvailable = shopAvailabilityService.getNumberUpgradesAvailable();
+        if (numUpgradesAvailable == 4) {
             upgradeButton4.setDisable(false);
-        } else if (upgradesAvailable == 5) {
+        } else if (numUpgradesAvailable == 5) {
             upgradeButton4.setDisable(false);
             upgradeButton5.setDisable(false);
-        } else if (upgradesAvailable == 6) {
+        } else if (numUpgradesAvailable == 6) {
             upgradeButton4.setDisable(false);
             upgradeButton5.setDisable(false);
             upgradeButton6.setDisable(false);
@@ -110,6 +114,29 @@ public class ShopController {
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
 
+        List<Button> towerButtons = List.of(towerButton1, towerButton2, towerButton3, towerButton4, towerButton5);
+
+        // Have to choose between 3 and 5 unique random numbers between 1 and 10 depending on shopAvailable:
+
+        for (int i = 0; i < numTowersAvailable; i++) {
+            shopTowers = shopAvailabilityService.getAvailableTowers();
+
+            final int finalI = i;
+            towerButtons.get(i).setOnAction(event -> {
+                for (int j = 0; j < towerButtons.size(); j++) { // Set all buttons to have no style - ensure that no buttons look selected other than the intended one
+                    if (j != finalI) {
+                        towerButtons.get(j).setStyle("");
+                    }
+                }
+
+                showStats(finalI);
+                if (Objects.equals(towerButtons.get(finalI).getStyle(), "")) { // Set style of button to indicate it is selected
+                    towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                } else {
+                    towerButtons.get(finalI).setStyle("");
+                }
+            });
+        }
     }
     /**
      * Method to call when the back button is clicked
@@ -117,5 +144,17 @@ public class ShopController {
     @FXML
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
+    }
+    /**
+     * Method to show stats of the selected tower
+     * @param towerIndex the index of the intended tower to view
+     */
+    private void showStats(int towerIndex) {
+        Tower selectedTower = shopTowers.get(towerIndex);
+        resourceAmountLabel.setText(String.valueOf((selectedTower.getResourceAmount())));
+        reloadSpeedLabel.setText(String.valueOf((selectedTower.getReloadSpeed())));
+        resourceTypeLabel.setText(selectedTower.getResourceType());
+        towerLevelLabel.setText(String.valueOf((selectedTower.getLevel())));
+        towerCostLabel.setText(String.valueOf(selectedTower.getCost()));
     }
 }
