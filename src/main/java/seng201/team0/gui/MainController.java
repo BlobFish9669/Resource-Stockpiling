@@ -33,6 +33,7 @@ public class MainController {
     public Label currentRoundLabel;
     public Label roundsRemaining;
     public Label roundsRemainingLabel;
+
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game
@@ -46,6 +47,7 @@ public class MainController {
         this.moneyService = gameManager.getMoneyService();
         this.currentRoundService = gameManager.getCurrentRoundService();
     }
+
     /**
      * Initialize the window
      */
@@ -57,6 +59,7 @@ public class MainController {
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
     }
+
     /**
      * Method to call when the shop button is clicked
      */
@@ -64,6 +67,7 @@ public class MainController {
     private void onShopButtonClicked() {
         gameManager.resetAndOpenShopScreen();
     }
+
     /**
      * Method to call when the inventory button is clicked
      */

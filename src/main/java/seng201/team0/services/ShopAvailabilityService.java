@@ -2,6 +2,7 @@ package seng201.team0.services;
 
 import seng201.team0.models.ShopAvailability;
 import seng201.team0.models.Tower;
+import seng201.team0.models.Upgrade;
 
 import java.util.List;
 
@@ -30,5 +31,7 @@ public class ShopAvailabilityService {
      * @return the list of towers available
      */
     public List<Tower> getAvailableTowers() { return shopAvailability.getShopTowers(); }
+
+    public List<Upgrade> getAvailableUpgrades() { return shopAvailability.getShopUpgrades(); }
 
 }

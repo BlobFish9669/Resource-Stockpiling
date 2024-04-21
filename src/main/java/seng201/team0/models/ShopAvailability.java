@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
+import seng201.team0.models.upgradetypes.*;
 
 /**
  * Class used to create and store a random number of shop items within given bounds
@@ -17,8 +18,11 @@ public class ShopAvailability {
     private int numUpgradesAvailable = r.nextInt(3, 7);
 
     private List<Tower> potentialShopTowers = new ArrayList<>();
-    public List<Tower> tempShopTowers = new ArrayList<>();
+    private List<Tower> tempShopTowers = new ArrayList<>();
+    private List<Upgrade> potentialShopUpgrades = new ArrayList<>();
+    private List<Upgrade> tempShopUpgrades = new ArrayList<>();
     private List<Tower> shopTowers = setAvailableTowers();
+    private List<Upgrade> shopUpgrades = setAvailableUpgrades();
 
 
     /**
@@ -54,11 +58,25 @@ public class ShopAvailability {
         return tempShopTowers;
     }
 
+    public List<Upgrade> setAvailableUpgrades() {
+        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4());
+        for (int i = 0; i < numUpgradesAvailable; i++) {
+            Random r = new Random();
+            int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());
+            tempShopUpgrades.add(potentialShopUpgrades.get(randomShopUpgrade));
+        }
+        return tempShopUpgrades;
+    }
+
     /**
      * Method to retrieve the list of available shop towers
      * @return the list of available shop towers
      */
     public List<Tower> getShopTowers() {
         return shopTowers;
+    }
+
+    public List<Upgrade> getShopUpgrades() {
+        return shopUpgrades;
     }
 }
