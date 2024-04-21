@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,7 @@ public class MenuController {
     private NameInputService nameService;
     private RoundsSelectionService roundsService;
     private TowerSelectionService towerService;
+    private MoneyBalanceService moneyService;
 
     @FXML
     public Label gameTitle;
@@ -70,6 +72,8 @@ public class MenuController {
         this.nameService = gameManager.getNameService();
         this.roundsService = gameManager.getRoundsService();
         this.towerService = gameManager.getTowerService();
+        this.moneyService = gameManager.getMoneyService();
+
     }
 
     /**
@@ -146,6 +150,19 @@ public class MenuController {
             roundsService.setRoundsSelection(selectedRounds);
             difficultyService.setDifficultySelection(difficultyDropdown.getValue());
             towerService.setTowerSelection(selectedTowers);
+
+            String difficulty = difficultyService.getDifficultySelection();
+
+            if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
+                moneyService.setNewBalance(100);
+            } else if (Objects.equals(difficulty, "Medium")) {
+                moneyService.setNewBalance(75);
+            } else if (Objects.equals(difficulty, "Hard")) {
+                moneyService.setNewBalance(50);
+            } else  {
+                moneyService.setNewBalance(25);
+            }
+
 
             System.out.println("--------------------------------------");
             System.out.println("Name is: " + nameService.getCurrentName());

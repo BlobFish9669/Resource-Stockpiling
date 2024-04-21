@@ -50,19 +50,9 @@ public class MainController {
      * Initialize the window
      */
     public void initialize() {
-        String difficulty = difficultyService.getDifficultySelection();
         currentRoundService.setCurrentRound(1);
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
 
-        if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
-            moneyService.setNewBalance(100);
-        } else if (Objects.equals(difficulty, "Medium")) {
-            moneyService.setNewBalance(75);
-        } else if (Objects.equals(difficulty, "Hard")) {
-            moneyService.setNewBalance(50);
-        } else  {
-            moneyService.setNewBalance(25);
-        }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
