@@ -129,7 +129,7 @@ public class MenuController {
     private void onSubmitButtonClicked() {
         System.out.println("Button has been clicked");
         // Resets error label each time button is clicked
-        errorsLabelResult.setText("Empty");
+        errorsLabelResult.setText("");
         /*
         Used code found on https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character to figure
         out how to find if a string contained special characters
@@ -137,15 +137,26 @@ public class MenuController {
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(nameInput.getText());
 
+        /*
+        Stores a boolean value to check if there are any errors.
+        Displays all current error messages if there are any.
+        */
+        boolean isError = false;
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
-            errorsLabelResult.setText("Error - Please enter a valid name");
+            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
             nameInput.setText("");
-        } else if (difficultyDropdown.getValue() == null) {
-            errorsLabelResult.setText("Error - Please select a difficulty");
-        } else if (selectedTowers.size() != 3) {
-            errorsLabelResult.setText("Error - Please select at least 3 Towers");
-        } else {
+            isError = true;
+        }
+        if (difficultyDropdown.getValue() == null) {
+            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
+            isError = true;
+        }
+        if (selectedTowers.size() != 3) {
+            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
+            isError = true;
+        }
+        if (!isError) {
             nameService.setNewName(nameInput.getText());
             roundsService.setRoundsSelection(selectedRounds);
             difficultyService.setDifficultySelection(difficultyDropdown.getValue());

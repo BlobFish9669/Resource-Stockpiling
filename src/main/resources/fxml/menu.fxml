@@ -22,7 +22,7 @@
         <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label fx:id="errorsLabelResult" text="Empty" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Label fx:id="errorsLabelResult" maxHeight="1.7976931348623157E308" text="Empty" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Label fx:id="errorsLabel" text="Errors:" GridPane.rowIndex="2" />
         <Label fx:id="gameTitle" text="GAME MENU" GridPane.halignment="LEFT" GridPane.valignment="TOP">
             <font>
