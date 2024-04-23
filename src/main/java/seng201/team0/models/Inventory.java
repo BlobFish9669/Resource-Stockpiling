@@ -10,7 +10,10 @@ public class Inventory {
     /**
      * Constructor
      */
-    public Inventory() {towers = new ArrayList<>();}
+    public Inventory() {
+        towers = new ArrayList<>();
+        upgrades = new ArrayList<>();
+    }
     /**
      * Get list of towers
      * @return Current towers

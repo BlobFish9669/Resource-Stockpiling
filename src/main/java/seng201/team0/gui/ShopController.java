@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
-import seng201.team0.models.towertypes.*;
 import seng201.team0.services.*;
 
 import java.util.*;
@@ -21,7 +20,6 @@ public class ShopController {
     @FXML
     public GridPane shopGrid;
     public Label shopLabel;
-    public Button backButton;
 
     public Label currentMoney;
     public Label currentRound;
@@ -63,7 +61,10 @@ public class ShopController {
     public Label upgradeTitle1;
     public Label upgradeInfo1;
 
-    public Button purchaseButton;
+    public Button purchaseTowerButton;
+    public Button purchaseUpgradeButton;
+    public Button sellFromInventoryButton;
+    public Button backButton;
 
 
     private GameManager gameManager;
@@ -77,6 +78,12 @@ public class ShopController {
 
     public List<Tower> shopTowers = new ArrayList<>();
     public List<Upgrade> shopUpgrades = new ArrayList<>();
+
+    private Tower towerToPurchase;
+    private Integer towerButton;
+    private Upgrade upgradeToPurchase;
+    private Integer upgradeButton;
+
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game in order to keep it
@@ -142,8 +149,13 @@ public class ShopController {
                 showTowerStats(finalI);
                 if (Objects.equals(towerButtons.get(finalI).getStyle(), "")) { // Set style of button to indicate it is selected
                     towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                    towerToPurchase = shopTowers.get(finalI);
+                    towerButton = finalI+1;
                 } else {
                     towerButtons.get(finalI).setStyle("");
+                    towerToPurchase = null;
+                    towerButton = null;
+                    clearTowerStats();
                 }
             });
         }
@@ -162,8 +174,13 @@ public class ShopController {
                 showUpgradeStats(finalI);
                 if (Objects.equals(upgradeButtons.get(finalI).getStyle(), "")) { // Set style of button to indicate it is selected
                     upgradeButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                    upgradeToPurchase = shopUpgrades.get(finalI);
+                    upgradeButton = finalI+1;
                 } else {
                     upgradeButtons.get(finalI).setStyle("");
+                    upgradeToPurchase = null;
+                    upgradeButton = null;
+                    clearUpgradeStats();
                 }
             });
         }
@@ -175,6 +192,10 @@ public class ShopController {
     @FXML
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
+    }
+
+    @FXML
+    private void onSellButtonClicked() { //gameManager.resetAndLaunchInventorySellScreen();
     }
     /**
      * Method to show stats of the selected tower
@@ -189,9 +210,84 @@ public class ShopController {
         towerCostLabel.setText(String.valueOf(selectedTower.getCost()));
     }
 
+    private void clearTowerStats() {
+        resourceAmountLabel.setText("");
+        reloadSpeedLabel.setText("");
+        resourceTypeLabel.setText("");
+        towerLevelLabel.setText("");
+        towerCostLabel.setText("");
+    }
+
     private void showUpgradeStats(int upgradeIndex) {
         Upgrade selectedUpgrade = shopUpgrades.get(upgradeIndex);
         upgradeInfo1.setText(selectedUpgrade.getUpgradeType());
         upgradeCostLabel.setText(String.valueOf(selectedUpgrade.getCost()));
+    }
+
+    private void clearUpgradeStats() {
+        upgradeInfo1.setText("");
+        upgradeCostLabel.setText("");
+    }
+
+    @FXML
+    private void onTowerPurchaseClicked() {
+        if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
+            System.out.println("Error not enough money");
+        } else if (inventoryService.getTowerSelection().size() == 10) {
+            System.out.println("Too many towers");
+            System.out.println(inventoryService.getTowerSelection());
+        } else {
+            switch (towerButton) {
+                case 1:
+                    towerButton1.setDisable(true);
+                    break;
+                case 2:
+                    towerButton2.setDisable(true);
+                    break;
+                case 3:
+                    towerButton3.setDisable(true);
+                    break;
+                case 4:
+                    towerButton4.setDisable(true);
+                    break;
+                case 5:
+                    towerButton5.setDisable(true);
+                    break;
+            }
+            moneyService.setNewBalance(moneyService.getCurrentBalance() - towerToPurchase.getCost());
+            inventoryService.addToTowerSelection(towerToPurchase);
+        }
+        currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
+    }
+
+    @FXML
+    private void onUpgradePurchaseClicked() {
+        if (moneyService.getCurrentBalance() - upgradeToPurchase.getCost() < 0) {
+            System.out.println("Error not enough money");
+        } else {
+            switch (upgradeButton) {
+                case 1:
+                    upgradeButton1.setDisable(true);
+                    break;
+                case 2:
+                    upgradeButton2.setDisable(true);
+                    break;
+                case 3:
+                    upgradeButton3.setDisable(true);
+                    break;
+                case 4:
+                    upgradeButton4.setDisable(true);
+                    break;
+                case 5:
+                    upgradeButton5.setDisable(true);
+                    break;
+                case 6:
+                    upgradeButton6.setDisable(true);
+                    break;
+            }
+            moneyService.setNewBalance(moneyService.getCurrentBalance() - upgradeToPurchase.getCost());
+            inventoryService.addUserUpgrade(upgradeToPurchase);
+        }
+        currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
 }

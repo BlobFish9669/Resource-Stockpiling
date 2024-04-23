@@ -105,12 +105,12 @@ public class MenuController {
             final int finalI = i;
             towerButtons.get(i).setOnAction(event -> {
                 showStats(finalI);
-                if (tempSelectedTowers.contains(finalI + 1)) {
-                    tempSelectedTowers.remove(Integer.valueOf(finalI + 1)); // Use Integer.valueOf to remove by object (the value) not index
+                if (tempSelectedTowers.contains(finalI)) {
+                    tempSelectedTowers.remove(Integer.valueOf(finalI)); // Use Integer.valueOf to remove by object (the value) not index
                     towerButtons.get(finalI).setStyle(""); // Reset style
                 } else {
                     if (tempSelectedTowers.size() < 3) {
-                        tempSelectedTowers.add(finalI + 1); // Add tower to the ArrayList
+                        tempSelectedTowers.add(finalI); // Add tower to the ArrayList
                         towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;"); // Set button to look like it has been selected
                     }
                 }
