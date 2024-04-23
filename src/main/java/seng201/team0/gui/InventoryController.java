@@ -8,7 +8,6 @@ import seng201.team0.GameManager;
 import seng201.team0.services.CurrentRoundService;
 import seng201.team0.services.MoneyBalanceService;
 import seng201.team0.services.RoundsSelectionService;
-import seng201.team0.services.TowerSelectionService;
 
 /**
  * Controller for the inventory.fxml window

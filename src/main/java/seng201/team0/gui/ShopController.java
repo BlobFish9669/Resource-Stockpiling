@@ -70,7 +70,7 @@ public class ShopController {
     private DifficultySelectionService difficultyService;
     private NameInputService nameService;
     private RoundsSelectionService roundsService;
-    private TowerSelectionService towerService;
+    private InventoryService inventoryService;
     private MoneyBalanceService moneyService;
     private CurrentRoundService currentRoundService;
     private ShopAvailabilityService shopAvailabilityService;
@@ -87,7 +87,7 @@ public class ShopController {
         this.difficultyService = gameManager.getDifficultyService();
         this.nameService = gameManager.getNameService();
         this.roundsService = gameManager.getRoundsService();
-        this.towerService = gameManager.getTowerService();
+        this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
         this.currentRoundService = gameManager.getCurrentRoundService();
         this.shopAvailabilityService = gameManager.getShopAvailabilityService();

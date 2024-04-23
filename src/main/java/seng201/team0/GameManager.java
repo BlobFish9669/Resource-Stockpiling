@@ -19,7 +19,7 @@ public class GameManager {
     private final DifficultySelectionService difficultyService;
     private final NameInputService nameService;
     private final RoundsSelectionService roundsService;
-    private final TowerSelectionService towerService;
+    private final InventoryService inventoryService;
     private final MoneyBalanceService moneyService;
     private final CurrentRoundService currentRoundService;
     private final ShopAvailabilityService shopAvailabilityService;
@@ -33,12 +33,12 @@ public class GameManager {
      * @param difficultyService Service for managing the selection of game difficulty
      * @param nameService Service for managing the player's name
      * @param roundsService Service for managing the selection of game rounds
-     * @param towerService Service for managing the selection of towers
+     * @param inventoryService Service for managing the players inventory
      * @param moneyService Service for managing the player's money
      * @param currentRoundService Service for managing the current round of the game
      * @param shopAvailabilityService Service for managing the availability of items in the shop
      */
-    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, TowerSelectionService towerService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
+    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
         this.menuScreenLauncher = menuScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
@@ -47,7 +47,7 @@ public class GameManager {
         this.difficultyService = difficultyService;
         this.nameService = nameService;
         this.roundsService = roundsService;
-        this.towerService = towerService;
+        this.inventoryService = inventoryService;
         this.moneyService = moneyService;
         this.currentRoundService = currentRoundService;
         this.shopAvailabilityService = shopAvailabilityService;
@@ -107,8 +107,8 @@ public class GameManager {
      * Method to retrieve the instance of TowerSelectionService to track players chosen tower input throughout the game
      * @return instance of TowerSelectionService
      */
-    public TowerSelectionService getTowerService() {
-        return towerService;
+    public InventoryService getInventoryService() {
+        return inventoryService;
     }
     /**
      * Method to retrieve the instance of MoneyBalanceService to track players money throughout the game

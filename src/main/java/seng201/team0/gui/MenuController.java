@@ -30,7 +30,7 @@ public class MenuController {
     private DifficultySelectionService difficultyService;
     private NameInputService nameService;
     private RoundsSelectionService roundsService;
-    private TowerSelectionService towerService;
+    private InventoryService inventoryService;
     private MoneyBalanceService moneyService;
 
     @FXML
@@ -62,7 +62,9 @@ public class MenuController {
 
     public int selectedRounds = 5;
     public List<Tower> towerTypes = new ArrayList<>();
-    public ArrayList<Integer> selectedTowers = new ArrayList<>();
+    public ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
+    public ArrayList<Tower> selectedTowers = new ArrayList<>();
+
 
     /**
      * Constructor
@@ -74,7 +76,7 @@ public class MenuController {
         this.difficultyService = gameManager.getDifficultyService();
         this.nameService = gameManager.getNameService();
         this.roundsService = gameManager.getRoundsService();
-        this.towerService = gameManager.getTowerService();
+        this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
 
     }
@@ -103,12 +105,12 @@ public class MenuController {
             final int finalI = i;
             towerButtons.get(i).setOnAction(event -> {
                 showStats(finalI);
-                if (selectedTowers.contains(finalI + 1)) {
-                    selectedTowers.remove(Integer.valueOf(finalI + 1)); // Use Integer.valueOf to remove by object (the value) not index
+                if (tempSelectedTowers.contains(finalI + 1)) {
+                    tempSelectedTowers.remove(Integer.valueOf(finalI + 1)); // Use Integer.valueOf to remove by object (the value) not index
                     towerButtons.get(finalI).setStyle(""); // Reset style
                 } else {
-                    if (selectedTowers.size() < 3) {
-                        selectedTowers.add(finalI + 1); // Add tower to the ArrayList
+                    if (tempSelectedTowers.size() < 3) {
+                        tempSelectedTowers.add(finalI + 1); // Add tower to the ArrayList
                         towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;"); // Set button to look like it has been selected
                     }
                 }
@@ -159,7 +161,7 @@ public class MenuController {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
             isError = true;
         }
-        if (selectedTowers.size() != 3) {
+        if (tempSelectedTowers.size() != 3) {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
             isError = true;
         }
@@ -167,7 +169,10 @@ public class MenuController {
             nameService.setNewName(nameInput.getText());
             roundsService.setRoundsSelection(selectedRounds);
             difficultyService.setDifficultySelection(difficultyDropdown.getValue());
-            towerService.setTowerSelection(selectedTowers);
+            for (Integer tempSelectedTower : tempSelectedTowers) {
+                selectedTowers.add(towerTypes.get(tempSelectedTower));
+            }
+            inventoryService.setTowerSelection(selectedTowers);
 
             String difficulty = difficultyService.getDifficultySelection();
 
@@ -186,7 +191,7 @@ public class MenuController {
             System.out.println("Name is: " + nameService.getCurrentName());
             System.out.println("# of Rounds: " + roundsService.getRoundsSelection());
             System.out.println("Difficulty: " + difficultyService.getDifficultySelection());
-            System.out.println("Towers Selected: " + towerService.getTowerSelection());
+            System.out.println("Towers Selected: " + inventoryService.getTowerSelection());
             System.out.println("--------------------------------------");
 
 

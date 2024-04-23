@@ -30,12 +30,12 @@ public class GameWrapper {
         DifficultySelectionService difficultyService = new DifficultySelectionService();
         NameInputService nameService = new NameInputService();
         RoundsSelectionService roundsService = new RoundsSelectionService();
-        TowerSelectionService towerService = new TowerSelectionService();
+        InventoryService inventoryService = new InventoryService();
         MoneyBalanceService moneyService = new MoneyBalanceService();
         CurrentRoundService currentRoundService = new CurrentRoundService();
         ShopAvailabilityService shopAvailabilityService = new ShopAvailabilityService();
 
-        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane, difficultyService, nameService, roundsService, towerService, moneyService, currentRoundService, shopAvailabilityService);
+        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::clearPane, difficultyService, nameService, roundsService, inventoryService, moneyService, currentRoundService, shopAvailabilityService);
     }
     /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
