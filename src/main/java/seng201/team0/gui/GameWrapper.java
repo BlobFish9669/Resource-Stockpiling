@@ -43,7 +43,7 @@ public class GameWrapper {
      */
     public void launchMenuScreen(GameManager gameManager) {
         try {
-            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/menu_test.fxml"));
             // provide a custom Controller with parameters
             setupLoader.setControllerFactory(param -> new MenuController(gameManager));
             Parent setupParent  = setupLoader.load();

@@ -34,7 +34,7 @@ public class MenuController {
     private MoneyBalanceService moneyService;
 
     @FXML
-    public GridPane menuGrid;
+    public BorderPane menuBorderPane;
     public Label gameTitle;
     public Label nameInputLabel;
     public TextField nameInput;
@@ -86,8 +86,8 @@ public class MenuController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        menuGrid.prefWidthProperty().bind(MenuWindow.getWidth());
-        menuGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+        menuBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        menuBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
 
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
