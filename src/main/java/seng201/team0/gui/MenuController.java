@@ -2,8 +2,10 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import seng201.team0.gui.MenuWindow;
 //import seng201.team0.services.CounterService;
 
+import javafx.scene.layout.*;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
@@ -32,6 +34,7 @@ public class MenuController {
     private MoneyBalanceService moneyService;
 
     @FXML
+    public GridPane menuGrid;
     public Label gameTitle;
     public Label nameInputLabel;
     public TextField nameInput;
@@ -80,6 +83,10 @@ public class MenuController {
      * Initialize the window
      */
     public void initialize() {
+        // Binds the width and height of the grid to the size of the window.
+        menuGrid.prefWidthProperty().bind(MenuWindow.getWidth());
+        menuGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+
 
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
 

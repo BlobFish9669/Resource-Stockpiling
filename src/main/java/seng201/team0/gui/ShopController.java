@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
@@ -18,6 +19,7 @@ import java.util.*;
 public class ShopController {
 
     @FXML
+    public GridPane shopGrid;
     public Label shopLabel;
     public Button backButton;
 
@@ -94,6 +96,10 @@ public class ShopController {
      * Initialize the window
      */
     public void initialize() {
+        // Binds the width and height of the grid to the size of the window.
+        shopGrid.prefWidthProperty().bind(MenuWindow.getWidth());
+        shopGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+
         int numTowersAvailable = shopAvailabilityService.getNumberTowersAvailable();
         if (numTowersAvailable == 4) {
             towerButton4.setDisable(false);

@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import seng201.team0.GameManager;
 import seng201.team0.services.CurrentRoundService;
 import seng201.team0.services.MoneyBalanceService;
@@ -21,6 +22,7 @@ public class InventoryController {
     private CurrentRoundService currentRoundService;
 
     @FXML
+    public GridPane inventoryGrid;
     public Label inventoryLabel;
     public Button backButton;
     public Label currentMoneyLabel;
@@ -42,6 +44,10 @@ public class InventoryController {
      * Initialize the window
      */
     public void initialize() {
+        // Binds the width and height of the grid to the size of the window.
+        inventoryGrid.prefWidthProperty().bind(MenuWindow.getWidth());
+        inventoryGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
