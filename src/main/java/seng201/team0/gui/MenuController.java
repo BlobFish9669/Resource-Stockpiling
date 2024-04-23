@@ -174,7 +174,7 @@ public class MenuController {
             for (Integer tempSelectedTower : tempSelectedTowers) {
                 selectedTowers.add(towerTypes.get(tempSelectedTower));
             }
-            inventoryService.setTowerSelection(selectedTowers);
+            inventoryService.setMainTowerSelection(selectedTowers);
 
             String difficulty = difficultyService.getDifficultySelection();
 
@@ -193,7 +193,7 @@ public class MenuController {
             System.out.println("Name is: " + nameService.getCurrentName());
             System.out.println("# of Rounds: " + roundsService.getRoundsSelection());
             System.out.println("Difficulty: " + difficultyService.getDifficultySelection());
-            System.out.println("Towers Selected: " + inventoryService.getTowerSelection());
+            System.out.println("Towers Selected: " + inventoryService.getMainTowerSelection());
             System.out.println("--------------------------------------");
 
 

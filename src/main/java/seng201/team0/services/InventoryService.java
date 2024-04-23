@@ -18,14 +18,18 @@ public class InventoryService {
      * Set towerSelection to be the value of the users desired Towers
      * @param input value of the users input
      */
-    public void setTowerSelection(ArrayList<Tower> input) {inventory.setTowers(input);}
+    public void setMainTowerSelection(ArrayList<Tower> input) {inventory.setMainTowers(input);}
     /**
      * Retrieve the current tower ArrayList
      * @return current tower ArrayList
      */
-    public ArrayList<Tower> getTowerSelection() {return inventory.getTowers();}
+    public ArrayList<Tower> getMainTowerSelection() {return inventory.getMainTowers();}
 
-    public void addToTowerSelection(Tower input) {inventory.addTower(input);}
+    public ArrayList<Tower> getReserveTowerSelection() {return inventory.getReserveTowers();}
+
+    public void addToMainTowerSelection(Tower input) {inventory.addMainTower(input);}
+
+    public void addToReserveTowerSelection(Tower input) {inventory.addReserveTower(input);}
 
     public ArrayList<Upgrade> getUserUpgrades() {return inventory.getUpgrades();}
 

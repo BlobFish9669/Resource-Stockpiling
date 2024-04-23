@@ -235,7 +235,7 @@ public class ShopController {
             System.out.println("No tower selected");
         } else if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
             System.out.println("Error not enough money");
-        } else if (inventoryService.getTowerSelection().size() == 10) {
+        } else if (inventoryService.getMainTowerSelection().size() == 5 && inventoryService.getReserveTowerSelection().size() == 5) {
             System.out.println("Too many towers");
         } else {
             switch (towerButton) {
@@ -261,8 +261,14 @@ public class ShopController {
                     break;
             }
             moneyService.setNewBalance(moneyService.getCurrentBalance() - towerToPurchase.getCost());
-            inventoryService.addToTowerSelection(towerToPurchase);
+            if (inventoryService.getMainTowerSelection().size() == 5) {
+                inventoryService.addToReserveTowerSelection(towerToPurchase);
+            } else {
+                inventoryService.addToMainTowerSelection(towerToPurchase);
+            }
             towerToPurchase = null;
+            System.out.println(inventoryService.getMainTowerSelection());
+            System.out.println(inventoryService.getReserveTowerSelection());
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
