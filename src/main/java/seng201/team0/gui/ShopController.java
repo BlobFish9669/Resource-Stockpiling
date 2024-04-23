@@ -248,8 +248,7 @@ public class ShopController {
     }
 
     @FXML
-    private void onSellButtonClicked() { //gameManager.resetAndLaunchInventorySellScreen();
-    }
+    private void onSellButtonClicked() { gameManager.resetAndOpenInventorySellScreen(); }
     /**
      * Method to show stats of the selected tower
      * @param towerIndex the index of the intended tower to view

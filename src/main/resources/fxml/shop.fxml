@@ -174,7 +174,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="sellFromInventoryButton" mnemonicParsing="false" text="Sell From Inventory" GridPane.halignment="CENTER" />
+            <Button fx:id="sellFromInventoryButton" mnemonicParsing="false" onAction="#onSellButtonClicked" text="Sell From Inventory" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
    </children>

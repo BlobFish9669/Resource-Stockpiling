@@ -14,6 +14,7 @@ public class GameManager {
     private final Consumer<GameManager> mainScreenLauncher;
     private final Consumer<GameManager> shopScreenLauncher;
     private final Consumer<GameManager> inventoryScreenLauncher;
+    private final Consumer<GameManager> inventorySellScreenLauncher;
     private final Runnable clearScreen;
 
     private final DifficultySelectionService difficultyService;
@@ -38,11 +39,12 @@ public class GameManager {
      * @param currentRoundService Service for managing the current round of the game
      * @param shopAvailabilityService Service for managing the availability of items in the shop
      */
-    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
+    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
         this.menuScreenLauncher = menuScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
         this.inventoryScreenLauncher = inventoryScreenLauncher;
+        this.inventorySellScreenLauncher = inventorySellScreenLauncher;
         this.clearScreen = clearScreen;
         this.difficultyService = difficultyService;
         this.nameService = nameService;
@@ -81,6 +83,11 @@ public class GameManager {
     public void resetAndOpenInventoryScreen() {
         clearScreen.run();
         inventoryScreenLauncher.accept(this);
+    }
+
+    public void resetAndOpenInventorySellScreen() {
+        clearScreen.run();
+        inventorySellScreenLauncher.accept(this);
     }
     /**
      * Method to retrieve the instance of DifficultySelectionService to track difficulty throughout the game
