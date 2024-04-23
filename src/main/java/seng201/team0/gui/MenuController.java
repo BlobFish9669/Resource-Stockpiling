@@ -1,6 +1,7 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import seng201.team0.gui.MenuWindow;
 //import seng201.team0.services.CounterService;
@@ -35,6 +36,7 @@ public class MenuController {
 
     @FXML
     public BorderPane menuBorderPane;
+    public GridPane errorsGridPane;
     public Label gameTitle;
     public Label nameInputLabel;
     public TextField nameInput;
@@ -147,25 +149,25 @@ public class MenuController {
         Matcher m = p.matcher(nameInput.getText());
 
         /*
-        Stores a boolean value to check if there are any errors.
+        Stores an int to check how many errors there are.
         Displays all current error messages if there are any.
         */
-        boolean isError = false;
+       int errors = 0;
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
             nameInput.setText("");
-            isError = true;
+            errors += 1;
         }
         if (difficultyDropdown.getValue() == null) {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
-            isError = true;
+            errors += 1;
         }
         if (tempSelectedTowers.size() != 3) {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
-            isError = true;
+            errors += 1;
         }
-        if (!isError) {
+        if (errors == 0) {
             nameService.setNewName(nameInput.getText());
             roundsService.setRoundsSelection(selectedRounds);
             difficultyService.setDifficultySelection(difficultyDropdown.getValue());
