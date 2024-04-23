@@ -231,62 +231,78 @@ public class ShopController {
 
     @FXML
     private void onTowerPurchaseClicked() {
-        if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
+        if (towerToPurchase == null) {
+            System.out.println("No tower selected");
+        } else if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
             System.out.println("Error not enough money");
         } else if (inventoryService.getTowerSelection().size() == 10) {
             System.out.println("Too many towers");
-            System.out.println(inventoryService.getTowerSelection());
         } else {
             switch (towerButton) {
                 case 1:
                     towerButton1.setDisable(true);
+                    towerButton1.setStyle("");
                     break;
                 case 2:
                     towerButton2.setDisable(true);
+                    towerButton2.setStyle("");
                     break;
                 case 3:
                     towerButton3.setDisable(true);
+                    towerButton3.setStyle("");
                     break;
                 case 4:
                     towerButton4.setDisable(true);
+                    towerButton4.setStyle("");
                     break;
                 case 5:
                     towerButton5.setDisable(true);
+                    towerButton5.setStyle("");
                     break;
             }
             moneyService.setNewBalance(moneyService.getCurrentBalance() - towerToPurchase.getCost());
             inventoryService.addToTowerSelection(towerToPurchase);
+            towerToPurchase = null;
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
 
     @FXML
     private void onUpgradePurchaseClicked() {
-        if (moneyService.getCurrentBalance() - upgradeToPurchase.getCost() < 0) {
+        if (upgradeToPurchase == null) {
+            System.out.println("No upgrade selected");
+        } else if (moneyService.getCurrentBalance() - upgradeToPurchase.getCost() < 0) {
             System.out.println("Error not enough money");
         } else {
             switch (upgradeButton) {
                 case 1:
                     upgradeButton1.setDisable(true);
+                    upgradeButton1.setStyle("");
                     break;
                 case 2:
                     upgradeButton2.setDisable(true);
+                    upgradeButton2.setStyle("");
                     break;
                 case 3:
                     upgradeButton3.setDisable(true);
+                    upgradeButton3.setStyle("");
                     break;
                 case 4:
                     upgradeButton4.setDisable(true);
+                    upgradeButton4.setStyle("");
                     break;
                 case 5:
                     upgradeButton5.setDisable(true);
+                    upgradeButton5.setStyle("");
                     break;
                 case 6:
                     upgradeButton6.setDisable(true);
+                    upgradeButton6.setStyle("");
                     break;
             }
             moneyService.setNewBalance(moneyService.getCurrentBalance() - upgradeToPurchase.getCost());
             inventoryService.addUserUpgrade(upgradeToPurchase);
+            upgradeToPurchase = null;
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
