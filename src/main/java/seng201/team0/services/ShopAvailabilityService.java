@@ -34,4 +34,12 @@ public class ShopAvailabilityService {
 
     public List<Upgrade> getAvailableUpgrades() { return shopAvailability.getShopUpgrades(); }
 
+    public List<Boolean> getPurchasedTowers() { return shopAvailability.getPurchasedTowers();}
+
+    public List<Boolean> getPurchasedUpgrades() { return shopAvailability.getPurchasedUpgrades(); }
+
+    public void setTowerPurchased(Integer input) { shopAvailability.setPurchasedTower(input); }
+
+    public void setUpgradePurchased(Integer input) { shopAvailability.setPurchasedUpgrade(input); }
+
 }

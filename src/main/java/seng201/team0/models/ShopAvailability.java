@@ -18,11 +18,38 @@ public class ShopAvailability {
     private int numUpgradesAvailable = r.nextInt(3, 7);
 
     private List<Tower> potentialShopTowers = new ArrayList<>();
-    private List<Tower> tempShopTowers = new ArrayList<>();
+    private List<Tower> shopTowers = new ArrayList<>();
     private List<Upgrade> potentialShopUpgrades = new ArrayList<>();
-    private List<Upgrade> tempShopUpgrades = new ArrayList<>();
-    private List<Tower> shopTowers = setAvailableTowers();
-    private List<Upgrade> shopUpgrades = setAvailableUpgrades();
+    private List<Upgrade> shopUpgrades = new ArrayList<>();
+
+    private List<Boolean> purchasedTowers = new ArrayList<>();
+    private List<Boolean> purchasedUpgrades = new ArrayList<>();
+
+    public ShopAvailability() {
+        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5(), new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10());
+        for (int i = 0; i < numTowersAvailable; i++) {
+            Random r = new Random();
+            int randomShopTower = r.nextInt(0, potentialShopTowers.size());
+            while (shopTowers.contains(potentialShopTowers.get(randomShopTower))) {
+                randomShopTower = r.nextInt(0, potentialShopTowers.size());
+            }
+            shopTowers.add(potentialShopTowers.get(randomShopTower));
+        }
+
+        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4());
+        for (int i = 0; i < numUpgradesAvailable; i++) {
+            Random r = new Random();
+            int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());
+            shopUpgrades.add(potentialShopUpgrades.get(randomShopUpgrade));
+        }
+
+        for (int i = 0; i < numTowersAvailable; i++) {
+            purchasedTowers.add(false);
+        }
+        for (int i = 0; i < numUpgradesAvailable; i++) {
+            purchasedUpgrades.add(false);
+        }
+    }
 
 
     /**
@@ -41,32 +68,6 @@ public class ShopAvailability {
         return numUpgradesAvailable;
     }
 
-    /**
-     * Chooses a set number of unique towers from a provided selection
-     * @return a list of available towers for the shop
-     */
-    private List<Tower> setAvailableTowers() {
-        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5(), new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10());
-        for (int i = 0; i < numTowersAvailable; i++) {
-            Random r = new Random();
-            int randomShopTower = r.nextInt(0, potentialShopTowers.size());
-            while (tempShopTowers.contains(potentialShopTowers.get(randomShopTower))) {
-                randomShopTower = r.nextInt(0, potentialShopTowers.size());
-            }
-            tempShopTowers.add(potentialShopTowers.get(randomShopTower));
-        }
-        return tempShopTowers;
-    }
-
-    public List<Upgrade> setAvailableUpgrades() {
-        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4());
-        for (int i = 0; i < numUpgradesAvailable; i++) {
-            Random r = new Random();
-            int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());
-            tempShopUpgrades.add(potentialShopUpgrades.get(randomShopUpgrade));
-        }
-        return tempShopUpgrades;
-    }
 
     /**
      * Method to retrieve the list of available shop towers
@@ -79,4 +80,12 @@ public class ShopAvailability {
     public List<Upgrade> getShopUpgrades() {
         return shopUpgrades;
     }
+
+    public List<Boolean> getPurchasedTowers() { return purchasedTowers; }
+
+    public List<Boolean> getPurchasedUpgrades() { return purchasedUpgrades; }
+
+    public void setPurchasedTower(Integer input) { purchasedTowers.set(input, true); }
+
+    public void setPurchasedUpgrade(Integer input) { purchasedUpgrades.set(input, true); }
 }

@@ -76,8 +76,10 @@ public class ShopController {
     private CurrentRoundService currentRoundService;
     private ShopAvailabilityService shopAvailabilityService;
 
-    public List<Tower> shopTowers = new ArrayList<>();
-    public List<Upgrade> shopUpgrades = new ArrayList<>();
+    public List<Tower> shopTowers;
+    public List<Upgrade> shopUpgrades;
+    public List<Boolean> purchasedTowers;
+    public List<Boolean> purchasedUpgrades;
 
     private Tower towerToPurchase;
     private Integer towerButton;
@@ -125,6 +127,57 @@ public class ShopController {
             upgradeButton4.setDisable(false);
             upgradeButton5.setDisable(false);
             upgradeButton6.setDisable(false);
+        }
+
+        purchasedTowers = shopAvailabilityService.getPurchasedTowers();
+        purchasedUpgrades = shopAvailabilityService.getPurchasedUpgrades();
+
+        for (int i = 0; i < purchasedTowers.size(); i++) {
+            if (purchasedTowers.get(i)) {
+                switch (i+1) {
+                    case 1:
+                        towerButton1.setDisable(true);
+                        break;
+                    case 2:
+                        towerButton2.setDisable(true);
+                        break;
+                    case 3:
+                        towerButton3.setDisable(true);
+                        break;
+                    case 4:
+                        towerButton4.setDisable(true);
+                        break;
+                    case 5:
+                        towerButton5.setDisable(true);
+                        break;
+                }
+            }
+        }
+
+        for (int i = 0; i < purchasedUpgrades.size(); i++) {
+            if (purchasedUpgrades.get(i)) {
+                switch (i+1) {
+                    case 1:
+                        upgradeButton1.setDisable(true);
+                        break;
+                    case 2:
+                        upgradeButton2.setDisable(true);
+                        break;
+                    case 3:
+                        upgradeButton3.setDisable(true);
+                        break;
+                    case 4:
+                        upgradeButton4.setDisable(true);
+                        break;
+                    case 5:
+                        upgradeButton5.setDisable(true);
+                        break;
+                    case 6:
+                        upgradeButton6.setDisable(true);
+                        break;
+                }
+            }
+
         }
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
@@ -266,9 +319,8 @@ public class ShopController {
             } else {
                 inventoryService.addToMainTowerSelection(towerToPurchase);
             }
+            shopAvailabilityService.setTowerPurchased(towerButton-1);
             towerToPurchase = null;
-            System.out.println(inventoryService.getMainTowerSelection());
-            System.out.println(inventoryService.getReserveTowerSelection());
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
@@ -308,6 +360,7 @@ public class ShopController {
             }
             moneyService.setNewBalance(moneyService.getCurrentBalance() - upgradeToPurchase.getCost());
             inventoryService.addUserUpgrade(upgradeToPurchase);
+            shopAvailabilityService.setUpgradePurchased(upgradeButton-1);
             upgradeToPurchase = null;
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
