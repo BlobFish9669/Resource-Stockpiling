@@ -34,4 +34,10 @@ public class InventoryService {
     public ArrayList<Upgrade> getUserUpgrades() {return inventory.getUpgrades();}
 
     public void addUserUpgrade(Upgrade input) {inventory.addUpgrade(input);}
+
+    public void removeMainTower(Tower input) {inventory.removeMainTower(input);}
+
+    public void removeReserveTower(Tower input) {inventory.removeReserveTower(input);}
+
+    public void removeUserUpgrade(Upgrade input) {inventory.removeUpgrade(input);}
 }

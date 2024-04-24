@@ -23,6 +23,9 @@ public class Inventory {
     public ArrayList<Tower> getMainTowers() {return mainTowers;}
 
     public ArrayList<Tower> getReserveTowers() {return reserveTowers;}
+
+    public ArrayList<Upgrade> getUpgrades() {return upgrades;}
+
     /**
      * Set tower arraylist to an arraylist of desired towers
      * @param input Value of the users desired towers
@@ -33,8 +36,12 @@ public class Inventory {
 
     public void addReserveTower(Tower input) {this.reserveTowers.add(input);}
 
-    public ArrayList<Upgrade> getUpgrades() {return upgrades;}
-
     public void addUpgrade(Upgrade input) {this.upgrades.add(input);}
+
+    public void removeMainTower(Tower input) {mainTowers.remove(input);}
+
+    public void removeReserveTower(Tower input) {reserveTowers.remove(input);}
+
+    public void removeUpgrade(Upgrade input) {upgrades.remove(input);}
 
 }

@@ -14,7 +14,7 @@ import seng201.team0.models.Tower;
  * Custom cell factory for Rockets to use in ListView
  * @author seng201 teaching team
  */
-public class MainTowerCellFactory implements Callback<ListView<Tower>, ListCell<Tower>> {
+public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Tower>> {
     @Override
     public ListCell<Tower> call(ListView<Tower> param) {
         return new ListCell<>() {
@@ -26,9 +26,9 @@ public class MainTowerCellFactory implements Callback<ListView<Tower>, ListCell<
                 } else {
                     // Create a new HBox to store the elements to be displayed
                     HBox hBox = new HBox(5);
-                    // Add a 'hero' image of a rocket
-                    // Rocket emoji taken from: https://creazilla.com/nodes/52975-rocket-emoji-clipart
-                    //ImageView imageView = new ImageView("/images/rocket.png");
+                    // Add a 'hero' image of a tower
+                    //made the tower png
+                    //ImageView imageView = new ImageView("/images/tower-min.png");
                     //imageView.setPreserveRatio(true);
                     //imageView.setFitWidth(50);
                     //imageView.setFitHeight(50);
@@ -40,8 +40,10 @@ public class MainTowerCellFactory implements Callback<ListView<Tower>, ListCell<
                     // Add the fuel and cleanliness labels to the VBox
                     vBox.getChildren().addAll(
                             nameLabel,
-                            new Label(String.format("Fuel level: %s",tower.getLevel())),
-                            new Label(String.format("Cleanliness level: %s", tower.getCost()))
+                            new Label(String.format("Resource Amount: %s",tower.getResourceAmount())),
+                            new Label(String.format("Reload Speed: %s", tower.getReloadSpeed())),
+                            new Label(String.format("Level: %s", tower.getLevel())),
+                            new Label(String.format("Cost: %s", tower.getCost()))
                     );
                     // Add the image and the VBox to the HBox
                     hBox.getChildren().addAll(
