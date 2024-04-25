@@ -28,10 +28,10 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                     HBox hBox = new HBox(5);
                     // Add a 'hero' image of a tower
                     //made the tower png
-                    //ImageView imageView = new ImageView("/images/tower-min.png");
-                    //imageView.setPreserveRatio(true);
-                    //imageView.setFitWidth(50);
-                    //imageView.setFitHeight(50);
+                    ImageView imageView = new ImageView("/images/tower.png");
+                    imageView.setPreserveRatio(true);
+                    imageView.setFitWidth(50);
+                    imageView.setFitHeight(50);
                     // Add an inner VBox to hold rocket info
                     VBox vBox = new VBox(5);
                     // Add rocket name label (separated from the others, so we can also change the font size)
@@ -47,7 +47,7 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                     );
                     // Add the image and the VBox to the HBox
                     hBox.getChildren().addAll(
-                            //imageView,
+                            imageView,
                             vBox
                     );
                     setGraphic(hBox);
