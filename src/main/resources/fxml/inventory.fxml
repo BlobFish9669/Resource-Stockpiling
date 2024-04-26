@@ -53,8 +53,8 @@
           <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button disable="true" mnemonicParsing="false" text="Move Tower" GridPane.halignment="CENTER" />
-            <Button disable="true" mnemonicParsing="false" text="Use Upgrade" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Button fx:id="moveTowerButton" mnemonicParsing="false" onAction="#onMoveTowerButtonClicked" text="Move Tower" GridPane.halignment="CENTER" />
+            <Button fx:id="useUpgradeButton" mnemonicParsing="false" onAction="#onUseUpgradeButtonClicked" text="Use Upgrade" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
          </children>
       </GridPane>

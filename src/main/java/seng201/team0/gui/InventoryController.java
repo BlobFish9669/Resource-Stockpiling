@@ -33,13 +33,17 @@ public class InventoryController {
     @FXML
     public BorderPane inventoryBorderPane;
     public Label inventoryLabel;
-    public Button backButton;
     public Label currentMoneyLabel;
     public Label currentRoundLabel;
     public Label roundsRemainingLabel;
     public ListView<Tower> mainTowerList;
     public ListView<Tower> reserveTowerList;
     public ListView<Upgrade> upgradeList;
+    public Button moveTowerButton;
+    public Button useUpgradeButton;
+    public Button backButton;
+
+    private Boolean isTowerSelectedMain;
 
 
     /**
@@ -74,12 +78,14 @@ public class InventoryController {
         // Used Tut 3 code here as a template
         mainTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedMainTower = mainTowerList.getSelectionModel().getSelectedItem();
+            isTowerSelectedMain = true;
         });
 
         reserveTowerList.setCellFactory(new TowerCellFactory());
         reserveTowerList.setItems(FXCollections.observableArrayList(inventoryService.getReserveTowerSelection()));
         reserveTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedReserveTower = reserveTowerList.getSelectionModel().getSelectedItem();
+            isTowerSelectedMain = false;
         });
 
         upgradeList.setCellFactory(new UpgradeCellFactory());
@@ -94,5 +100,38 @@ public class InventoryController {
     @FXML
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
+    }
+    @FXML
+    private void onMoveTowerButtonClicked() {
+        if (isTowerSelectedMain != null) {
+            if (isTowerSelectedMain) {
+                inventoryService.addToReserveTowerSelection(selectedMainTower);
+                reserveTowerList.getItems().add(selectedMainTower);
+
+                inventoryService.removeMainTower(selectedMainTower);
+                mainTowerList.getItems().remove(selectedMainTower);
+
+                clearSelections();
+            } else {
+                inventoryService.addToMainTowerSelection(selectedReserveTower);
+                mainTowerList.getItems().add(selectedReserveTower);
+
+                inventoryService.removeReserveTower(selectedReserveTower);
+                reserveTowerList.getItems().remove(selectedReserveTower);
+
+                clearSelections();
+            }
+        }
+    }
+    private void clearSelections() {
+        mainTowerList.getSelectionModel().clearSelection();
+        reserveTowerList.getSelectionModel().clearSelection();
+        selectedMainTower = null;
+        selectedReserveTower = null;
+        isTowerSelectedMain = null;
+    }
+    @FXML
+    private void onUseUpgradeButtonClicked() {
+
     }
 }
