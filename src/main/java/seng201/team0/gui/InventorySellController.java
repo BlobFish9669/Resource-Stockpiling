@@ -87,12 +87,14 @@ public class InventorySellController {
         // Used Tut 3 code here as a template
         mainTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedMainTower = mainTowerList.getSelectionModel().getSelectedItem();
+            selectedReserveTower = null;
         });
 
         reserveTowerList.setCellFactory(new TowerCellFactory());
         reserveTowerList.setItems(FXCollections.observableArrayList(inventoryService.getReserveTowerSelection()));
         reserveTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedReserveTower = reserveTowerList.getSelectionModel().getSelectedItem();
+            selectedMainTower = null;
         });
 
         upgradeList.setCellFactory(new UpgradeCellFactory());
@@ -120,6 +122,7 @@ public class InventorySellController {
             mainTowerList.getItems().remove(selectedMainTower);
             mainTowerList.getSelectionModel().clearSelection();
             selectedMainTower = null;
+            selectedReserveTower = null;
         } else if (selectedReserveTower != null) {
             inventoryService.removeReserveTower(selectedReserveTower);
             moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getCost());
@@ -127,6 +130,7 @@ public class InventorySellController {
 
             reserveTowerList.getItems().remove(selectedReserveTower);
             reserveTowerList.getSelectionModel().clearSelection();
+            selectedMainTower = null;
             selectedReserveTower = null;
         }
     }
