@@ -56,6 +56,7 @@ public class InventorySellController {
     private Tower selectedMainTower;
     private Tower selectedReserveTower;
     private Upgrade selectedUpgrade;
+    private Boolean isTowerSelectedMain;
 
     /**
      * Constructor
@@ -87,14 +88,14 @@ public class InventorySellController {
         // Used Tut 3 code here as a template
         mainTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedMainTower = mainTowerList.getSelectionModel().getSelectedItem();
-            selectedReserveTower = null;
+            isTowerSelectedMain = true;
         });
 
         reserveTowerList.setCellFactory(new TowerCellFactory());
         reserveTowerList.setItems(FXCollections.observableArrayList(inventoryService.getReserveTowerSelection()));
         reserveTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedReserveTower = reserveTowerList.getSelectionModel().getSelectedItem();
-            selectedMainTower = null;
+            isTowerSelectedMain = false;
         });
 
         upgradeList.setCellFactory(new UpgradeCellFactory());
@@ -114,25 +115,30 @@ public class InventorySellController {
 
     @FXML
     private void onSellTowerButtonClicked() {
-        if (selectedMainTower != null) {
-            inventoryService.removeMainTower(selectedMainTower);
-            moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getCost());
-            currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
+        if (isTowerSelectedMain != null) {
+            if (isTowerSelectedMain) {
+                inventoryService.removeMainTower(selectedMainTower);
+                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getCost());
+                currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
-            mainTowerList.getItems().remove(selectedMainTower);
-            mainTowerList.getSelectionModel().clearSelection();
-            selectedMainTower = null;
-            selectedReserveTower = null;
-        } else if (selectedReserveTower != null) {
-            inventoryService.removeReserveTower(selectedReserveTower);
-            moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getCost());
-            currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
+                mainTowerList.getItems().remove(selectedMainTower);
+                clearSelections();
+            } else {
+                inventoryService.removeReserveTower(selectedReserveTower);
+                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getCost());
+                currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
-            reserveTowerList.getItems().remove(selectedReserveTower);
-            reserveTowerList.getSelectionModel().clearSelection();
-            selectedMainTower = null;
-            selectedReserveTower = null;
+                reserveTowerList.getItems().remove(selectedReserveTower);
+                clearSelections();
+            }
         }
+    }
+    private void clearSelections() {
+        mainTowerList.getSelectionModel().clearSelection();
+        reserveTowerList.getSelectionModel().clearSelection();
+        selectedMainTower = null;
+        selectedReserveTower = null;
+        isTowerSelectedMain = null;
     }
 
     @FXML
