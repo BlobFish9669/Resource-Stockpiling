@@ -3,7 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import seng201.team0.GameManager;
 import seng201.team0.services.*;
 
@@ -25,7 +25,7 @@ public class MainController {
 
 
     @FXML
-    public GridPane mainGrid;
+    public BorderPane mainBorderPane;
     public Button shopButton;
     public Button inventoryButton;
     public Label mainLabel;
@@ -55,8 +55,8 @@ public class MainController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        mainGrid.prefWidthProperty().bind(MenuWindow.getWidth());
-        mainGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+        mainBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        mainBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
         currentRoundService.setCurrentRound(1);
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
