@@ -144,7 +144,7 @@ public class InventoryController {
     @FXML
     private void onUseUpgradeButtonClicked() {
 
-        if (upgradeSelected) {
+        if (upgradeSelected && towerSelected != null) {
             if (towerSelected.equals("Main")) {
                 selectedMainTower.applyUpgrade(selectedUpgrade);
             } else {
