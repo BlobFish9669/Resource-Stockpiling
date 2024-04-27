@@ -24,12 +24,14 @@ public class GameManager {
     private final MoneyBalanceService moneyService;
     private final CurrentRoundService currentRoundService;
     private final ShopAvailabilityService shopAvailabilityService;
+
     /**
      * Constructor
      * @param menuScreenLauncher Action to execute to display the menu screen
      * @param mainScreenLauncher Action to execute to display the main screen
      * @param shopScreenLauncher Action to execute to display the shop screen
      * @param inventoryScreenLauncher Action to execute to display the inventory screen
+     * @param inventorySellScreenLauncher Action to execute to display the inventory sell screen
      * @param clearScreen Action to execute to clear the screen
      * @param difficultyService Service for managing the selection of game difficulty
      * @param nameService Service for managing the player's name
@@ -63,6 +65,7 @@ public class GameManager {
         clearScreen.run();
         menuScreenLauncher.accept(this);
     }
+
     /**
      * Method to call to clear the current screen and then open the main screen
      */
@@ -70,6 +73,7 @@ public class GameManager {
         clearScreen.run();
         mainScreenLauncher.accept(this);
     }
+
     /**
      * Method to call to clear the current screen and then opens the shop screen
      */
@@ -77,6 +81,7 @@ public class GameManager {
         clearScreen.run();
         shopScreenLauncher.accept(this);
     }
+
     /**
      * Method to call to clear the current screen and then opens the inventory screen
      */
@@ -85,10 +90,14 @@ public class GameManager {
         inventoryScreenLauncher.accept(this);
     }
 
+    /**
+     * Method to call to clear the current screen and then opens the inventory sell screen
+     */
     public void resetAndOpenInventorySellScreen() {
         clearScreen.run();
         inventorySellScreenLauncher.accept(this);
     }
+
     /**
      * Method to retrieve the instance of DifficultySelectionService to track difficulty throughout the game
      * @return instance of DifficultySelectionService
@@ -96,6 +105,7 @@ public class GameManager {
     public DifficultySelectionService getDifficultyService() {
         return difficultyService;
     }
+
     /**
      * Method to retrieve the instance of NameInputService to track name input throughout the game
      * @return instance of NameInputService
@@ -103,6 +113,7 @@ public class GameManager {
     public NameInputService getNameService() {
         return nameService;
     }
+
     /**
      * Method to retrieve the instance of RoundsSelectionService to track round input throughout the game
      * @return instance of RoundsSelectionService
@@ -110,6 +121,7 @@ public class GameManager {
     public RoundsSelectionService getRoundsService() {
         return roundsService;
     }
+
     /**
      * Method to retrieve the instance of TowerSelectionService to track players chosen tower input throughout the game
      * @return instance of TowerSelectionService
@@ -117,6 +129,7 @@ public class GameManager {
     public InventoryService getInventoryService() {
         return inventoryService;
     }
+
     /**
      * Method to retrieve the instance of MoneyBalanceService to track players money throughout the game
      * @return instance of MoneyBalanceService
@@ -124,6 +137,7 @@ public class GameManager {
     public MoneyBalanceService getMoneyService() {
         return moneyService;
     }
+
     /**
      * Method to retrieve the instance of CurrentRoundService to track number of current round throughout the game
      * @return instance of CurrentRoundService
@@ -131,6 +145,7 @@ public class GameManager {
     public CurrentRoundService getCurrentRoundService() {
         return currentRoundService;
     }
+
     /**
      * Method to retrieve the instance of ShopAvailabilityService to track shop availability throughout the round
      * @return instance of ShopAvailabilityService
