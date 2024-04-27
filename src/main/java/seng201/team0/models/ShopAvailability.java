@@ -36,7 +36,7 @@ public class ShopAvailability {
             shopTowers.add(potentialShopTowers.get(randomShopTower));
         }
 
-        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4());
+        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5());
         for (int i = 0; i < numUpgradesAvailable; i++) {
             Random r = new Random();
             int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());

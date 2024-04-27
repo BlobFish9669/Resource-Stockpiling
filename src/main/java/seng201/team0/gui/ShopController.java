@@ -272,7 +272,7 @@ public class ShopController {
 
     private void showUpgradeStats(int upgradeIndex) {
         Upgrade selectedUpgrade = shopUpgrades.get(upgradeIndex);
-        upgradeInfo1.setText(selectedUpgrade.getUpgradeType());
+        upgradeInfo1.setText(selectedUpgrade.getUpgradeTitle());
         upgradeCostLabel.setText(String.valueOf(selectedUpgrade.getCost()));
     }
 

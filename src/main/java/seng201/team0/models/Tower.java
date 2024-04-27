@@ -1,4 +1,8 @@
 package seng201.team0.models;
+
+import javax.print.attribute.standard.JobKOctets;
+import java.util.Objects;
+
 /**
  * Class for towers that will be used to fill carts with resources.
  * @author Quinn Le Lievre
@@ -53,6 +57,20 @@ public class Tower {
     }
     public int getCost() {
         return cost;
+    }
+
+    public void applyUpgrade(Upgrade upgrade) {
+        if (Objects.equals(upgrade.getUpgradeType(), "Resource Type")) {
+            setResourceType(upgrade.getResourceType());
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Tower Level")) {
+            setLevel((int) (getLevel() + upgrade.getUpgradeModifier()));
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Resource Amount")) {
+            setResourceAmount((int) (getResourceAmount() * upgrade.getUpgradeModifier()));
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Reload Speed")) {
+            setReloadSpeed(getReloadSpeed() * upgrade.getUpgradeModifier());
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Price")) {
+            setCost((int) (getCost() * upgrade.getUpgradeModifier()));
+        }
     }
 
 }

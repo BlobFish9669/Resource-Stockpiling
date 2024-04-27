@@ -43,7 +43,8 @@ public class InventoryController {
     public Button useUpgradeButton;
     public Button backButton;
 
-    private Boolean isTowerSelectedMain;
+    private String towerSelected;
+    private boolean upgradeSelected = false;
 
 
     /**
@@ -70,28 +71,27 @@ public class InventoryController {
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
-        System.out.println("Inventory Page");
-
 
         mainTowerList.setCellFactory(new TowerCellFactory());
         mainTowerList.setItems(FXCollections.observableArrayList(inventoryService.getMainTowerSelection()));
         // Used Tut 3 code here as a template
         mainTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedMainTower = mainTowerList.getSelectionModel().getSelectedItem();
-            isTowerSelectedMain = true;
+            towerSelected = "Main";
         });
 
         reserveTowerList.setCellFactory(new TowerCellFactory());
         reserveTowerList.setItems(FXCollections.observableArrayList(inventoryService.getReserveTowerSelection()));
         reserveTowerList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Tower>) r -> {
             selectedReserveTower = reserveTowerList.getSelectionModel().getSelectedItem();
-            isTowerSelectedMain = false;
+            towerSelected = "Reserve";
         });
 
         upgradeList.setCellFactory(new UpgradeCellFactory());
         upgradeList.setItems(FXCollections.observableArrayList(inventoryService.getUserUpgrades()));
         upgradeList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Upgrade>) r -> {
             selectedUpgrade = upgradeList.getSelectionModel().getSelectedItem();
+            upgradeSelected = true;
         });
     }
     /**
@@ -103,8 +103,8 @@ public class InventoryController {
     }
     @FXML
     private void onMoveTowerButtonClicked() {
-        if (isTowerSelectedMain != null) {
-            if (isTowerSelectedMain) {
+        if (towerSelected != null) {
+            if (towerSelected.equals("Main")) {
                 if (inventoryService.getMainTowerSelection().size() == 1) {
                     System.out.println("Error - There must always be at least one main tower");
                 } else if(inventoryService.getReserveTowerSelection().size() < 5) {
@@ -134,12 +134,25 @@ public class InventoryController {
     private void clearSelections() {
         mainTowerList.getSelectionModel().clearSelection();
         reserveTowerList.getSelectionModel().clearSelection();
+        upgradeList.getSelectionModel().clearSelection();
         selectedMainTower = null;
         selectedReserveTower = null;
-        isTowerSelectedMain = null;
+        selectedUpgrade = null;
+        towerSelected = null;
+        upgradeSelected = false;
     }
     @FXML
     private void onUseUpgradeButtonClicked() {
 
+        if (upgradeSelected) {
+            if (towerSelected.equals("Main")) {
+                selectedMainTower.applyUpgrade(selectedUpgrade);
+            } else {
+                selectedReserveTower.applyUpgrade(selectedUpgrade);
+            }
+            inventoryService.removeUserUpgrade(selectedUpgrade);
+            upgradeList.getItems().remove(selectedUpgrade);
+            clearSelections();
+        }
     }
 }

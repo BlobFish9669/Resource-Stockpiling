@@ -1,30 +1,34 @@
 package seng201.team0.models;
 
 public class Upgrade {
-    private String upgradeType;
+    private String upgradeTitle;
+    private String upgradeModifying;
     private Integer cost;
+    private Double upgradeModifier;
+    private String resourceType;
 
-    public Upgrade() {
-        setUpgradeType("None");
-        setCost(0);
+    public Upgrade(String upgradeTitle ,String upgradeModifying, Integer cost, Double upgradeModifier) {
+        this.upgradeTitle = upgradeTitle;
+        this.upgradeModifying = upgradeModifying;
+        this.cost = cost;
+        this.upgradeModifier = upgradeModifier;
     }
-    public Upgrade(String upgradeType, int cost) {
-        setUpgradeType(upgradeType);
-        setCost(cost);
+    public Upgrade(String upgradeTitle, String upgradeModifying, String resourceType, Integer cost, Double upgradeModifier) {
+        this.upgradeTitle = upgradeTitle;
+        this.upgradeModifying = upgradeModifying;
+        this.cost = cost;
+        this.upgradeModifier = upgradeModifier;
+        this.resourceType = resourceType;
     }
 
-    public void setUpgradeType(String upgradeTypeInput) {
-        upgradeType = upgradeTypeInput;
-    }
-    public void setCost(Integer costInput) {
-        cost = costInput;
-    }
+    public String getUpgradeTitle() { return upgradeTitle; }
     public String getUpgradeType() {
-        return upgradeType;
+        return upgradeModifying;
     }
-
     public Integer getCost() {
         return cost;
     }
+    public Double getUpgradeModifier() { return upgradeModifier; }
+    public String getResourceType() { return resourceType; }
 
 }

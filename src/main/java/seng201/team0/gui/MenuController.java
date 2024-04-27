@@ -138,7 +138,6 @@ public class MenuController {
      */
     @FXML
     private void onSubmitButtonClicked() {
-        System.out.println("Button has been clicked");
         // Resets error label each time button is clicked
         errorsLabelResult.setText("");
         /*

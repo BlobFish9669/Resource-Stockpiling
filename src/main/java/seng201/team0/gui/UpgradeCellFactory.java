@@ -36,7 +36,7 @@ public class UpgradeCellFactory implements Callback<ListView<Upgrade>, ListCell<
                     // Add an inner VBox to hold rocket info
                     VBox vBox = new VBox(5);
                     // Add rocket name label (separated from the others, so we can also change the font size)
-                    Label nameLabel = new Label(upgrade.getUpgradeType());
+                    Label nameLabel = new Label(upgrade.getUpgradeTitle());
                     nameLabel.setFont(new Font(20));
                     // Add the fuel and cleanliness labels to the VBox
                     vBox.getChildren().addAll(
