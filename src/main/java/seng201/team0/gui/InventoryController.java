@@ -105,20 +105,28 @@ public class InventoryController {
     private void onMoveTowerButtonClicked() {
         if (isTowerSelectedMain != null) {
             if (isTowerSelectedMain) {
-                inventoryService.addToReserveTowerSelection(selectedMainTower);
-                reserveTowerList.getItems().add(selectedMainTower);
+                if (inventoryService.getMainTowerSelection().size() == 1) {
+                    System.out.println("Error - There must always be at least one main tower");
+                } else if(inventoryService.getReserveTowerSelection().size() < 5) {
+                    inventoryService.addToReserveTowerSelection(selectedMainTower);
+                    reserveTowerList.getItems().add(selectedMainTower);
 
-                inventoryService.removeMainTower(selectedMainTower);
-                mainTowerList.getItems().remove(selectedMainTower);
-
-                clearSelections();
+                    inventoryService.removeMainTower(selectedMainTower);
+                    mainTowerList.getItems().remove(selectedMainTower);
+                } else {
+                    System.out.println("Error - Too many towers in reserve towers");
+                }
+                    clearSelections();
             } else {
-                inventoryService.addToMainTowerSelection(selectedReserveTower);
-                mainTowerList.getItems().add(selectedReserveTower);
+                if (inventoryService.getMainTowerSelection().size() < 5) {
+                    inventoryService.addToMainTowerSelection(selectedReserveTower);
+                    mainTowerList.getItems().add(selectedReserveTower);
 
-                inventoryService.removeReserveTower(selectedReserveTower);
-                reserveTowerList.getItems().remove(selectedReserveTower);
-
+                    inventoryService.removeReserveTower(selectedReserveTower);
+                    reserveTowerList.getItems().remove(selectedReserveTower);
+                } else {
+                    System.out.println("Error - Too many towers in main towers");
+                }
                 clearSelections();
             }
         }
