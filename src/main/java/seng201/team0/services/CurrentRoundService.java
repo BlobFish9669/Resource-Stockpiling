@@ -1,8 +1,14 @@
 package seng201.team0.services;
 
+import seng201.team0.models.Cart;
 import seng201.team0.models.CurrentRound;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Service class used to store and retrieve the round the user is currently on
+ * Service class used to store and retrieve information about the round the user is currently on
  * @author Caleb Cooper
  */
 public class CurrentRoundService {
@@ -24,4 +30,14 @@ public class CurrentRoundService {
     public Integer getCurrentRound() {
         return currentRound.getRound();
     }
+
+    public void setDifficulty(String input) { currentRound.setDifficulty(input); }
+
+    public Integer getDistance() { return currentRound.getDistance(); }
+
+    public Integer getNumCarts() { return currentRound.getNumCarts(); }
+
+    public void setCarts() { currentRound.setCarts(); }
+
+    public ArrayList<Cart> getCarts() { return currentRound.getCarts(); }
 }

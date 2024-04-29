@@ -1,10 +1,17 @@
 package seng201.team0.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import seng201.team0.GameManager;
+import seng201.team0.models.Cart;
+import seng201.team0.models.Tower;
 import seng201.team0.services.*;
 
 import java.util.Objects;
@@ -26,15 +33,27 @@ public class MainController {
 
     @FXML
     public BorderPane mainBorderPane;
-    public Button shopButton;
-    public Button inventoryButton;
     public Label mainLabel;
+
     public Label currentMoney;
     public Label currentMoneyLabel;
     public Label currentRound;
     public Label currentRoundLabel;
     public Label roundsRemaining;
     public Label roundsRemainingLabel;
+
+    public Label roundDifficultyLabel;
+    public Label distanceLabel;
+    public Label distance;
+    public Label numberCartsLabel;
+    public Label numberCarts;
+    public ChoiceBox<String> roundDifficultyDropdown;
+    public ListView<Cart> cartList;
+
+    public Button playRound;
+    public Button shopButton;
+    public Button inventoryButton;
+
 
     /**
      * Constructor
@@ -64,6 +83,16 @@ public class MainController {
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
+
+        //generate carts
+        roundDifficultyDropdown.getItems().addAll("Easy", "Medium", "Hard");
+        roundDifficultyDropdown.setOnAction(event -> {
+            currentRoundService.setDifficulty(roundDifficultyDropdown.getValue());
+            distance.setText(currentRoundService.getDistance() + " Metres");
+            numberCarts.setText(currentRoundService.getNumCarts().toString());
+            cartList.setCellFactory(new CartCellFactory());
+            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getCarts()));
+        });
     }
 
     /**
@@ -81,4 +110,6 @@ public class MainController {
     private void onInventoryButtonClicked() {
         gameManager.resetAndOpenInventoryScreen();
     }
+    @FXML
+    private void onPlayRoundButtonClicked() { System.out.println("Play Round"); }
 }
