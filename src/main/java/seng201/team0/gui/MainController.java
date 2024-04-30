@@ -142,14 +142,27 @@ public class MainController {
         if (checkResources()) {
             //Round not failed yet - check distance
             for (Cart cart: currentRoundService.getCarts()) {
-                for (Tower tower: inventoryService.getMainTowerSelection()) {
+                if (cart.getFilledSize() != cart.getSize()) {
+                    boolean cartFilled = false;
+                    for (Tower tower : inventoryService.getMainTowerSelection()) {
+                        if (tower.getResourceType() == cart.getResourceType()) {
+                            double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
+                            //System.out.println(timeToFill);
+                            double distanceRemaining = (cart.getSpeed()*((double) 1000/60)) * timeToFill; // Turn to m/min to be able to compare
+                            //System.out.println(distanceRemaining);
+                            if (distanceRemaining <= currentRoundService.getDistance()) {
+                                cart.fill((int) (tower.getFillRate() * timeToFill));
+                                cartFilled = true;
+                                break;
+                            }
+                        }
+                    }
 
-                    if (tower.getResourceType() == cart.getResourceType()) {
-                        //if resource amount * reload speed can fill cart before it reaches max distance, continue on
-                        cart.fill(tower.getResourceAmount());
+                    if (!cartFilled) {
+                        System.out.print("Error - not filled in time");
+                        break;
                     }
                 }
-                System.out.println(cart.getFilledSize());
             }
 
         } else {
@@ -158,18 +171,19 @@ public class MainController {
     }
 
     private Boolean checkResources() {
-        ArrayList<Boolean> towerResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[inventoryService.getMainTowerSelection().size()]));
-        Collections.fill(towerResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
-
-        for (int i = 0; i < inventoryService.getMainTowerSelection().size(); i++) {
-            for (int j = 0; j < currentRoundService.getCarts().size(); j++) {
-                if (inventoryService.getMainTowerSelection().get(i).getResourceType() == currentRoundService.getCarts().get(j).getResourceType()) {
-                    towerResourceTypeSupported.set(i, true);
+        ArrayList<Boolean> cartResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[currentRoundService.getCarts().size()]));
+        Collections.fill(cartResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
+        int i = 0;
+        for (Cart cart: currentRoundService.getCarts()) {
+            for (Tower tower: inventoryService.getMainTowerSelection()) {
+                if (tower.getResourceType() == cart.getResourceType()) {
+                    cartResourceTypeSupported.set(i, true);
                 }
             }
+            i++;
         }
-        System.out.println(towerResourceTypeSupported);
-        if (towerResourceTypeSupported.contains(false)) {
+        System.out.println(cartResourceTypeSupported);
+        if (cartResourceTypeSupported.contains(false)) {
             //Round failed
             return false;
         }

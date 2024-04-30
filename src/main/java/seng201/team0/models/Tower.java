@@ -13,6 +13,7 @@ public class Tower {
     private double reloadSpeed;
     private int level;
     private int cost;
+    private int fillRate;
     public Tower() {
         setResourceType("None");
         setResourceAmount(0);
@@ -72,5 +73,7 @@ public class Tower {
             setCost((int) (getCost() * upgrade.getUpgradeModifier()));
         }
     }
+
+    public int getFillRate() { return (int) (this.resourceAmount/this.reloadSpeed); }
 
 }
