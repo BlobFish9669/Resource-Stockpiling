@@ -23,7 +23,7 @@ public class Tower {
     public Tower(String resourceType, int resourceAmount, double reloadSpeed, int level, int cost) {
         setResourceType(resourceType);
         setResourceAmount(resourceAmount);
-        setReloadSpeed(reloadSpeed);
+        setReloadSpeed(reloadSpeed); // In mins
         setLevel(level);
         setCost(cost);
     }

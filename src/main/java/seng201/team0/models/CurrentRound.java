@@ -41,14 +41,14 @@ public class CurrentRound {
     public void setDifficulty(String input) {
         difficulty = input;
         if (difficulty.equals("Easy")) {
-            distance = 100;
+            distance = 5000;
             cartsNum = 3;
         }
         else if (difficulty.equals("Medium")) {
-            distance = 250;
+            distance = 2500;
             cartsNum = 6;
         } else {
-            distance = 500;
+            distance = 1000;
             cartsNum = 10;
         }
     }
@@ -62,16 +62,16 @@ public class CurrentRound {
         for (int i = 0; i < 10; i++) {
             Random r = new Random();
             List<String> availableResourceTypes = new ArrayList<>();
-            availableResourceTypes.addAll(Arrays.asList("Stone", "Coal", "Silver", "Gold", "Diamond"));
+            availableResourceTypes.addAll(Arrays.asList("Stone", "Coal", "Copper", "Silver", "Gold", "Diamond"));
 
             int randomSize = r.nextInt(5,31);
             int randomResource = r.nextInt(0,5);
-            double randomSpeed = r.nextInt(5,51);
+            int randomSpeed = r.nextInt(1,11);
             carts.add(new Cart(randomSize, availableResourceTypes.get(randomResource), randomSpeed));
         }
     }
 
-    public ArrayList<Cart> getCarts() {
+    public ArrayList<Cart> getPotentialCarts() {
         if (tempCarts.size() != 0) {
             tempCarts.clear();
         }
@@ -80,4 +80,10 @@ public class CurrentRound {
         }
         return tempCarts;
     }
+
+    public String getDifficulty() { return difficulty; }
+
+    public void storeCarts(ArrayList<Cart> input) { tempCarts = input; }
+
+    public ArrayList<Cart> getCarts() { return tempCarts; }
 }

@@ -7,7 +7,8 @@ package seng201.team0.models;
 public class Cart {
     private Integer size;
     private String resourceType;
-    private Double speed;
+    private Integer speed;
+    private Integer filledSize;
 
     /**
      * Constructor
@@ -15,10 +16,11 @@ public class Cart {
      * @param resourceType the type of resource that the cart can contain
      * @param speed in m/s of how fast the cart will travel along the track
      */
-    public Cart(Integer size, String resourceType, Double speed) {
+    public Cart(Integer size, String resourceType, Integer speed) {
         this.size = size;
         this.resourceType = resourceType;
         this.speed = speed;
+        this.filledSize = 0;
     }
 
     /**
@@ -37,5 +39,13 @@ public class Cart {
      * Method to return the speed that the cart will travel
      * @return cart speed
      */
-    public Double getSpeed() { return speed; }
+    public Integer getSpeed() { return speed; }
+
+    public Integer getFilledSize() { return filledSize; }
+    public void fill(int amount) {
+        filledSize += amount;
+        if (filledSize > size) {
+            filledSize = size;
+        }
+    }
 }

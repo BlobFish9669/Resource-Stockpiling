@@ -39,5 +39,12 @@ public class CurrentRoundService {
 
     public void setCarts() { currentRound.setCarts(); }
 
+    public ArrayList<Cart> getPotentialCarts() { return currentRound.getPotentialCarts(); }
+
+    public String getDifficulty() { return currentRound.getDifficulty(); }
+
+    public void storeCarts(ArrayList<Cart> input) { currentRound.storeCarts(input); }
+
     public ArrayList<Cart> getCarts() { return currentRound.getCarts(); }
+
 }

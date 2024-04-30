@@ -3,6 +3,6 @@ import seng201.team0.models.Tower;
 
 public class ShopTower7 extends Tower {
     public ShopTower7() {
-        super("Diamond", 8, 6, 5, 7);
+        super("Coal", 8, 6, 5, 7);
     }
 }

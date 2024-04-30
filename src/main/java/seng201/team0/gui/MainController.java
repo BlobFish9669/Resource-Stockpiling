@@ -14,6 +14,9 @@ import seng201.team0.models.Cart;
 import seng201.team0.models.Tower;
 import seng201.team0.services.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -55,6 +58,7 @@ public class MainController {
     public Button inventoryButton;
 
 
+
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game
@@ -86,12 +90,21 @@ public class MainController {
 
         //generate carts
         roundDifficultyDropdown.getItems().addAll("Easy", "Medium", "Hard");
+
+        if (currentRoundService.getDifficulty() != null) { //If difficulty has previously been set
+            roundDifficultyDropdown.setValue(currentRoundService.getDifficulty());
+            distance.setText(currentRoundService.getDistance() + " Metres");
+            numberCarts.setText(currentRoundService.getNumCarts().toString());
+            cartList.setCellFactory(new CartCellFactory());
+            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getPotentialCarts()));
+        }
+
         roundDifficultyDropdown.setOnAction(event -> {
             currentRoundService.setDifficulty(roundDifficultyDropdown.getValue());
             distance.setText(currentRoundService.getDistance() + " Metres");
             numberCarts.setText(currentRoundService.getNumCarts().toString());
             cartList.setCellFactory(new CartCellFactory());
-            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getCarts()));
+            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getPotentialCarts()));
         });
     }
 
@@ -111,5 +124,55 @@ public class MainController {
         gameManager.resetAndOpenInventoryScreen();
     }
     @FXML
-    private void onPlayRoundButtonClicked() { System.out.println("Play Round"); }
+    private void onPlayRoundButtonClicked() {
+        if (roundDifficultyDropdown.getValue() != null) {
+            currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
+            startRound();
+            /* Round Complete if:
+            - Towers contain cart materials
+            - Cart can complete track in time
+             */
+
+        } else {
+            System.out.println("Error");
+        }
+    }
+
+    private void startRound() {
+        if (checkResources()) {
+            //Round not failed yet - check distance
+            for (Cart cart: currentRoundService.getCarts()) {
+                for (Tower tower: inventoryService.getMainTowerSelection()) {
+
+                    if (tower.getResourceType() == cart.getResourceType()) {
+                        //if resource amount * reload speed can fill cart before it reaches max distance, continue on
+                        cart.fill(tower.getResourceAmount());
+                    }
+                }
+                System.out.println(cart.getFilledSize());
+            }
+
+        } else {
+            System.out.println("Error - resource");
+        }
+    }
+
+    private Boolean checkResources() {
+        ArrayList<Boolean> towerResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[inventoryService.getMainTowerSelection().size()]));
+        Collections.fill(towerResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
+
+        for (int i = 0; i < inventoryService.getMainTowerSelection().size(); i++) {
+            for (int j = 0; j < currentRoundService.getCarts().size(); j++) {
+                if (inventoryService.getMainTowerSelection().get(i).getResourceType() == currentRoundService.getCarts().get(j).getResourceType()) {
+                    towerResourceTypeSupported.set(i, true);
+                }
+            }
+        }
+        System.out.println(towerResourceTypeSupported);
+        if (towerResourceTypeSupported.contains(false)) {
+            //Round failed
+            return false;
+        }
+        return true;
+    }
 }

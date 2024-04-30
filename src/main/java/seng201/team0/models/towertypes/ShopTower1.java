@@ -10,6 +10,6 @@ public class ShopTower1 extends Tower {
      * Constructor
      */
     public ShopTower1() {
-        super("Diamond", 8, 6, 5, 1);
+        super("Stone", 8, 6, 5, 1);
     }
 }

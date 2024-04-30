@@ -61,6 +61,8 @@ public class MenuController {
     public Label selectedTowerLevelLabel;
     public Label selectedTowerCostLabel;
     public Button submitButton;
+    public GridPane towerGrid;
+
 
     public int selectedRounds = 5;
     public List<Tower> towerTypes = new ArrayList<>();
@@ -147,6 +149,10 @@ public class MenuController {
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(nameInput.getText());
 
+        nameInput.setStyle("");
+        difficultyDropdown.setStyle("");
+        towerGrid.setStyle("");
+
         /*
         Stores an int to check how many errors there are.
         Displays all current error messages if there are any.
@@ -155,15 +161,18 @@ public class MenuController {
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
+            nameInput.setStyle("-fx-text-box-border: red");
             nameInput.setText("");
             errors += 1;
         }
         if (difficultyDropdown.getValue() == null) {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
+            difficultyDropdown.setStyle("-fx-border-color: red");
             errors += 1;
         }
         if (tempSelectedTowers.size() != 3) {
             errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
+            towerGrid.setStyle("-fx-border-color: red");
             errors += 1;
         }
         if (errors == 0) {
