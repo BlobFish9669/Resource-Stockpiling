@@ -59,7 +59,6 @@ public class MainController {
     public Button inventoryButton;
 
 
-
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game
@@ -126,7 +125,7 @@ public class MainController {
     }
     @FXML
     private void onPlayRoundButtonClicked() {
-        if (roundDifficultyDropdown.getValue() != null || roundDifficultyDropdown.getValue() != "") {
+        if (roundDifficultyDropdown.getValue() != null && roundDifficultyDropdown.getValue() != "") {
             currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
             startRound();
         } else {
@@ -199,13 +198,13 @@ public class MainController {
             currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
             roundsRemainingLabel.setText(Integer.toString(remainingRounds));
 
-            resetCartInfo();
-            //currentRoundService.setDifficulty(null);  NEED TO FIGURE THIS OUT WITHOUT PRODUCING NULL ERROR
+            resetCartInfo(); // reset labels
+            cartList.setItems(null); // reset list view to remove carts
+
         }
     }
 
     private void resetCartInfo() {
-        cartList.setItems(null);
         roundDifficultyDropdown.setValue("");
         distance.setText("");
         numberCarts.setText("");
