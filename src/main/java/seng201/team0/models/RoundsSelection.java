@@ -4,7 +4,7 @@ package seng201.team0.models;
  * @author Caleb Cooper
  */
 public class RoundsSelection {
-    private int numberOfRounds;
+    private Integer numberOfRounds;
     /**
      * Constructor
      */
@@ -13,10 +13,10 @@ public class RoundsSelection {
      * Get current number of rounds
      * @return Current number of rounds
      */
-    public int getNumberOfRounds() {return numberOfRounds;}
+    public Integer getNumberOfRounds() {return numberOfRounds;}
     /**
      * Set number of rounds to an inputted integer value
      * @param input Value of the users desired rounds
      */
-    public void setNumberOfRounds(int input) {this.numberOfRounds = input;}
+    public void setNumberOfRounds(Integer input) {this.numberOfRounds = input;}
 }

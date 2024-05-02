@@ -35,7 +35,7 @@ public class GameWrapper {
         CurrentRoundService currentRoundService = new CurrentRoundService();
         ShopAvailabilityService shopAvailabilityService = new ShopAvailabilityService();
 
-        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::launchInventorySellScreen, this::clearPane, difficultyService, nameService, roundsService, inventoryService, moneyService, currentRoundService, shopAvailabilityService);
+        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::launchInventorySellScreen, this::launchEndScreen, this::clearPane, difficultyService, nameService, roundsService, inventoryService, moneyService, currentRoundService, shopAvailabilityService);
     }
     /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
@@ -113,6 +113,18 @@ public class GameWrapper {
             Parent setupParent  = inventorySellScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Inventory Sell");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchEndScreen(GameManager gameManager) {
+        try {
+            FXMLLoader endScreenLoader = new FXMLLoader(getClass().getResource("/fxml/end_screen.fxml"));
+            endScreenLoader.setControllerFactory(param -> new EndScreenController(gameManager));
+            Parent setupParent  = endScreenLoader.load();
+            pane.getChildren().add(setupParent);
+            stage.setTitle("Game Over");
         } catch (IOException e) {
             e.printStackTrace();
         }

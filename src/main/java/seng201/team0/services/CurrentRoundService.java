@@ -47,4 +47,8 @@ public class CurrentRoundService {
 
     public ArrayList<Cart> getCarts() { return currentRound.getCarts(); }
 
+    public void setGameSuccess(boolean input) { currentRound.setGameSuccess(input); }
+
+    public boolean getGameSuccess() { return currentRound.getGameSuccess(); }
+
 }

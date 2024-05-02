@@ -32,6 +32,7 @@ public class MainController {
     private InventoryService inventoryService;
     private MoneyBalanceService moneyService;
     private CurrentRoundService currentRoundService;
+    private ShopAvailabilityService shopAvailabilityService;
 
 
     @FXML
@@ -71,6 +72,7 @@ public class MainController {
         this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
         this.currentRoundService = gameManager.getCurrentRoundService();
+        this.shopAvailabilityService = gameManager.getShopAvailabilityService();
     }
 
     /**
@@ -81,7 +83,6 @@ public class MainController {
         mainBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
         mainBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
-        currentRoundService.setCurrentRound(1);
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
 
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
@@ -125,16 +126,11 @@ public class MainController {
     }
     @FXML
     private void onPlayRoundButtonClicked() {
-        if (roundDifficultyDropdown.getValue() != null) {
+        if (roundDifficultyDropdown.getValue() != null || roundDifficultyDropdown.getValue() != "") {
             currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
             startRound();
-            /* Round Complete if:
-            - Towers contain cart materials
-            - Cart can complete track in time
-             */
-
         } else {
-            System.out.println("Error");
+            System.out.println("Error - No difficulty selected");
         }
     }
 
@@ -159,15 +155,60 @@ public class MainController {
                     }
 
                     if (!cartFilled) {
+                        gameOver();
                         System.out.print("Error - not filled in time");
                         break;
                     }
                 }
             }
+            //Round completed
+            finishRound();
 
         } else {
+            gameOver();
             System.out.println("Error - resource");
         }
+    }
+
+    private void gameOver() { gameManager.resetAndOpenEndScreen(); }
+
+    private void finishRound() {
+        Integer currentMoney = moneyService.getCurrentBalance();
+        String currentDifficulty = currentRoundService.getDifficulty();
+        Integer currentRound = currentRoundService.getCurrentRound();
+        int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
+
+        if (remainingRounds == 0) {
+            currentRoundService.setGameSuccess(true);
+            gameOver();
+        } else {
+            if (currentDifficulty == "Easy") {
+                moneyService.setNewBalance(currentMoney + 100);
+            } else if (currentDifficulty == "Medium") {
+                moneyService.setNewBalance(currentMoney + 250);
+            } else if (currentDifficulty == "Hard") {
+                moneyService.setNewBalance(currentMoney + 500);
+            }
+
+            shopAvailabilityService.resetStore(); // reset shop
+            currentRoundService.setCarts(); // reset carts
+            currentRoundService.setCurrentRound(currentRound + 1); // update rounds
+            remainingRounds -= 1;
+
+            currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString()); //update labels
+            currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
+            roundsRemainingLabel.setText(Integer.toString(remainingRounds));
+
+            resetCartInfo();
+            //currentRoundService.setDifficulty(null);  NEED TO FIGURE THIS OUT WITHOUT PRODUCING NULL ERROR
+        }
+    }
+
+    private void resetCartInfo() {
+        cartList.setItems(null);
+        roundDifficultyDropdown.setValue("");
+        distance.setText("");
+        numberCarts.setText("");
     }
 
     private Boolean checkResources() {
@@ -184,8 +225,7 @@ public class MainController {
         }
         System.out.println(cartResourceTypeSupported);
         if (cartResourceTypeSupported.contains(false)) {
-            //Round failed
-            return false;
+            return false; //Round failed
         }
         return true;
     }

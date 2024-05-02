@@ -66,4 +66,6 @@ public class ShopAvailabilityService {
      */
     public void setUpgradePurchased(Integer input) { shopAvailability.setPurchasedUpgrade(input); }
 
+    public void resetStore() { shopAvailability.resetStore(); }
+
 }

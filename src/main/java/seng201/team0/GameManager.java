@@ -15,6 +15,7 @@ public class GameManager {
     private final Consumer<GameManager> shopScreenLauncher;
     private final Consumer<GameManager> inventoryScreenLauncher;
     private final Consumer<GameManager> inventorySellScreenLauncher;
+    private final Consumer<GameManager> endScreenLauncher;
     private final Runnable clearScreen;
 
     private final DifficultySelectionService difficultyService;
@@ -32,6 +33,7 @@ public class GameManager {
      * @param shopScreenLauncher Action to execute to display the shop screen
      * @param inventoryScreenLauncher Action to execute to display the inventory screen
      * @param inventorySellScreenLauncher Action to execute to display the inventory sell screen
+     * @param endScreenLauncher
      * @param clearScreen Action to execute to clear the screen
      * @param difficultyService Service for managing the selection of game difficulty
      * @param nameService Service for managing the player's name
@@ -41,12 +43,13 @@ public class GameManager {
      * @param currentRoundService Service for managing the current round of the game
      * @param shopAvailabilityService Service for managing the availability of items in the shop
      */
-    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
+    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Consumer<GameManager> endScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
         this.menuScreenLauncher = menuScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
         this.inventoryScreenLauncher = inventoryScreenLauncher;
         this.inventorySellScreenLauncher = inventorySellScreenLauncher;
+        this.endScreenLauncher = endScreenLauncher;
         this.clearScreen = clearScreen;
         this.difficultyService = difficultyService;
         this.nameService = nameService;
@@ -96,6 +99,11 @@ public class GameManager {
     public void resetAndOpenInventorySellScreen() {
         clearScreen.run();
         inventorySellScreenLauncher.accept(this);
+    }
+
+    public void resetAndOpenEndScreen() {
+        clearScreen.run();
+        endScreenLauncher.accept(this);
     }
 
     /**
@@ -153,4 +161,5 @@ public class GameManager {
     public ShopAvailabilityService getShopAvailabilityService() {
         return shopAvailabilityService;
     }
+
 }

@@ -14,10 +14,10 @@ public class RoundsSelectionService {
      * Set stored rounds number to be the value of the users input
      * @param input value of the users input
      */
-    public void setRoundsSelection(int input) {roundsSelection.setNumberOfRounds(input);}
+    public void setRoundsSelection(Integer input) {roundsSelection.setNumberOfRounds(input);}
     /**
      * Retrieve the current stored number of rounds
      * @return current rounds number
      */
-    public int getRoundsSelection() {return roundsSelection.getNumberOfRounds();}
+    public Integer getRoundsSelection() {return roundsSelection.getNumberOfRounds();}
 }
