@@ -108,11 +108,11 @@ public class GameWrapper {
 
     public void launchInventorySellScreen(GameManager gameManager) {
         try {
-            FXMLLoader inventorySellScreenLoader = new FXMLLoader(getClass().getResource("/fxml/sell_from_inventory.fxml"));
+            FXMLLoader inventorySellScreenLoader = new FXMLLoader(getClass().getResource("/fxml/sell_screen.fxml"));
             inventorySellScreenLoader.setControllerFactory(param -> new InventorySellController(gameManager));
             Parent setupParent  = inventorySellScreenLoader.load();
             pane.getChildren().add(setupParent);
-            stage.setTitle("Inventory Sell");
+            stage.setTitle("Sell");
         } catch (IOException e) {
             e.printStackTrace();
         }

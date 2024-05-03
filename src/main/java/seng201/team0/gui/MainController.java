@@ -36,7 +36,6 @@ public class MainController {
 
 
     @FXML
-    public BorderPane mainBorderPane;
     public Label mainLabel;
 
     public Label currentMoney;
@@ -79,8 +78,8 @@ public class MainController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        mainBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        mainBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+        //mainBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        //mainBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
 

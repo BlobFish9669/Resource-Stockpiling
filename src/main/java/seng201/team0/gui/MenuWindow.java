@@ -27,7 +27,7 @@ public class MenuWindow extends Application {
         Parent root = baseLoader.load();
         GameWrapper gameWrapper = baseLoader.getController();
         primaryStage.setTitle("Group 15 Game");
-        Scene scene = new Scene(root, 800, 400);
+        Scene scene = new Scene(root, 1200, 675);
         width = primaryStage.widthProperty();
         height = primaryStage.heightProperty();
         primaryStage.setScene(scene);

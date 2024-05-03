@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import seng201.team0.gui.MenuWindow;
 //import seng201.team0.services.CounterService;
 
@@ -35,8 +36,6 @@ public class MenuController {
     private MoneyBalanceService moneyService;
 
     @FXML
-    public BorderPane menuBorderPane;
-    public GridPane errorsGridPane;
     public Label gameTitle;
     public Label nameInputLabel;
     public TextField nameInput;
@@ -52,8 +51,6 @@ public class MenuController {
     public Button towerButton4;
     public Button towerButton5;
     public Button towerButton6;
-    public Label errorsLabel;
-    public Label errorsLabelResult;
     public Label selectedTowerTitle;
     public Label selectedTowerResourcesLabel;
     public Label selectedTowerReloadSpeedLabel;
@@ -65,9 +62,11 @@ public class MenuController {
 
 
     public int selectedRounds = 5;
-    public List<Tower> towerTypes = new ArrayList<>();
+    public ArrayList<Tower> towerTypes = new ArrayList<>();
     public ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
     public ArrayList<Tower> selectedTowers = new ArrayList<>();
+
+    public List<String> errorsList = new ArrayList<>();
 
 
     /**
@@ -90,9 +89,12 @@ public class MenuController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        menuBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        menuBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+        //menuBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        //menuBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
+        // Background Image from Adobe Stock Ai thing
+        // https://stock.adobe.com/nz/generate/details?prompt=I+would+like+a+picture+with+the+perspective+of+looking+down+a+mine+where+there+are+gems+in+the+walls+to+each+side+and+lit+up+by+lanterns.+Maybe+have+a+pickaxe+and+a+helmet+with+a+torch+laying+against+the+wall.+Don%27t+include+any+people+and+have+a+minecart+track+going+deeper+in+the+mine.+Do+this+in+a+cartoony+style.+&aspectRatio=widescreen&contentType=none&style=vector_look&seed=71566
+        // Prompt: I would like a picture with the perspective of looking down a mine where there are gems in the walls to each side and lit up by lanterns. Maybe have a pickaxe and a helmet with a torch laying against the wall. Don't include any people and have a minecart track going deeper in the mine. Do this in a cartoony style.
 
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
 
@@ -108,14 +110,15 @@ public class MenuController {
         for (int i = 0; i < 6; i++) {
             final int finalI = i;
             towerButtons.get(i).setOnAction(event -> {
-                showStats(finalI);
                 if (tempSelectedTowers.contains(finalI)) {
+                    showStats(finalI);
                     tempSelectedTowers.remove(Integer.valueOf(finalI)); // Use Integer.valueOf to remove by object (the value) not index
                     towerButtons.get(finalI).setStyle(""); // Reset style
                 } else {
                     if (tempSelectedTowers.size() < 3) {
+                        showStats(finalI);
                         tempSelectedTowers.add(finalI); // Add tower to the ArrayList
-                        towerButtons.get(finalI).setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;"); // Set button to look like it has been selected
+                        towerButtons.get(finalI).setStyle("-fx-background-color: #7d7d7d; -fx-background-radius: 5;"); // Set button to look like it has been selected
                     }
                 }
             });
@@ -140,8 +143,6 @@ public class MenuController {
      */
     @FXML
     private void onSubmitButtonClicked() {
-        // Resets error label each time button is clicked
-        errorsLabelResult.setText("");
         /*
         Used code found on https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character to figure
         out how to find if a string contained special characters
@@ -160,20 +161,28 @@ public class MenuController {
        int errors = 0;
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
-            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
+            //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
+            errorsList.add("Error - Please enter a valid name");
             nameInput.setStyle("-fx-text-box-border: red");
             nameInput.setText("");
             errors += 1;
+
         }
         if (difficultyDropdown.getValue() == null) {
-            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
+            //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
+            errorsList.add("Error - Please select a difficulty");
             difficultyDropdown.setStyle("-fx-border-color: red");
             errors += 1;
+
+
+
         }
         if (tempSelectedTowers.size() != 3) {
-            errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
+            //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
+            errorsList.add("Error - Please select at least 3 Towers");
             towerGrid.setStyle("-fx-border-color: red");
             errors += 1;
+
         }
         if (errors == 0) {
             nameService.setNewName(nameInput.getText());
@@ -196,16 +205,22 @@ public class MenuController {
                 moneyService.setNewBalance(25);
             }
 
-
-            System.out.println("--------------------------------------");
-            System.out.println("Name is: " + nameService.getCurrentName());
-            System.out.println("# of Rounds: " + roundsService.getRoundsSelection());
-            System.out.println("Difficulty: " + difficultyService.getDifficultySelection());
-            System.out.println("Towers Selected: " + inventoryService.getMainTowerSelection());
-            System.out.println("--------------------------------------");
-
-
             gameManager.resetAndLaunchMainScreen();
+        } else {
+            openErrorDialog();
         }
+    }
+
+    private void openErrorDialog() {
+        //Tutorial 2 Extension
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Error");
+        VBox dialogContent = new VBox(10);
+        for (String error: errorsList) {
+            dialogContent.getChildren().add(new Label(error));
+        }
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
     }
 }
