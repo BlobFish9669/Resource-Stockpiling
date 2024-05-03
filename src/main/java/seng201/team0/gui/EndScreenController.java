@@ -42,6 +42,7 @@ public class EndScreenController {
     public Label scoreLabel;
 
     public Button exitButton;
+    public Button restartGameButton;
 
 
     /**
@@ -94,6 +95,11 @@ public class EndScreenController {
         roundsCompletedLabel.setText(String.valueOf(roundsChosen - remainingRounds));
         moneyGainedLabel.setText(String.valueOf((currentBalance - startBalance)));
 
+    }
+
+    @FXML
+    public void onRestartGameButtonClicked() {
+        gameManager.resetAndLaunchMenuScreen();
     }
 
     @FXML
