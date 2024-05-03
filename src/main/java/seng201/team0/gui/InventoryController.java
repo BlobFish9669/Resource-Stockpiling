@@ -3,10 +3,9 @@ package seng201.team0.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
@@ -14,6 +13,9 @@ import seng201.team0.services.CurrentRoundService;
 import seng201.team0.services.MoneyBalanceService;
 import seng201.team0.services.RoundsSelectionService;
 import seng201.team0.services.InventoryService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for the inventory.fxml window
@@ -31,8 +33,10 @@ public class InventoryController {
     private Upgrade selectedUpgrade;
 
     @FXML
-    public BorderPane inventoryBorderPane;
     public Label inventoryLabel;
+    public Label currentRound;
+    public Label roundsRemaining;
+    public Label currentMoney;
     public Label currentMoneyLabel;
     public Label currentRoundLabel;
     public Label roundsRemainingLabel;
@@ -42,10 +46,12 @@ public class InventoryController {
     public Button moveTowerButton;
     public Button useUpgradeButton;
     public Button backButton;
+    public Label upgrades;
+    public Label reserveTowers;
+    public Label mainTowers;
 
     private String towerSelected;
     private boolean upgradeSelected = false;
-
 
     /**
      * Constructor
@@ -64,8 +70,8 @@ public class InventoryController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        inventoryBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        inventoryBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+        //inventoryBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        //inventoryBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
@@ -101,12 +107,13 @@ public class InventoryController {
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
     }
+
     @FXML
     private void onMoveTowerButtonClicked() {
         if (towerSelected != null) {
             if (towerSelected.equals("Main")) {
                 if (inventoryService.getMainTowerSelection().size() == 1) {
-                    System.out.println("Error - There must always be at least one main tower");
+                    openErrorDialog("Error - There must always be at least one main tower");
                 } else if(inventoryService.getReserveTowerSelection().size() < 5) {
                     inventoryService.addToReserveTowerSelection(selectedMainTower);
                     reserveTowerList.getItems().add(selectedMainTower);
@@ -114,7 +121,7 @@ public class InventoryController {
                     inventoryService.removeMainTower(selectedMainTower);
                     mainTowerList.getItems().remove(selectedMainTower);
                 } else {
-                    System.out.println("Error - Too many towers in reserve towers");
+                    openErrorDialog("Error - Too many towers in reserve towers");
                 }
                     clearSelections();
             } else {
@@ -125,12 +132,15 @@ public class InventoryController {
                     inventoryService.removeReserveTower(selectedReserveTower);
                     reserveTowerList.getItems().remove(selectedReserveTower);
                 } else {
-                    System.out.println("Error - Too many towers in main towers");
+                    openErrorDialog("Error - Too many towers in main towers");
                 }
                 clearSelections();
             }
+        } else {
+            openErrorDialog("Error - Please select a tower");
         }
     }
+
     private void clearSelections() {
         mainTowerList.getSelectionModel().clearSelection();
         reserveTowerList.getSelectionModel().clearSelection();
@@ -141,9 +151,9 @@ public class InventoryController {
         towerSelected = null;
         upgradeSelected = false;
     }
+
     @FXML
     private void onUseUpgradeButtonClicked() {
-
         if (upgradeSelected && towerSelected != null) {
             if (towerSelected.equals("Main")) {
                 selectedMainTower.applyUpgrade(selectedUpgrade);
@@ -153,6 +163,18 @@ public class InventoryController {
             inventoryService.removeUserUpgrade(selectedUpgrade);
             upgradeList.getItems().remove(selectedUpgrade);
             clearSelections();
+        } else {
+            openErrorDialog("Error - Please select both a tower AND an upgrade");
         }
+    }
+
+    private void openErrorDialog(String message) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Error");
+        VBox dialogContent = new VBox(10);
+        dialogContent.getChildren().add(new Label(message));
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
     }
 }

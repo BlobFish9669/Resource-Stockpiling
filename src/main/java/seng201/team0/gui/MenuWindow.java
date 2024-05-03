@@ -31,6 +31,7 @@ public class MenuWindow extends Application {
         width = primaryStage.widthProperty();
         height = primaryStage.heightProperty();
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false); // Locks screen size https://stackoverflow.com/questions/34809447/disable-maximize-button-and-resizing-window-in-javafx#:~:text=You%20can%20do%20it%20with,remove%20window%20buttons%20with%20stage.
         primaryStage.show();
         gameWrapper.init(primaryStage);
     }
