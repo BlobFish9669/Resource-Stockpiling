@@ -3,11 +3,9 @@ package seng201.team0.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
@@ -23,8 +21,6 @@ import seng201.team0.services.RoundsSelectionService;
 public class InventorySellController {
 
     @FXML
-    public BorderPane inventorySellBorderPane;
-
     public Label title;
 
     public Label currentMoney;
@@ -75,8 +71,8 @@ public class InventorySellController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        inventorySellBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        inventorySellBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+        //inventorySellBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
+        //inventorySellBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
@@ -116,13 +112,18 @@ public class InventorySellController {
     @FXML
     private void onSellTowerButtonClicked() {
         if (isTowerSelectedMain != null) {
-            if (isTowerSelectedMain) {
-                inventoryService.removeMainTower(selectedMainTower);
-                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getCost());
-                currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
-                mainTowerList.getItems().remove(selectedMainTower);
-                clearSelections();
+            if (isTowerSelectedMain) {
+                if (inventoryService.getMainTowerSelection().size() != 1) {
+                    inventoryService.removeMainTower(selectedMainTower);
+                    moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getCost());
+                    currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
+
+                    mainTowerList.getItems().remove(selectedMainTower);
+                    clearSelections();
+                } else {
+                    openErrorDialog("Error - There must always be at least one main tower");
+                }
             } else {
                 inventoryService.removeReserveTower(selectedReserveTower);
                 moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getCost());
@@ -131,6 +132,8 @@ public class InventorySellController {
                 reserveTowerList.getItems().remove(selectedReserveTower);
                 clearSelections();
             }
+        } else {
+            openErrorDialog("Error - Please select a tower to sell");
         }
     }
     private void clearSelections() {
@@ -151,6 +154,18 @@ public class InventorySellController {
             upgradeList.getItems().remove(selectedUpgrade);
             upgradeList.getSelectionModel().clearSelection();
             selectedUpgrade = null;
+        } else {
+            openErrorDialog("Error - Please select an upgrade to sell");
         }
+    }
+
+    private void openErrorDialog(String message) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Error");
+        VBox dialogContent = new VBox(10);
+        dialogContent.getChildren().add(new Label(message));
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
     }
 }

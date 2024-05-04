@@ -2,8 +2,11 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
@@ -18,7 +21,6 @@ import java.util.*;
 public class ShopController {
 
     @FXML
-    public GridPane shopGrid;
     public Label shopLabel;
 
     public Label currentMoney;
@@ -106,8 +108,8 @@ public class ShopController {
      */
     public void initialize() {
         // Binds the width and height of the grid to the size of the window.
-        shopGrid.prefWidthProperty().bind(MenuWindow.getWidth());
-        shopGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+        //shopGrid.prefWidthProperty().bind(MenuWindow.getWidth());
+        //shopGrid.prefHeightProperty().bind(MenuWindow.getHeight());
 
         int numTowersAvailable = shopAvailabilityService.getNumberTowersAvailable();
         if (numTowersAvailable == 4) {
@@ -284,11 +286,11 @@ public class ShopController {
     @FXML
     private void onTowerPurchaseClicked() {
         if (towerToPurchase == null) {
-            System.out.println("No tower selected");
+            openErrorDialog("Error - Please select a tower");
         } else if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
-            System.out.println("Error not enough money");
+            openErrorDialog("Error - Not enough money");
         } else if (inventoryService.getMainTowerSelection().size() == 5 && inventoryService.getReserveTowerSelection().size() == 5) {
-            System.out.println("Too many towers");
+            openErrorDialog("Error - Too many towers, sell one and try again");
         } else {
             switch (towerButton) {
                 case 1:
@@ -327,9 +329,9 @@ public class ShopController {
     @FXML
     private void onUpgradePurchaseClicked() {
         if (upgradeToPurchase == null) {
-            System.out.println("No upgrade selected");
+            openErrorDialog("Error - Please select an upgrade");
         } else if (moneyService.getCurrentBalance() - upgradeToPurchase.getCost() < 0) {
-            System.out.println("Error not enough money");
+            openErrorDialog("Error - Not enough money");
         } else {
             switch (upgradeButton) {
                 case 1:
@@ -364,4 +366,15 @@ public class ShopController {
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
+
+    private void openErrorDialog(String message) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Error");
+        VBox dialogContent = new VBox(10);
+        dialogContent.getChildren().add(new Label(message));
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
+    }
+
 }
