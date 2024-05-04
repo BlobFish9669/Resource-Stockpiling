@@ -13,20 +13,27 @@ public class Tower {
     private double reloadSpeed;
     private int level;
     private int cost;
-    private int fillRate;
-    public Tower() {
+    private int sellPrice;
+    private int towerPoints;
+    private int roundsUsed;
+
+    /* public Tower() { // Constructor not needed if we just create a bunch of them manually?
         setResourceType("None");
         setResourceAmount(0);
         setReloadSpeed(0);
         setLevel(0);
         setCost(0);
-    }
+    }*/
+
     public Tower(String resourceType, int resourceAmount, double reloadSpeed, int level, int cost) {
         setResourceType(resourceType);
         setResourceAmount(resourceAmount);
         setReloadSpeed(reloadSpeed); // In mins
         setLevel(level);
         setCost(cost);
+        this.sellPrice = (int) (cost * 0.75); // Get 75% of cost back if sold
+        this.towerPoints = 0;
+        this.roundsUsed = 0;
     }
 
     public void setResourceType(String resourceType) {
@@ -55,9 +62,40 @@ public class Tower {
     }
     public void setCost(int cost) {
         this.cost = cost;
+        this.sellPrice = (int) (cost * 0.75);
     }
     public int getCost() {
         return cost;
+    }
+
+    public int getSellPrice() {
+        return sellPrice;
+    }
+
+    public int getRoundsUsed() {
+        return roundsUsed;
+    }
+
+    public void addRoundUsed() {
+        this.roundsUsed++;
+    }
+
+    public void gainTowerPoints(int points) {
+        this.towerPoints += points;
+        checkIfTowerLevelUp();
+    }
+
+    private void checkIfTowerLevelUp() {
+        if (towerPoints >= 100 * level) { // Good to go for a level up
+            towerPoints = 0;
+            level += 1;
+
+            // Increase stats
+            resourceAmount += 10;
+            reloadSpeed -= 1;
+            cost += 15;
+            sellPrice = (int) (cost * 0.75);
+        }
     }
 
     public void applyUpgrade(Upgrade upgrade) {

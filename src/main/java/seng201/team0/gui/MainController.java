@@ -4,20 +4,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
 import seng201.team0.models.Cart;
 import seng201.team0.models.Tower;
 import seng201.team0.services.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Controller for the main.fxml window
@@ -57,6 +52,7 @@ public class MainController {
     public Button shopButton;
     public Button inventoryButton;
 
+    public List<String> randomEventList = new ArrayList<>();
 
     /**
      * Constructor
@@ -176,6 +172,17 @@ public class MainController {
         Integer currentRound = currentRoundService.getCurrentRound();
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
 
+        //Add random events here
+        /*
+        (a) A tower has one or more of its stats (including XP) increased or decreased.
+        (b) A tower breaks.
+            i. A broken tower can either:
+                A. Be removed from the player’s inventory entirely, or
+                B. Be placed in a broken state and require a specific item to be repaired to working order
+            ii. The chance should increase if the tower was used in the previous round
+         */
+        randomTowerEvent();
+
         if (remainingRounds == 0) {
             currentRoundService.setGameSuccess(true);
             gameOver();
@@ -201,6 +208,64 @@ public class MainController {
             cartList.setItems(null); // reset list view to remove carts
 
         }
+    }
+
+    private void randomTowerEvent() {
+        Random r = new Random();
+        int randomEvents = 0;
+        for (Tower tower : inventoryService.getMainTowerSelection()) {
+            int chanceOfTowerStatIncrease = r.nextInt(0, 3); // 1/3 chance
+            if (chanceOfTowerStatIncrease == 0) {
+                int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
+                String stat = "";
+                switch (whichStatIncrease) {
+                    case 1: // Tower Points
+                        tower.gainTowerPoints(100);
+                        stat = "Tower Points";
+                        break;
+                    case 2: // Resource Amount
+                        tower.setResourceAmount(tower.getResourceAmount() + 5);
+                        stat = "Resource Amount";
+                        break;
+                    case 3: // Reload Speed
+                        tower.setReloadSpeed(tower.getReloadSpeed() - 0.5);
+                        stat = "Reload Speed";
+                        break;
+                    case 4: // Price
+                        tower.setCost(tower.getCost() + 10);
+                        stat = "Cost";
+                        break;
+                }
+                randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has changed!");
+                randomEvents += 1;
+            }
+
+            int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
+            if (chanceOfTowerBreaking == 0) {
+                randomEventList.add("A " + tower.getResourceType() + " tower has broken! It has been removed from your inventory");
+                inventoryService.removeMainTower(tower);
+                randomEvents += 1;
+                // "Breaks" tower by removing from inventory - Might do the "Be placed in a broken state and require a specific item to be repaired to working order" bit later on
+            }
+
+            tower.addRoundUsed(); // Tracks how many times a tower has been used
+        }
+        if (randomEvents > 0) {
+            openRandomEventDialog();
+        }
+    }
+
+    private void openRandomEventDialog() {
+        //Tutorial 2 Extension
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("A random event has occurred");
+        VBox dialogContent = new VBox(50);
+        for (String event: randomEventList) {
+            dialogContent.getChildren().add(new Label(event));
+        }
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
     }
 
     private void resetCartInfo() {
