@@ -66,10 +66,19 @@ public class CurrentRound {
         for (int i = 0; i < 10; i++) {
             Random r = new Random();
             List<String> availableResourceTypes = new ArrayList<>();
-            availableResourceTypes.addAll(Arrays.asList("Stone", "Coal", "Copper", "Silver", "Gold", "Diamond"));
+            availableResourceTypes.addAll(Arrays.asList("Stone", "Coal", "Copper"));
+            if (round >= 3) {
+                availableResourceTypes.add("Silver");
+            }
+            if (round >= 4) {
+                availableResourceTypes.add("Gold");
+            }
+            if (round >= 5) {
+                availableResourceTypes.add("Diamond");
+            }
 
             int randomSize = r.nextInt(5,31);
-            int randomResource = r.nextInt(0,6);
+            int randomResource = r.nextInt(0, availableResourceTypes.size());
             int randomSpeed = r.nextInt(1,11);
             carts.add(new Cart(randomSize, availableResourceTypes.get(randomResource), randomSpeed));
         }

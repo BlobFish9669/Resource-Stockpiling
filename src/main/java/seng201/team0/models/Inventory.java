@@ -17,6 +17,14 @@ public class Inventory {
         upgrades = new ArrayList<>();
     }
     /**
+     * Method to reset towers and upgrades
+     */
+    public void resetInventory() {
+        mainTowers = new ArrayList<>();
+        reserveTowers = new ArrayList<>();
+        upgrades = new ArrayList<>();
+    }
+    /**
      * Get list of main towers
      * @return Current main towers in inventory
      */

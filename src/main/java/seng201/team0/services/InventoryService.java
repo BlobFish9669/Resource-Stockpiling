@@ -75,4 +75,11 @@ public class InventoryService {
      * @param input upgrade to be removed
      */
     public void removeUserUpgrade(Upgrade input) {inventory.removeUpgrade(input);}
+
+    /**
+     * Reset the users inventory
+     */
+    public void resetInventory() {
+        inventory.resetInventory();
+    }
 }

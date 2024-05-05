@@ -101,6 +101,7 @@ public class EndScreenController {
     public void onRestartGameButtonClicked() {
         currentRoundService.setDifficulty("reset");
         currentRoundService.setCurrentRound(1);
+        inventoryService.resetInventory();
         gameManager.resetAndLaunchMenuScreen();
     }
 
