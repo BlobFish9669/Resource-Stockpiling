@@ -99,6 +99,8 @@ public class EndScreenController {
 
     @FXML
     public void onRestartGameButtonClicked() {
+        currentRoundService.setDifficulty("reset");
+        currentRoundService.setCurrentRound(1);
         gameManager.resetAndLaunchMenuScreen();
     }
 

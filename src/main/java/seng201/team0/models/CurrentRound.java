@@ -51,6 +51,8 @@ public class CurrentRound {
         } else if (difficulty.equals("Hard")) {
             distance = 1000;
             cartsNum = 10;
+        } else if (difficulty.equals("reset")) {
+            difficulty = null;
         }
     }
 
