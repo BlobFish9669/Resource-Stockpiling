@@ -40,17 +40,17 @@ public class CurrentRound {
     public void setRound(Integer input) { round = input; }
 
     public void setDifficulty(String input) {
+        Random r = new Random();
         difficulty = input;
         if (difficulty.equals("Easy")) {
             distance = 5000;
             cartsNum = 3;
-        }
-        else if (difficulty.equals("Medium")) {
+        } else if (difficulty.equals("Medium")) {
             distance = 2500;
-            cartsNum = 6;
+            cartsNum = r.nextInt(4,7);
         } else if (difficulty.equals("Hard")) {
             distance = 1000;
-            cartsNum = 10;
+            cartsNum = r.nextInt(7,11);
         } else if (difficulty.equals("reset")) {
             difficulty = null;
         }
