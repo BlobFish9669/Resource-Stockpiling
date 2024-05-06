@@ -116,7 +116,7 @@ public class InventorySellController {
             if (isTowerSelectedMain) {
                 if (inventoryService.getMainTowerSelection().size() != 1) {
                     inventoryService.removeMainTower(selectedMainTower);
-                    moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getCost());
+                    moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getSellPrice());
                     currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
                     mainTowerList.getItems().remove(selectedMainTower);
@@ -126,7 +126,7 @@ public class InventorySellController {
                 }
             } else {
                 inventoryService.removeReserveTower(selectedReserveTower);
-                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getCost());
+                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getSellPrice());
                 currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
                 reserveTowerList.getItems().remove(selectedReserveTower);

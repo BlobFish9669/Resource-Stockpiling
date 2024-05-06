@@ -43,7 +43,7 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                             new Label(String.format("Resource Amount: %s",tower.getResourceAmount())),
                             new Label(String.format("Reload Speed: %s", tower.getReloadSpeed())),
                             new Label(String.format("Level: %s", tower.getLevel())),
-                            new Label(String.format("Cost: %s", tower.getCost()))
+                            new Label(String.format("Sell Back Price: $%s", tower.getSellPrice()))
                     );
                     // Add the image and the VBox to the HBox
                     hBox.getChildren().addAll(

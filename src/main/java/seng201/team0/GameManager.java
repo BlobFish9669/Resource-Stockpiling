@@ -25,6 +25,7 @@ public class GameManager {
     private final MoneyBalanceService moneyService;
     private final CurrentRoundService currentRoundService;
     private final ShopAvailabilityService shopAvailabilityService;
+    private final PlayerScoreService playerScoreService;
 
     /**
      * Constructor
@@ -43,7 +44,7 @@ public class GameManager {
      * @param currentRoundService Service for managing the current round of the game
      * @param shopAvailabilityService Service for managing the availability of items in the shop
      */
-    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Consumer<GameManager> endScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService) {
+    public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Consumer<GameManager> endScreenLauncher, Runnable clearScreen, DifficultySelectionService difficultyService, NameInputService nameService, RoundsSelectionService roundsService, InventoryService inventoryService, MoneyBalanceService moneyService, CurrentRoundService currentRoundService, ShopAvailabilityService shopAvailabilityService, PlayerScoreService playerScoreService) {
         this.menuScreenLauncher = menuScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
@@ -58,6 +59,7 @@ public class GameManager {
         this.moneyService = moneyService;
         this.currentRoundService = currentRoundService;
         this.shopAvailabilityService = shopAvailabilityService;
+        this.playerScoreService = playerScoreService;
         resetAndLaunchMenuScreen();
     }
 
@@ -161,5 +163,7 @@ public class GameManager {
     public ShopAvailabilityService getShopAvailabilityService() {
         return shopAvailabilityService;
     }
+
+    public PlayerScoreService getPlayerScoreService() { return playerScoreService; }
 
 }

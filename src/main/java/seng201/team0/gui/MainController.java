@@ -28,6 +28,7 @@ public class MainController {
     private MoneyBalanceService moneyService;
     private CurrentRoundService currentRoundService;
     private ShopAvailabilityService shopAvailabilityService;
+    private PlayerScoreService playerScoreService;
 
 
     @FXML
@@ -54,6 +55,8 @@ public class MainController {
 
     public List<String> randomEventList = new ArrayList<>();
 
+    public int remainingRounds;
+
     /**
      * Constructor
      * @param gameManager an instance of GameManger that is linked through the entirety of the game
@@ -67,17 +70,14 @@ public class MainController {
         this.moneyService = gameManager.getMoneyService();
         this.currentRoundService = gameManager.getCurrentRoundService();
         this.shopAvailabilityService = gameManager.getShopAvailabilityService();
+        this.playerScoreService = gameManager.getPlayerScoreService();
     }
 
     /**
      * Initialize the window
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        //mainBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        //mainBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
-
-        int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
+        remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
 
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
@@ -118,6 +118,9 @@ public class MainController {
     private void onInventoryButtonClicked() {
         gameManager.resetAndOpenInventoryScreen();
     }
+
+    private void gameOver() { gameManager.resetAndOpenEndScreen(); }
+
     @FXML
     private void onPlayRoundButtonClicked() {
         if (roundDifficultyDropdown.getValue() != null && roundDifficultyDropdown.getValue() != "") {
@@ -164,50 +167,36 @@ public class MainController {
         }
     }
 
-    private void gameOver() { gameManager.resetAndOpenEndScreen(); }
-
     private void finishRound() {
-        Integer currentMoney = moneyService.getCurrentBalance();
-        String currentDifficulty = currentRoundService.getDifficulty();
-        Integer currentRound = currentRoundService.getCurrentRound();
-        int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
-
-        //Add random events here
-        /*
-        (a) A tower has one or more of its stats (including XP) increased or decreased.
-        (b) A tower breaks.
-            i. A broken tower can either:
-                A. Be removed from the player’s inventory entirely, or
-                B. Be placed in a broken state and require a specific item to be repaired to working order
-            ii. The chance should increase if the tower was used in the previous round
-         */
-        randomTowerEvent();
 
         if (remainingRounds == 0) {
             currentRoundService.setGameSuccess(true);
             gameOver();
         } else {
-            if (currentDifficulty == "Easy") {
-                moneyService.setNewBalance(currentMoney + 100);
-            } else if (currentDifficulty == "Medium") {
-                moneyService.setNewBalance(currentMoney + 250);
-            } else if (currentDifficulty == "Hard") {
-                moneyService.setNewBalance(currentMoney + 500);
+            if (remainingRounds > 0) {
+                randomTowerEvent();
             }
-
-            shopAvailabilityService.resetStore(); // reset shop
-            currentRoundService.setCarts(); // reset carts
-            currentRoundService.setCurrentRound(currentRound + 1); // update rounds
-            remainingRounds -= 1;
-
-            currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString()); //update labels
-            currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
-            roundsRemainingLabel.setText(Integer.toString(remainingRounds));
-
-            resetCartInfo(); // reset labels
-            cartList.setItems(null); // reset list view to remove carts
-
+            resetAndUpdateLabelsAndStats();
         }
+    }
+
+    private Boolean checkResources() {
+        ArrayList<Boolean> cartResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[currentRoundService.getCarts().size()]));
+        Collections.fill(cartResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
+        int i = 0;
+        for (Cart cart: currentRoundService.getCarts()) {
+            for (Tower tower: inventoryService.getMainTowerSelection()) {
+                if (tower.getResourceType() == cart.getResourceType()) {
+                    cartResourceTypeSupported.set(i, true);
+                }
+            }
+            i++;
+        }
+        System.out.println(cartResourceTypeSupported);
+        if (cartResourceTypeSupported.contains(false)) {
+            return false; //Round failed
+        }
+        return true;
     }
 
     private void randomTowerEvent() {
@@ -255,6 +244,42 @@ public class MainController {
         }
     }
 
+    private void resetAndUpdateLabelsAndStats() {
+        Integer currentMoney = moneyService.getCurrentBalance();
+        String currentDifficulty = currentRoundService.getDifficulty();
+        Integer currentRound = currentRoundService.getCurrentRound();
+
+        if (currentDifficulty == "Easy") {
+            moneyService.setNewBalance(currentMoney + 100);
+            playerScoreService.addPlayerScore(50);
+        } else if (currentDifficulty == "Medium") {
+            moneyService.setNewBalance(currentMoney + 250);
+            playerScoreService.addPlayerScore(100);
+        } else if (currentDifficulty == "Hard") {
+            moneyService.setNewBalance(currentMoney + 500);
+            playerScoreService.addPlayerScore(150);
+        }
+
+        shopAvailabilityService.resetStore(); // reset shop
+        currentRoundService.setCarts(); // reset carts
+        currentRoundService.setCurrentRound(currentRound + 1); // update rounds
+        remainingRounds -= 1;
+
+        currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString()); //update labels
+        currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
+        roundsRemainingLabel.setText(Integer.toString(remainingRounds));
+
+        resetCartInfo(); // reset labels
+        currentRoundService.setDifficulty("reset"); // reset difficulty so that previous rounds difficulty isn't stored
+        cartList.setItems(null); // reset list view to remove carts
+    }
+
+    private void resetCartInfo() {
+        roundDifficultyDropdown.setValue("");
+        distance.setText("");
+        numberCarts.setText("");
+    }
+
     private void openRandomEventDialog() {
         //Tutorial 2 Extension
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -266,30 +291,5 @@ public class MainController {
         dialog.getDialogPane().setContent(dialogContent);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.show();
-    }
-
-    private void resetCartInfo() {
-        roundDifficultyDropdown.setValue("");
-        distance.setText("");
-        numberCarts.setText("");
-    }
-
-    private Boolean checkResources() {
-        ArrayList<Boolean> cartResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[currentRoundService.getCarts().size()]));
-        Collections.fill(cartResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
-        int i = 0;
-        for (Cart cart: currentRoundService.getCarts()) {
-            for (Tower tower: inventoryService.getMainTowerSelection()) {
-                if (tower.getResourceType() == cart.getResourceType()) {
-                    cartResourceTypeSupported.set(i, true);
-                }
-            }
-            i++;
-        }
-        System.out.println(cartResourceTypeSupported);
-        if (cartResourceTypeSupported.contains(false)) {
-            return false; //Round failed
-        }
-        return true;
     }
 }

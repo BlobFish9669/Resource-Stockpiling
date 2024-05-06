@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import seng201.team0.GameManager;
+import seng201.team0.models.ShopAvailability;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.*;
@@ -26,6 +27,8 @@ public class EndScreenController {
     private CurrentRoundService currentRoundService;
     private InventoryService inventoryService;
     private DifficultySelectionService difficultyService;
+    private ShopAvailabilityService shopAvailabilityService;
+    private PlayerScoreService playerScoreService;
 
     @FXML
     public BorderPane endScreenBorderPane;
@@ -58,6 +61,8 @@ public class EndScreenController {
         this.inventoryService = gameManager.getInventoryService();
         this.nameService = gameManager.getNameService();
         this.difficultyService = gameManager.getDifficultyService();
+        this.shopAvailabilityService = gameManager.getShopAvailabilityService();
+        this.playerScoreService = gameManager.getPlayerScoreService();
     }
     /**
      * Initialize the window
@@ -94,6 +99,7 @@ public class EndScreenController {
         roundsChosenLabel.setText(roundsService.getRoundsSelection().toString());
         roundsCompletedLabel.setText(String.valueOf(roundsChosen - remainingRounds));
         moneyGainedLabel.setText(String.valueOf((currentBalance - startBalance)));
+        scoreLabel.setText(String.valueOf(playerScoreService.getPlayerScore()));
 
     }
 
@@ -102,6 +108,7 @@ public class EndScreenController {
         currentRoundService.setDifficulty("reset");
         currentRoundService.setCurrentRound(1);
         inventoryService.resetInventory();
+        shopAvailabilityService.resetStore();
         gameManager.resetAndLaunchMenuScreen();
     }
 
