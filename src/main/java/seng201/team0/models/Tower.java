@@ -86,14 +86,21 @@ public class Tower {
     }
 
     private void checkIfTowerLevelUp() {
+        System.out.println(towerPoints);
         if (towerPoints >= 100 * level) { // Good to go for a level up
+            int temp = towerPoints;
+            int i = 0;
+            while (temp >= 100*level) { //Can do multiple level ups at once now
+                temp -= 100*level;
+                level += 1;
+                i++;
+            }
             towerPoints = 0;
-            level += 1;
 
             // Increase stats
-            resourceAmount += 10;
-            reloadSpeed -= 1;
-            cost += 15;
+            resourceAmount += 5*i;
+            reloadSpeed -= (double) i /4;
+            cost += 10*i;
             sellPrice = (int) (cost * 0.75);
         }
     }
@@ -101,8 +108,8 @@ public class Tower {
     public void applyUpgrade(Upgrade upgrade) {
         if (Objects.equals(upgrade.getUpgradeType(), "Resource Type")) {
             setResourceType(upgrade.getResourceType());
-        } else if (Objects.equals(upgrade.getUpgradeType(), "Tower Level")) {
-            setLevel((int) (getLevel() + upgrade.getUpgradeModifier()));
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Tower Points")) {
+            gainTowerPoints((upgrade.getUpgradeModifier().intValue()));
         } else if (Objects.equals(upgrade.getUpgradeType(), "Resource Amount")) {
             setResourceAmount((int) (getResourceAmount() * upgrade.getUpgradeModifier()));
         } else if (Objects.equals(upgrade.getUpgradeType(), "Reload Speed")) {

@@ -3,6 +3,6 @@ import seng201.team0.models.Tower;
 
 public class ShopTower9 extends Tower {
     public ShopTower9() {
-        super("Gold", 8, 6, 5, 9);
+        super("Copper", 15, 5, 5, 45);
     }
 }

@@ -127,7 +127,7 @@ public class MainController {
             currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
             startRound();
         } else {
-            System.out.println("Error - No difficulty selected");
+            openErrorDialog("Error - No difficulty selected");
         }
     }
 
@@ -145,15 +145,15 @@ public class MainController {
                             //System.out.println(distanceRemaining);
                             if (distanceRemaining <= currentRoundService.getDistance()) {
                                 cart.fill((int) (tower.getFillRate() * timeToFill));
-                                cartFilled = true;
+                                cartFilled = true;  // Getting a Caused by: java.util.ConcurrentModificationException error here somewhere?
                                 break;
                             }
                         }
                     }
 
                     if (!cartFilled) {
+                        openErrorDialog("Error - Not filled in time");
                         gameOver();
-                        System.out.print("Error - not filled in time");
                         break;
                     }
                 }
@@ -163,7 +163,8 @@ public class MainController {
 
         } else {
             gameOver();
-            System.out.println("Error - resource");
+            openErrorDialog("Error - There was one or more carts that did not have a corresponding tower");
+
         }
     }
 
@@ -192,7 +193,6 @@ public class MainController {
             }
             i++;
         }
-        System.out.println(cartResourceTypeSupported);
         if (cartResourceTypeSupported.contains(false)) {
             return false; //Round failed
         }
@@ -260,7 +260,7 @@ public class MainController {
             playerScoreService.addPlayerScore(150);
         }
 
-        shopAvailabilityService.resetStore(); // reset shop
+        shopAvailabilityService.resetStore(currentRound); // reset shop
         currentRoundService.setCarts(); // reset carts
         currentRoundService.setCurrentRound(currentRound + 1); // update rounds
         remainingRounds -= 1;
@@ -288,6 +288,16 @@ public class MainController {
         for (String event: randomEventList) {
             dialogContent.getChildren().add(new Label(event));
         }
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.show();
+    }
+
+    private void openErrorDialog(String message) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Error");
+        VBox dialogContent = new VBox(10);
+        dialogContent.getChildren().add(new Label(message));
         dialog.getDialogPane().setContent(dialogContent);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.show();

@@ -3,6 +3,6 @@ import seng201.team0.models.Upgrade;
 
 public class Upgrade3 extends Upgrade {
     public Upgrade3() {
-        super("+1 Tower Level", "Tower Level", 1, 1.0);
+        super("+500 Tower Points", "Tower Points", 50, 500.0);
     }
 }

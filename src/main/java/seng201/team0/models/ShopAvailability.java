@@ -4,6 +4,7 @@ import java.util.*;
 
 import seng201.team0.models.towertypes.*;
 import seng201.team0.models.upgradetypes.*;
+import seng201.team0.services.CurrentRoundService;
 
 /**
  * Class used to create and store a random number of shop items within given bounds
@@ -26,9 +27,8 @@ public class ShopAvailability {
      * Constructor to randomise the shop towers and upgrades
      */
     public ShopAvailability() {
-        resetStore();
+        resetStore(1);
     }
-
 
     /**
      * Retrieve the randomised number between 3 and 5 inclusive to see how many towers are available in the shop
@@ -82,7 +82,7 @@ public class ShopAvailability {
      */
     public void setPurchasedUpgrade(Integer input) { purchasedUpgrades.set(input, true); }
 
-    public void resetStore() {
+    public void resetStore(int round) {
         Random r = new Random();
         numTowersAvailable = r.nextInt(3, 6); //randomly generates a number between 3 and 5 indicating how many towers should be available in the shop
         numUpgradesAvailable = r.nextInt(3, 7);
@@ -90,7 +90,14 @@ public class ShopAvailability {
         shopTowers = new ArrayList<>();
         shopUpgrades = new ArrayList<>();
 
-        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5(), new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10());
+        // Change tower availability based on round the user is currently on, better tower later on
+        if (round > 5) {
+            Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11(), new ShopTower12());
+        } else if (round > 2 && round < 5) {
+            Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11());
+        }
+        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5());
+
         for (int i = 0; i < numTowersAvailable; i++) {
             int randomShopTower = r.nextInt(0, potentialShopTowers.size());
             while (shopTowers.contains(potentialShopTowers.get(randomShopTower))) {
@@ -99,7 +106,12 @@ public class ShopAvailability {
             shopTowers.add(potentialShopTowers.get(randomShopTower));
         }
 
-        Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5());
+        // Change upgrade availability based on round the user is currently on, better upgrades later on
+        if (round > 3) {
+            Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5(), new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10(), new Upgrade11());
+        } else {
+            Collections.addAll(potentialShopUpgrades, new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10()); // worse upgrades to start with - also cheaper
+        }
         for (int i = 0; i < numUpgradesAvailable; i++) {
             int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());
             shopUpgrades.add(potentialShopUpgrades.get(randomShopUpgrade));
