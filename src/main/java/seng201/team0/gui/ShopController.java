@@ -1,13 +1,12 @@
 package seng201.team0.gui;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
+import seng201.team0.gui.cellfactories.TowerCellFactory;
+import seng201.team0.gui.cellfactories.UpgradeCellFactory;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.*;
@@ -65,8 +64,10 @@ public class ShopController {
 
     public Button purchaseTowerButton;
     public Button purchaseUpgradeButton;
-    public Button sellFromInventoryButton;
+    public Button sellItemsButton;
     public Button backButton;
+    public ListView<Tower> towersListView;
+    public ListView<Upgrade> upgradesListView;
 
 
     private GameManager gameManager;
@@ -110,6 +111,19 @@ public class ShopController {
         // Binds the width and height of the grid to the size of the window.
         //shopGrid.prefWidthProperty().bind(MenuWindow.getWidth());
         //shopGrid.prefHeightProperty().bind(MenuWindow.getHeight());
+
+        purchaseTowerButton.setOnMouseEntered(event -> purchaseTowerButton.setStyle("-fx-background-color: #999999"));
+        purchaseTowerButton.setOnMouseExited(event -> purchaseTowerButton.setStyle(""));
+
+        purchaseUpgradeButton.setOnMouseEntered(event -> purchaseUpgradeButton.setStyle("-fx-background-color: #999999"));
+        purchaseUpgradeButton.setOnMouseExited(event -> purchaseUpgradeButton.setStyle(""));
+
+        backButton.setOnMouseEntered(event -> backButton.setStyle("-fx-background-color: #999999"));
+        backButton.setOnMouseExited(event -> backButton.setStyle(""));
+
+        sellItemsButton.setOnMouseEntered(event -> sellItemsButton.setStyle("-fx-background-color: #85aeb0"));
+        sellItemsButton.setOnMouseExited(event -> sellItemsButton.setStyle("-fx-background-color: #b6dcdd"));
+
 
         int numTowersAvailable = shopAvailabilityService.getNumberTowersAvailable();
         if (numTowersAvailable == 4) {
@@ -191,6 +205,9 @@ public class ShopController {
         List<Button> upgradeButtons = List.of(upgradeButton1, upgradeButton2, upgradeButton3, upgradeButton4, upgradeButton5, upgradeButton6);
 
         // Have to choose between 3 and 5 unique random numbers between 1 and 10 depending on numTowersAvailable:
+        towersListView.setCellFactory(new TowerCellFactory());
+        upgradesListView.setCellFactory(new UpgradeCellFactory());
+
 
         for (int i = 0; i < numTowersAvailable; i++) {
             shopTowers = shopAvailabilityService.getAvailableTowers();
@@ -257,11 +274,9 @@ public class ShopController {
      */
     private void showTowerStats(int towerIndex) {
         Tower selectedTower = shopTowers.get(towerIndex);
-        resourceAmountLabel.setText(String.valueOf((selectedTower.getResourceAmount())));
-        reloadSpeedLabel.setText(String.valueOf((selectedTower.getReloadSpeed())));
-        resourceTypeLabel.setText(selectedTower.getResourceType());
-        towerLevelLabel.setText(String.valueOf((selectedTower.getLevel())));
-        towerCostLabel.setText(String.valueOf(selectedTower.getCost()));
+        ArrayList<Tower> tempList = new ArrayList<>();
+        tempList.add(selectedTower);
+        towersListView.setItems(FXCollections.observableArrayList(tempList));
     }
 
     private void clearTowerStats() {
@@ -274,8 +289,9 @@ public class ShopController {
 
     private void showUpgradeStats(int upgradeIndex) {
         Upgrade selectedUpgrade = shopUpgrades.get(upgradeIndex);
-        upgradeInfo1.setText(selectedUpgrade.getUpgradeTitle());
-        upgradeCostLabel.setText(String.valueOf(selectedUpgrade.getCost()));
+        ArrayList<Upgrade> tempList = new ArrayList<>();
+        tempList.add(selectedUpgrade);
+        upgradesListView.setItems(FXCollections.observableArrayList(tempList));
     }
 
     private void clearUpgradeStats() {

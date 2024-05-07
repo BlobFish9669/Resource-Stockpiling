@@ -4,18 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
+import seng201.team0.gui.cellfactories.TowerCellFactory;
+import seng201.team0.gui.cellfactories.UpgradeCellFactory;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.CurrentRoundService;
 import seng201.team0.services.MoneyBalanceService;
 import seng201.team0.services.RoundsSelectionService;
 import seng201.team0.services.InventoryService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller for the inventory.fxml window
@@ -69,9 +67,15 @@ public class InventoryController {
      * Initialize the window
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        //inventoryBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        //inventoryBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+
+        backButton.setOnMouseEntered(event -> backButton.setStyle("-fx-background-color: #999999"));
+        backButton.setOnMouseExited(event -> backButton.setStyle(""));
+
+        moveTowerButton.setOnMouseEntered(event -> moveTowerButton.setStyle("-fx-background-color: #999999"));
+        moveTowerButton.setOnMouseExited(event -> moveTowerButton.setStyle(""));
+
+        useUpgradeButton.setOnMouseEntered(event -> useUpgradeButton.setStyle("-fx-background-color: #999999"));
+        useUpgradeButton.setOnMouseExited(event -> useUpgradeButton.setStyle(""));
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());

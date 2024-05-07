@@ -1,13 +1,11 @@
 package seng201.team0.gui;
 
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
+import seng201.team0.gui.cellfactories.CartCellFactory;
 import seng201.team0.models.Cart;
 import seng201.team0.models.Tower;
 import seng201.team0.services.*;
@@ -82,6 +80,15 @@ public class MainController {
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
         currentRoundLabel.setText(currentRoundService.getCurrentRound().toString());
         roundsRemainingLabel.setText(Integer.toString(remainingRounds));
+
+        playRound.setOnMouseEntered(event -> playRound.setStyle("-fx-background-color: #A08B27"));
+        playRound.setOnMouseExited(event -> playRound.setStyle("-fx-background-color: #D4AF37"));
+
+        shopButton.setOnMouseEntered(event -> shopButton.setStyle("-fx-background-color: #999999"));
+        shopButton.setOnMouseExited(event -> shopButton.setStyle(""));
+
+        inventoryButton.setOnMouseEntered(event -> inventoryButton.setStyle("-fx-background-color: #999999"));
+        inventoryButton.setOnMouseExited(event -> inventoryButton.setStyle(""));
 
         //generate carts
         roundDifficultyDropdown.getItems().addAll("Easy", "Medium", "Hard");

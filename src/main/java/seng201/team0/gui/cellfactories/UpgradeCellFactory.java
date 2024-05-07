@@ -1,4 +1,4 @@
-package seng201.team0.gui;
+package seng201.team0.gui.cellfactories;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;

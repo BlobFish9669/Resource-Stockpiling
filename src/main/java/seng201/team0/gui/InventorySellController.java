@@ -4,9 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
+import seng201.team0.gui.cellfactories.TowerCellFactory;
+import seng201.team0.gui.cellfactories.UpgradeCellFactory;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.CurrentRoundService;
@@ -70,9 +71,15 @@ public class InventorySellController {
      * Initialize the window
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        //inventorySellBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        //inventorySellBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+
+        backButton.setOnMouseEntered(event -> backButton.setStyle("-fx-background-color: #999999"));
+        backButton.setOnMouseExited(event -> backButton.setStyle(""));
+
+        sellTower.setOnMouseEntered(event -> sellTower.setStyle("-fx-background-color: #999999"));
+        sellTower.setOnMouseExited(event -> sellTower.setStyle(""));
+
+        sellUpgrade.setOnMouseEntered(event -> sellUpgrade.setStyle("-fx-background-color: #999999"));
+        sellUpgrade.setOnMouseExited(event -> sellUpgrade.setStyle(""));
 
         int remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());

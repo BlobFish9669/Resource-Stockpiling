@@ -102,6 +102,9 @@ public class MenuController {
             selectedRounds = newValue.intValue();
         });
 
+        submitButton.setOnMouseEntered(event -> submitButton.setStyle("-fx-background-color: #A08B27"));
+        submitButton.setOnMouseExited(event -> submitButton.setStyle("-fx-background-color: #D4AF37"));
+
         Collections.addAll(towerTypes, new TowerOne(), new TowerTwo(), new TowerThree(), new TowerFour(), new TowerFive(), new TowerSix());
 
         //Tutorial 2
