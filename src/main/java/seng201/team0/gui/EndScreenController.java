@@ -31,7 +31,6 @@ public class EndScreenController {
     private PlayerScoreService playerScoreService;
 
     @FXML
-    public BorderPane endScreenBorderPane;
     public Label title;
     public Label gameMessage;
 
@@ -68,9 +67,11 @@ public class EndScreenController {
      * Initialize the window
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        endScreenBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        endScreenBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
+        restartGameButton.setOnMouseEntered(event -> restartGameButton.setStyle("-fx-background-color: #999999"));
+        restartGameButton.setOnMouseExited(event -> restartGameButton.setStyle(""));
+
+        exitButton.setOnMouseEntered(event -> exitButton.setStyle("-fx-background-color: #999999"));
+        exitButton.setOnMouseExited(event -> exitButton.setStyle(""));
 
         if (currentRoundService.getGameSuccess()) {
             gameMessage.setText("Congratulations "+ nameService.getCurrentName() + ", you Won!");
