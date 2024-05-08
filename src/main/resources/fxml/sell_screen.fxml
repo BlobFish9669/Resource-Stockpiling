@@ -132,7 +132,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="sellTowerButton" mnemonicParsing="false" onAction="#onSellTowerButtonClicked" text="Sell Tower" GridPane.halignment="CENTER">
+            <Button fx:id="sellTower" mnemonicParsing="false" onAction="#onSellTowerButtonClicked" text="Sell Tower" GridPane.halignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="20.0" />
                </font>

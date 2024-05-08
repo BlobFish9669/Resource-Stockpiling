@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
+import seng201.team0.gui.cellfactories.ShopTowerCellFactory;
+import seng201.team0.gui.cellfactories.ShopUpgradeCellFactory;
 import seng201.team0.gui.cellfactories.TowerCellFactory;
 import seng201.team0.gui.cellfactories.UpgradeCellFactory;
 import seng201.team0.models.Tower;
@@ -43,24 +45,6 @@ public class ShopController {
     public Button upgradeButton4;
     public Button upgradeButton5;
     public Button upgradeButton6;
-
-    public Label towerStatsLabel;
-    public Label resourceAmount;
-    public Label resourceAmountLabel;
-    public Label reloadSpeed;
-    public Label reloadSpeedLabel;
-    public Label resourceType;
-    public Label resourceTypeLabel;
-    public Label towerLevel;
-    public Label towerLevelLabel;
-    public Label towerCost;
-    public Label towerCostLabel;
-
-    public Label upgradeStats;
-    public Label upgradeCost;
-    public Label upgradeCostLabel;
-    public Label upgradeTitle1;
-    public Label upgradeInfo1;
 
     public Button purchaseTowerButton;
     public Button purchaseUpgradeButton;
@@ -205,8 +189,8 @@ public class ShopController {
         List<Button> upgradeButtons = List.of(upgradeButton1, upgradeButton2, upgradeButton3, upgradeButton4, upgradeButton5, upgradeButton6);
 
         // Have to choose between 3 and 5 unique random numbers between 1 and 10 depending on numTowersAvailable:
-        towersListView.setCellFactory(new TowerCellFactory());
-        upgradesListView.setCellFactory(new UpgradeCellFactory());
+        towersListView.setCellFactory(new ShopTowerCellFactory());
+        upgradesListView.setCellFactory(new ShopUpgradeCellFactory());
 
 
         for (int i = 0; i < numTowersAvailable; i++) {
@@ -280,11 +264,7 @@ public class ShopController {
     }
 
     private void clearTowerStats() {
-        resourceAmountLabel.setText("");
-        reloadSpeedLabel.setText("");
-        resourceTypeLabel.setText("");
-        towerLevelLabel.setText("");
-        towerCostLabel.setText("");
+        towersListView.setItems(null);
     }
 
     private void showUpgradeStats(int upgradeIndex) {
@@ -295,8 +275,7 @@ public class ShopController {
     }
 
     private void clearUpgradeStats() {
-        upgradeInfo1.setText("");
-        upgradeCostLabel.setText("");
+        upgradesListView.setItems(null);
     }
 
     @FXML
