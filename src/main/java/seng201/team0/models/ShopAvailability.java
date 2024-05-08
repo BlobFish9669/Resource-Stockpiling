@@ -14,6 +14,7 @@ public class ShopAvailability {
 
     private Integer numTowersAvailable;
     private Integer numUpgradesAvailable;
+    private int totalRounds;
 
     private List<Tower> potentialShopTowers = new ArrayList<>();
     private List<Tower> shopTowers;
@@ -90,10 +91,10 @@ public class ShopAvailability {
         shopTowers = new ArrayList<>();
         shopUpgrades = new ArrayList<>();
 
-        // Change tower availability based on round the user is currently on, better tower later on
-        if (round > 5) {
+        // Change tower availability based on round the user is currently on, better tower later on, variable based on what third of the game the user is on
+        if (round > (totalRounds*2)/3) {
             Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11(), new ShopTower12());
-        } else if (round > 2 && round < 5) {
+        } else if (round > totalRounds/3 && round < (totalRounds*2)/3) {
             Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11());
         }
         Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5());
@@ -122,4 +123,6 @@ public class ShopAvailability {
         Collections.fill(purchasedTowers, false);
         Collections.fill(purchasedUpgrades, false);
     }
+
+    public void setTotalRounds(int input) { totalRounds = input; }
 }

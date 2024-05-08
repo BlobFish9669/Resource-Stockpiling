@@ -317,6 +317,7 @@ public class ShopController {
             }
             shopAvailabilityService.setTowerPurchased(towerButton-1);
             towerToPurchase = null;
+            clearTowerStats();
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
@@ -358,6 +359,7 @@ public class ShopController {
             inventoryService.addUserUpgrade(upgradeToPurchase);
             shopAvailabilityService.setUpgradePurchased(upgradeButton-1);
             upgradeToPurchase = null;
+            clearUpgradeStats();
         }
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }

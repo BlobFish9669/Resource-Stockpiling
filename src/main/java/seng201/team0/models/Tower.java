@@ -86,7 +86,6 @@ public class Tower {
     }
 
     private void checkIfTowerLevelUp() {
-        System.out.println(towerPoints);
         if (towerPoints >= 100 * level) { // Good to go for a level up
             int temp = towerPoints;
             int i = 0;

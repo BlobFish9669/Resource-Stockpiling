@@ -147,9 +147,7 @@ public class MainController {
                     for (Tower tower : inventoryService.getMainTowerSelection()) {
                         if (tower.getResourceType() == cart.getResourceType()) {
                             double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
-                            //System.out.println(timeToFill);
                             double distanceRemaining = (cart.getSpeed()*((double) 1000/60)) * timeToFill; // Turn to m/min to be able to compare
-                            //System.out.println(distanceRemaining);
                             if (distanceRemaining <= currentRoundService.getDistance()) {
                                 cart.fill((int) (tower.getFillRate() * timeToFill));
                                 cartFilled = true;  // Getting a Caused by: java.util.ConcurrentModificationException error here somewhere?

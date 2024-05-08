@@ -34,6 +34,8 @@ public class MenuController {
     private RoundsSelectionService roundsService;
     private InventoryService inventoryService;
     private MoneyBalanceService moneyService;
+    private CurrentRoundService currentRoundService;
+    private ShopAvailabilityService shopAvailabilityService;
 
     @FXML
     public Label gameTitle;
@@ -81,7 +83,8 @@ public class MenuController {
         this.roundsService = gameManager.getRoundsService();
         this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
-
+        this.currentRoundService = gameManager.getCurrentRoundService();
+        this.shopAvailabilityService = gameManager.getShopAvailabilityService();
     }
 
     /**
@@ -156,6 +159,9 @@ public class MenuController {
         nameInput.setStyle("");
         difficultyDropdown.setStyle("");
         towerGrid.setStyle("");
+
+        currentRoundService.setTotalRounds(selectedRounds);
+        shopAvailabilityService.setTotalRounds(selectedRounds);
 
         /*
         Stores an int to check how many errors there are.

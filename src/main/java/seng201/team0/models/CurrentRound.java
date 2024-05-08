@@ -15,6 +15,7 @@ public class CurrentRound {
     private ArrayList<Cart> carts;
     private ArrayList<Cart> tempCarts;
     private boolean gameSuccess = false;
+    private int totalRounds;
 
     /**
      * Constructor
@@ -50,10 +51,10 @@ public class CurrentRound {
             distance = 5000;
             cartsNum = 3;
         } else if (difficulty.equals("Medium")) {
-            distance = 2500;
+            distance = 3500;
             cartsNum = 5;
         } else if (difficulty.equals("Hard")) {
-            distance = 1000;
+            distance = 2000;
             cartsNum = hardCartsNum;
         } else if (difficulty.equals("reset")) {
             difficulty = null;
@@ -68,25 +69,26 @@ public class CurrentRound {
     public void setCarts() {
         carts = new ArrayList<>();
         //generate carts amount of carts random stats
-        for (int i = 0; i < (3+5+hardCartsNum)-1; i++) {
+        for (int i = 0; i < (3+5+11)-1; i++) {
             Random r = new Random();
             List<String> availableResourceTypes = new ArrayList<>();
             availableResourceTypes.addAll(Arrays.asList("Stone", "Coal", "Copper", "Silver"));
-            if (round >= 3) { //maybe make this relative to total number of rounds?
+            if (round >= (totalRounds/3)+1) { // 1/3 through the game, add one to ensure that for 5 round game, gold is not available till 2nd round
                 availableResourceTypes.add("Gold");
             }
-            if (round >= 5) {
+            if (round >= ((totalRounds*2)/3)+2) { // 2/3 through the game, add two to ensure that 5 round game for same reason as above (4th round)
                 availableResourceTypes.add("Diamond");
             }
-            int randomSize = r.nextInt(5, 31);
+            int randomSize = r.nextInt(5, 10+i + (round/2)); // Harder for later rounds and harder difficulty
             int randomResource = r.nextInt(0, availableResourceTypes.size());
-            int randomSpeed = r.nextInt(1, 11);
+            int randomSpeed = r.nextInt(1, 5 + (i/4)); // Harder for harder difficulty
             carts.add(new Cart(randomSize, availableResourceTypes.get(randomResource), randomSpeed));
         }
     }
 
     public ArrayList<Cart> getPotentialCarts() {
         tempCarts = new ArrayList<>();
+        //Do this in order to have 3 different lists of potential carts
         if (Objects.equals(difficulty, "Easy")) {
             for (int i = 0; i < 3; i++) {
                 tempCarts.add(carts.get(i));
@@ -113,4 +115,6 @@ public class CurrentRound {
     public void setGameSuccess(boolean input) { gameSuccess = input; }
 
     public boolean getGameSuccess() { return gameSuccess; }
+
+    public void setTotalRounds(int input) { totalRounds = input; }
 }

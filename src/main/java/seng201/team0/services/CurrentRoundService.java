@@ -51,4 +51,6 @@ public class CurrentRoundService {
 
     public boolean getGameSuccess() { return currentRound.getGameSuccess(); }
 
+    public void setTotalRounds(int rounds) { currentRound.setTotalRounds(rounds); }
+
 }

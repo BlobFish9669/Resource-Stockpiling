@@ -68,4 +68,6 @@ public class ShopAvailabilityService {
 
     public void resetStore(int round) { shopAvailability.resetStore(round); }
 
+    public void setTotalRounds(int rounds) { shopAvailability.setTotalRounds(rounds); }
+
 }
