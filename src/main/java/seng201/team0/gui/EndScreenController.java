@@ -1,17 +1,12 @@
 package seng201.team0.gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
 import seng201.team0.GameManager;
-import seng201.team0.models.ShopAvailability;
-import seng201.team0.models.Tower;
-import seng201.team0.models.Upgrade;
 import seng201.team0.services.*;
+
+import java.util.Objects;
 
 /**
  * Controller for the end_screen.fxml window
@@ -20,20 +15,19 @@ import seng201.team0.services.*;
 public class EndScreenController {
 
 
-    private GameManager gameManager;
-    private NameInputService nameService;
-    private RoundsSelectionService roundsService;
-    private MoneyBalanceService moneyService;
-    private CurrentRoundService currentRoundService;
-    private InventoryService inventoryService;
-    private DifficultySelectionService difficultyService;
-    private ShopAvailabilityService shopAvailabilityService;
-    private PlayerScoreService playerScoreService;
+    private final GameManager gameManager;
+    private final NameInputService nameService;
+    private final RoundsSelectionService roundsService;
+    private final MoneyBalanceService moneyService;
+    private final CurrentRoundService currentRoundService;
+    private final InventoryService inventoryService;
+    private final DifficultySelectionService difficultyService;
+    private final ShopAvailabilityService shopAvailabilityService;
+    private final PlayerScoreService playerScoreService;
 
     @FXML
     public Label title;
     public Label gameMessage;
-
     public Label roundsChosen;
     public Label roundsChosenLabel;
     public Label roundsCompleted;
@@ -42,7 +36,6 @@ public class EndScreenController {
     public Label moneyGainedLabel;
     public Label score;
     public Label scoreLabel;
-
     public Button exitButton;
     public Button restartGameButton;
 
@@ -63,8 +56,10 @@ public class EndScreenController {
         this.shopAvailabilityService = gameManager.getShopAvailabilityService();
         this.playerScoreService = gameManager.getPlayerScoreService();
     }
+
     /**
-     * Initialize the window
+     * Initialize the window, sets up the buttons to change colour when hovered over, checks whether the game was won or lost and
+     * displays a message accordingly, displays the users game stats
      */
     public void initialize() {
         restartGameButton.setOnMouseEntered(event -> restartGameButton.setStyle("-fx-background-color: #999999"));
@@ -82,11 +77,11 @@ public class EndScreenController {
         String difficulty = difficultyService.getDifficultySelection();
         Integer startBalance;
 
-        if (difficulty == "Easy") {
+        if (Objects.equals(difficulty, "Easy")) {
             startBalance = 100;
-        } else if (difficulty == "Medium") {
+        } else if (Objects.equals(difficulty, "Medium")) {
             startBalance = 75;
-        } else if (difficulty == "Hard") {
+        } else if (Objects.equals(difficulty, "Hard")) {
             startBalance = 50;
         } else {
             startBalance = 25;
@@ -104,6 +99,9 @@ public class EndScreenController {
 
     }
 
+    /**
+     * Method called if the restart game button is clicked, resets all the service classes so that a fresh game can be played.
+     */
     @FXML
     public void onRestartGameButtonClicked() {
         currentRoundService.setDifficulty("reset");
@@ -114,6 +112,9 @@ public class EndScreenController {
         gameManager.resetAndLaunchMenuScreen();
     }
 
+    /**
+     * Method called when the exit button is clicked, closes the game window and exits
+     */
     @FXML
     public void onExitButtonClicked() {
         System.exit(0);

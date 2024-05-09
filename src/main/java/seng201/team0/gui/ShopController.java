@@ -7,8 +7,6 @@ import javafx.scene.layout.VBox;
 import seng201.team0.GameManager;
 import seng201.team0.gui.cellfactories.ShopTowerCellFactory;
 import seng201.team0.gui.cellfactories.ShopUpgradeCellFactory;
-import seng201.team0.gui.cellfactories.TowerCellFactory;
-import seng201.team0.gui.cellfactories.UpgradeCellFactory;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.*;
@@ -21,23 +19,27 @@ import java.util.*;
  */
 public class ShopController {
 
+    private final GameManager gameManager;
+    private final RoundsSelectionService roundsService;
+    private final InventoryService inventoryService;
+    private final MoneyBalanceService moneyService;
+    private final CurrentRoundService currentRoundService;
+    private final ShopAvailabilityService shopAvailabilityService;
+
     @FXML
     public Label shopLabel;
-
     public Label currentMoney;
     public Label currentRound;
     public Label roundsRemaining;
     public Label currentMoneyLabel;
     public Label currentRoundLabel;
     public Label roundsRemainingLabel;
-
     public Label towersLabel;
     public Button towerButton1;
     public Button towerButton2;
     public Button towerButton3;
     public Button towerButton4;
     public Button towerButton5;
-
     public Label upgradesLabel;
     public Button upgradeButton1;
     public Button upgradeButton2;
@@ -45,23 +47,12 @@ public class ShopController {
     public Button upgradeButton4;
     public Button upgradeButton5;
     public Button upgradeButton6;
-
     public Button purchaseTowerButton;
     public Button purchaseUpgradeButton;
     public Button sellItemsButton;
     public Button backButton;
     public ListView<Tower> towersListView;
     public ListView<Upgrade> upgradesListView;
-
-
-    private GameManager gameManager;
-    private DifficultySelectionService difficultyService;
-    private NameInputService nameService;
-    private RoundsSelectionService roundsService;
-    private InventoryService inventoryService;
-    private MoneyBalanceService moneyService;
-    private CurrentRoundService currentRoundService;
-    private ShopAvailabilityService shopAvailabilityService;
 
     public List<Tower> shopTowers;
     public List<Upgrade> shopUpgrades;
@@ -80,21 +71,19 @@ public class ShopController {
      */
     public ShopController(GameManager gameManager) {
         this.gameManager = gameManager;
-        this.difficultyService = gameManager.getDifficultyService();
-        this.nameService = gameManager.getNameService();
         this.roundsService = gameManager.getRoundsService();
         this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
         this.currentRoundService = gameManager.getCurrentRoundService();
         this.shopAvailabilityService = gameManager.getShopAvailabilityService();
     }
+
     /**
-     * Initialize the window
+     * Initialize the window, sets up the buttons to change colour when hovered over, displays the users current money, round and rounds remaining.
+     * Sets up the buttons according to what has or hasn't previously been purchased that round and sets up the list views to
+     * display the tower and upgrade stats
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        //shopGrid.prefWidthProperty().bind(MenuWindow.getWidth());
-        //shopGrid.prefHeightProperty().bind(MenuWindow.getHeight());
 
         purchaseTowerButton.setOnMouseEntered(event -> purchaseTowerButton.setStyle("-fx-background-color: #999999"));
         purchaseTowerButton.setOnMouseExited(event -> purchaseTowerButton.setStyle(""));
@@ -242,18 +231,23 @@ public class ShopController {
         }
 
     }
+
     /**
-     * Method to call when the back button is clicked
+     * Method called when the back button is clicked, resets the pane and displays the main screen
      */
     @FXML
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
     }
 
+    /**
+     * Method called when the sell button is clicked, resets the pane and displays the inventory sell screen
+     */
     @FXML
     private void onSellButtonClicked() { gameManager.resetAndOpenInventorySellScreen(); }
+
     /**
-     * Method to show stats of the selected tower
+     * Method to display stats of the selected tower
      * @param towerIndex the index of the intended tower to view
      */
     private void showTowerStats(int towerIndex) {
@@ -263,10 +257,17 @@ public class ShopController {
         towersListView.setItems(FXCollections.observableArrayList(tempList));
     }
 
+    /**
+     * Clears the tower list view of any selected tower
+     */
     private void clearTowerStats() {
         towersListView.setItems(null);
     }
 
+    /**
+     * Method to display stats of the selected upgrade
+     * @param upgradeIndex the index of the intended upgrade to view
+     */
     private void showUpgradeStats(int upgradeIndex) {
         Upgrade selectedUpgrade = shopUpgrades.get(upgradeIndex);
         ArrayList<Upgrade> tempList = new ArrayList<>();
@@ -274,10 +275,18 @@ public class ShopController {
         upgradesListView.setItems(FXCollections.observableArrayList(tempList));
     }
 
+    /**
+     * Clears the upgrade list view of any selected upgrades
+     */
     private void clearUpgradeStats() {
         upgradesListView.setItems(null);
     }
 
+    /**
+     * Makes sure a tower is selected, balance is enough to cover the tower and the inventory isn't full. Adds the tower
+     * to the users inventory into either main or reserve depending on if main is already full, reduces money balance and
+     * sets the tower to purchased in order to not be purchased again
+     */
     @FXML
     private void onTowerPurchaseClicked() {
         if (towerToPurchase == null) {
@@ -322,6 +331,10 @@ public class ShopController {
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
 
+    /**
+     * Makes sure an upgrade is selected and balance is enough to cover the upgrade. Adds the upgrade to the users
+     * inventory, reduces money balance and sets the upgrade to purchased in order to not be purchased again
+     */
     @FXML
     private void onUpgradePurchaseClicked() {
         if (upgradeToPurchase == null) {
@@ -364,6 +377,10 @@ public class ShopController {
         currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
     }
 
+    /**
+     * Displays information about the provided error in a dialog box
+     * @param message the error that should be displayed to the user
+     */
     private void openErrorDialog(String message) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Error");

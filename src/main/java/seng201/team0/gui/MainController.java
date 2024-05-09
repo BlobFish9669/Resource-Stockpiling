@@ -18,27 +18,22 @@ import java.util.*;
  */
 public class MainController {
 
-    private GameManager gameManager;
-    private DifficultySelectionService difficultyService;
-    private NameInputService nameService;
-    private RoundsSelectionService roundsService;
-    private InventoryService inventoryService;
-    private MoneyBalanceService moneyService;
-    private CurrentRoundService currentRoundService;
-    private ShopAvailabilityService shopAvailabilityService;
-    private PlayerScoreService playerScoreService;
-
+    private final GameManager gameManager; // final because services aren't themselves changed, just provide info through getters and setters
+    private final RoundsSelectionService roundsService;
+    private final InventoryService inventoryService;
+    private final MoneyBalanceService moneyService;
+    private final CurrentRoundService currentRoundService;
+    private final ShopAvailabilityService shopAvailabilityService;
+    private final PlayerScoreService playerScoreService;
 
     @FXML
     public Label mainLabel;
-
     public Label currentMoney;
     public Label currentMoneyLabel;
     public Label currentRound;
     public Label currentRoundLabel;
     public Label roundsRemaining;
     public Label roundsRemainingLabel;
-
     public Label roundDifficultyLabel;
     public Label distanceLabel;
     public Label distance;
@@ -46,13 +41,11 @@ public class MainController {
     public Label numberCarts;
     public ChoiceBox<String> roundDifficultyDropdown;
     public ListView<Cart> cartList;
-
     public Button playRound;
     public Button shopButton;
     public Button inventoryButton;
 
     public List<String> randomEventList = new ArrayList<>();
-
     public int remainingRounds;
 
     /**
@@ -61,8 +54,6 @@ public class MainController {
      */
     public MainController(GameManager gameManager) {
         this.gameManager = gameManager;
-        this.difficultyService = gameManager.getDifficultyService();
-        this.nameService = gameManager.getNameService();
         this.roundsService = gameManager.getRoundsService();
         this.inventoryService = gameManager.getInventoryService();
         this.moneyService = gameManager.getMoneyService();
@@ -72,7 +63,8 @@ public class MainController {
     }
 
     /**
-     * Initialize the window
+     * Initialize the window, sets up the buttons to change colour when hovered over, displays the users current money, round and rounds remaining.
+     * Sets up the carts list view
      */
     public void initialize() {
         remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
@@ -111,7 +103,7 @@ public class MainController {
     }
 
     /**
-     * Method to call when the shop button is clicked
+     * Method called when the shop button is clicked, resets the pane and displays the shop screen
      */
     @FXML
     private void onShopButtonClicked() {
@@ -119,15 +111,22 @@ public class MainController {
     }
 
     /**
-     * Method to call when the inventory button is clicked
+     * Method called when the inventory button is clicked, resets the pane and displays the inventory screen
      */
     @FXML
     private void onInventoryButtonClicked() {
         gameManager.resetAndOpenInventoryScreen();
     }
 
+    /**
+     * Method called when all rounds are completed or when game is failed, resets the plane and displays the end screen
+     */
     private void gameOver() { gameManager.resetAndOpenEndScreen(); }
 
+    /**
+     * Method called when the play round button is clicked, checks to see if difficulty is selected and starts the round,
+     * otherwise displays error message
+     */
     @FXML
     private void onPlayRoundButtonClicked() {
         if (roundDifficultyDropdown.getValue() != null && roundDifficultyDropdown.getValue() != "") {
@@ -138,6 +137,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Contains the maths to check if all the carts can be filled in time before they reach the end of the track after
+     * checking if there is a corresponding tower for each cart. Calls finishRound() if yes, otherwise displays error message
+     * and ends game.
+     */
     private void startRound() {
         if (checkResources()) {
             //Round not failed yet - check distance
@@ -173,8 +177,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Checks to see if game is completed, otherwise has the possibility of a random event occurring and resets the
+     * screen, ready for a new round
+     */
     private void finishRound() {
-
         if (remainingRounds == 0) {
             currentRoundService.setGameSuccess(true);
             gameOver();
@@ -186,6 +193,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Goes through the list of carts to see if there is a corresponding tower in the users current main tower
+     * selection with a matching resource type which will allow it to be filled
+     * @return returns true if all carts have a corresponding tower, otherwise returns false
+     */
     private Boolean checkResources() {
         ArrayList<Boolean> cartResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[currentRoundService.getCarts().size()]));
         Collections.fill(cartResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
@@ -204,6 +216,11 @@ public class MainController {
         return true;
     }
 
+    /**
+     * Method called to check whether a random event has occurred this round and adds that information to a list in order
+     * to all be displayed in a dialog box before the next round begins. Multiple positive random events can occur each round, only
+     * a maximum of one tower can break per round
+     */
     private void randomTowerEvent() {
         Random r = new Random();
         int randomEvents = 0;
@@ -249,18 +266,22 @@ public class MainController {
         }
     }
 
+    /**
+     * Resets the labels for current money, current round and rounds remaining to reflect updated values and also
+     * the labels associated with carts. Calls services to reset the available carts and reset shop
+     */
     private void resetAndUpdateLabelsAndStats() {
         Integer currentMoney = moneyService.getCurrentBalance();
         String currentDifficulty = currentRoundService.getDifficulty();
         Integer currentRound = currentRoundService.getCurrentRound();
 
-        if (currentDifficulty == "Easy") {
+        if (Objects.equals(currentDifficulty, "Easy")) {
             moneyService.setNewBalance(currentMoney + 100);
             playerScoreService.addPlayerScore(50);
-        } else if (currentDifficulty == "Medium") {
+        } else if (Objects.equals(currentDifficulty, "Medium")) {
             moneyService.setNewBalance(currentMoney + 250);
             playerScoreService.addPlayerScore(100);
-        } else if (currentDifficulty == "Hard") {
+        } else if (Objects.equals(currentDifficulty, "Hard")) {
             moneyService.setNewBalance(currentMoney + 500);
             playerScoreService.addPlayerScore(150);
         }
@@ -279,12 +300,18 @@ public class MainController {
         cartList.setItems(null); // reset list view to remove carts
     }
 
+    /**
+     * Sets all the cart information labels to be blank
+     */
     private void resetCartInfo() {
         roundDifficultyDropdown.setValue("");
         distance.setText("");
         numberCarts.setText("");
     }
 
+    /**
+     * Opens a dialog box to display each random event that has occurred within randomEventList
+     */
     private void openRandomEventDialog() {
         //Tutorial 2 Extension
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -298,6 +325,10 @@ public class MainController {
         dialog.show();
     }
 
+    /**
+     * Displays information about the provided error in a dialog box
+     * @param message the error that should be displayed to the user
+     */
     private void openErrorDialog(String message) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Error");

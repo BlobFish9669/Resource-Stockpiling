@@ -1,21 +1,14 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
-import javafx.geometry.VPos;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import seng201.team0.gui.MenuWindow;
-//import seng201.team0.services.CounterService;
-
 import javafx.scene.layout.*;
 import seng201.team0.GameManager;
 import seng201.team0.models.Tower;
 import seng201.team0.models.towertypes.*;
-
 import seng201.team0.services.*;
 
 import java.util.Collections;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,14 +21,14 @@ import java.util.regex.Pattern;
  */
 public class MenuController {
 
-    private GameManager gameManager;
-    private DifficultySelectionService difficultyService;
-    private NameInputService nameService;
-    private RoundsSelectionService roundsService;
-    private InventoryService inventoryService;
-    private MoneyBalanceService moneyService;
-    private CurrentRoundService currentRoundService;
-    private ShopAvailabilityService shopAvailabilityService;
+    private final GameManager gameManager;
+    private final DifficultySelectionService difficultyService;
+    private final NameInputService nameService;
+    private final RoundsSelectionService roundsService;
+    private final InventoryService inventoryService;
+    private final MoneyBalanceService moneyService;
+    private final CurrentRoundService currentRoundService;
+    private final ShopAvailabilityService shopAvailabilityService;
 
     @FXML
     public Label gameTitle;
@@ -62,7 +55,6 @@ public class MenuController {
     public Button submitButton;
     public GridPane towerGrid;
 
-
     public int selectedRounds = 5;
     public ArrayList<Tower> towerTypes = new ArrayList<>();
     public ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
@@ -88,13 +80,10 @@ public class MenuController {
     }
 
     /**
-     * Initialize the window
+     * Initialize the window, sets up the buttons to change colour when hovered over, displays the users current money, round and rounds remaining.
+     * Sets up all the elements that make up the menu page
      */
     public void initialize() {
-        // Binds the width and height of the grid to the size of the window.
-        //menuBorderPane.prefWidthProperty().bind(MenuWindow.getWidth());
-        //menuBorderPane.prefHeightProperty().bind(MenuWindow.getHeight());
-
         // Background Image from Adobe Stock Ai thing
         // https://stock.adobe.com/nz/generate/details?prompt=I+would+like+a+picture+with+the+perspective+of+looking+down+a+mine+where+there+are+gems+in+the+walls+to+each+side+and+lit+up+by+lanterns.+Maybe+have+a+pickaxe+and+a+helmet+with+a+torch+laying+against+the+wall.+Don%27t+include+any+people+and+have+a+minecart+track+going+deeper+in+the+mine.+Do+this+in+a+cartoony+style.+&aspectRatio=widescreen&contentType=none&style=vector_look&seed=71566
         // Prompt: I would like a picture with the perspective of looking down a mine where there are gems in the walls to each side and lit up by lanterns. Maybe have a pickaxe and a helmet with a torch laying against the wall. Don't include any people and have a minecart track going deeper in the mine. Do this in a cartoony style.
@@ -130,6 +119,7 @@ public class MenuController {
             });
         }
     }
+
     /**
      * Method to show stats of the selected tower
      * @param towerIndex the index of the intended tower to view
@@ -143,9 +133,9 @@ public class MenuController {
         selectedTowerCostLabel.setText("Cost: " + selectedTower.getCost());
     }
 
-
     /**
-     * Method to call when the name submit button is clicked
+     * Method to call when the name submit button is clicked, checks to see if any errors have occurred and adds them to a list
+     * to be displayed. Otherwise, sets and stores the choices in the service classes
      */
     @FXML
     private void onSubmitButtonClicked() {
@@ -220,6 +210,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Opens a dialog box to display each random event that has occurred within errorsList
+     */
     private void openErrorDialog() {
         //Tutorial 2 Extension
         Dialog<ButtonType> dialog = new Dialog<>();

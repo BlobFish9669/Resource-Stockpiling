@@ -21,11 +21,12 @@ import seng201.team0.services.InventoryService;
  */
 public class InventoryController {
 
-    private GameManager gameManager;
-    private RoundsSelectionService roundsService;
-    private MoneyBalanceService moneyService;
-    private CurrentRoundService currentRoundService;
-    private InventoryService inventoryService;
+    private final GameManager gameManager;
+    private final RoundsSelectionService roundsService;
+    private final MoneyBalanceService moneyService;
+    private final CurrentRoundService currentRoundService;
+    private final InventoryService inventoryService;
+
     private Tower selectedMainTower;
     private Tower selectedReserveTower;
     private Upgrade selectedUpgrade;
@@ -64,7 +65,8 @@ public class InventoryController {
         this.inventoryService = gameManager.getInventoryService();
     }
     /**
-     * Initialize the window
+     * Initialize the window, sets up the buttons to change colour when hovered over, displays the users current money, round and rounds remaining.
+     * Displays users current main towers, reserve towers and upgrades using list views and cell factories.
      */
     public void initialize() {
 
@@ -104,14 +106,19 @@ public class InventoryController {
             upgradeSelected = true;
         });
     }
+
     /**
-     * Method to call when the back button is clicked
+     * Method called when the back button is clicked, resets the pane and displays the main screen
      */
     @FXML
     private void onBackButtonClicked() {
         gameManager.resetAndLaunchMainScreen();
     }
 
+    /**
+     * Method called when the move tower button is clicked, ensures that a tower is selected, number of main towers is greater
+     * than one and whether a main or reserve tower is selected then moves the tower accordingly
+     */
     @FXML
     private void onMoveTowerButtonClicked() {
         if (towerSelected != null) {
@@ -145,6 +152,9 @@ public class InventoryController {
         }
     }
 
+    /**
+     * Clears the users previous selection in order to indicate that no tower or upgrade is selected
+     */
     private void clearSelections() {
         mainTowerList.getSelectionModel().clearSelection();
         reserveTowerList.getSelectionModel().clearSelection();
@@ -156,6 +166,10 @@ public class InventoryController {
         upgradeSelected = false;
     }
 
+    /**
+     * Method called when the use upgrade button is clicked, ensures that both a tower and upgrade are selected and whether
+     * it is a main or reserve tower selected and then applies the selected upgrade to the selected tower
+     */
     @FXML
     private void onUseUpgradeButtonClicked() {
         if (upgradeSelected && towerSelected != null) {
@@ -172,6 +186,10 @@ public class InventoryController {
         }
     }
 
+    /**
+     * Method called in order to display a new dialog pane containing information about the provided error
+     * @param message the error that should be displayed to the user
+     */
     private void openErrorDialog(String message) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Error");

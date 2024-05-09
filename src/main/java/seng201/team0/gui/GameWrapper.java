@@ -7,8 +7,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import seng201.team0.GameManager;
 
-import seng201.team0.services.*;
-
 import java.io.IOException;
 
 /**
@@ -20,15 +18,15 @@ public class GameWrapper {
     private Pane pane;
     private Stage stage;
 
-
     /**
      * Initializes the interface and sets up the game environment on the provided stage
      * @param stage The primary stage on which the application's elements are displayed
      */
     public void init(Stage stage) {
         this.stage = stage;
-        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::launchInventorySellScreen, this::launchEndScreen, this::clearPane);
+        new GameManager(this::launchMenuScreen, this::launchMainScreen, this::launchShopScreen, this::launchInventoryScreen, this::launchSellScreen, this::launchEndScreen, this::clearPane);
     }
+
     /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
      * @param gameManager The current fxml stage, handled by the GameManager class
@@ -45,12 +43,14 @@ public class GameWrapper {
             e.printStackTrace();
         }
     }
+
     /**
-     * Method to clear all elements from the pane
+     * Method called in order to clear all elements from the pane
      */
     public void clearPane() {
         pane.getChildren().clear();
     }
+
     /**
      * Method to open the gui with the fxml content specified in main.fxml, uses try block to catch IOException errors
      * @param gameManager The current fxml stage, handled by the GameManager class
@@ -67,6 +67,7 @@ public class GameWrapper {
         }
 
     }
+
     /**
      * Method to open the gui with the fxml content specified in shop.fxml, uses try block to catch IOException errors
      * @param gameManager The current fxml stage, handled by the GameManager class
@@ -82,6 +83,7 @@ public class GameWrapper {
             e.printStackTrace();
         }
     }
+
     /**
      * Method to open the gui with the fxml content specified in inventory.fxml, uses try block to catch IOException errors
      * @param gameManager The current fxml stage, handled by the GameManager class
@@ -98,11 +100,15 @@ public class GameWrapper {
         }
     }
 
-    public void launchInventorySellScreen(GameManager gameManager) {
+    /**
+     * Method to open the gui with the fxml content specified in sell_screen.fxml, uses try block to catch IOException errors
+     * @param gameManager The current fxml stage, handled by the GameManager class
+     */
+    public void launchSellScreen(GameManager gameManager) {
         try {
-            FXMLLoader inventorySellScreenLoader = new FXMLLoader(getClass().getResource("/fxml/sell_screen.fxml"));
-            inventorySellScreenLoader.setControllerFactory(param -> new InventorySellController(gameManager));
-            Parent setupParent  = inventorySellScreenLoader.load();
+            FXMLLoader sellScreenLoader = new FXMLLoader(getClass().getResource("/fxml/sell_screen.fxml"));
+            sellScreenLoader.setControllerFactory(param -> new SellScreenController(gameManager));
+            Parent setupParent  = sellScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Sell");
         } catch (IOException e) {
@@ -110,6 +116,10 @@ public class GameWrapper {
         }
     }
 
+    /**
+     * Method to open the gui with the fxml content specified in end_screen.fxml, uses try block to catch IOException errors
+     * @param gameManager The current fxml stage, handled by the GameManager class
+     */
     public void launchEndScreen(GameManager gameManager) {
         try {
             FXMLLoader endScreenLoader = new FXMLLoader(getClass().getResource("/fxml/end_screen.fxml"));
