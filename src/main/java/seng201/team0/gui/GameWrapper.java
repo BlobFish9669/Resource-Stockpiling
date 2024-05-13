@@ -28,6 +28,11 @@ public class GameWrapper {
     }
 
     /**
+     * Method called in order to clear all elements from the pane
+     */
+    public void clearPane() { pane.getChildren().clear(); }
+
+    /**
      * Method to open the gui with the fxml content specified in menu.fxml, uses try block to catch IOException errors
      * @param gameManager The current fxml stage, handled by the GameManager class
      */
@@ -42,13 +47,6 @@ public class GameWrapper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Method called in order to clear all elements from the pane
-     */
-    public void clearPane() {
-        pane.getChildren().clear();
     }
 
     /**
