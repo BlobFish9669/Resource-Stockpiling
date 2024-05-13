@@ -36,7 +36,7 @@ public class MenuWindow extends Application {
      * errors out and does not run
      * @param args command line arguments
      */
-    public static void launchWrapper(String [] args) {
+    public static void launchWrapper(String[] args) {
         launch(args);
     }
 

@@ -54,10 +54,10 @@ public class ShopController {
     public ListView<Tower> towersListView;
     public ListView<Upgrade> upgradesListView;
 
-    public List<Tower> shopTowers;
-    public List<Upgrade> shopUpgrades;
-    public List<Boolean> purchasedTowers;
-    public List<Boolean> purchasedUpgrades;
+    private List<Tower> shopTowers;
+    private List<Upgrade> shopUpgrades;
+    private List<Boolean> purchasedTowers;
+    private List<Boolean> purchasedUpgrades;
 
     private Tower towerToPurchase;
     private Integer towerButton;

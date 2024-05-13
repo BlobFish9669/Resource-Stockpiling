@@ -146,19 +146,6 @@ public class SellScreenController {
     }
 
     /**
-     * Removes any selection from the list view and sets all values to be none
-     */
-    private void clearSelections() {
-        mainTowerList.getSelectionModel().clearSelection();
-        reserveTowerList.getSelectionModel().clearSelection();
-        upgradeList.getSelectionModel().clearSelection();
-        selectedMainTower = null;
-        selectedReserveTower = null;
-        isTowerSelectedMain = null;
-        selectedUpgrade = null;
-    }
-
-    /**
      * Called when the sell upgrade button is clicked, removes selected upgrade from inventory and adds money to users balance.
      * Opens error dialog if no upgrade is selected
      */
@@ -174,6 +161,19 @@ public class SellScreenController {
         } else {
             openErrorDialog("Error - Please select an upgrade to sell");
         }
+    }
+
+    /**
+     * Removes any selection from the list view and sets all values to be none
+     */
+    private void clearSelections() {
+        mainTowerList.getSelectionModel().clearSelection();
+        reserveTowerList.getSelectionModel().clearSelection();
+        upgradeList.getSelectionModel().clearSelection();
+        selectedMainTower = null;
+        selectedReserveTower = null;
+        isTowerSelectedMain = null;
+        selectedUpgrade = null;
     }
 
     /**

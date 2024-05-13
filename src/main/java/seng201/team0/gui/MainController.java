@@ -45,8 +45,8 @@ public class MainController {
     public Button shopButton;
     public Button inventoryButton;
 
-    public List<String> randomEventList = new ArrayList<>();
-    public int remainingRounds;
+    private List<String> randomEventList = new ArrayList<>();
+    private int remainingRounds;
 
     /**
      * Constructor
@@ -210,10 +210,7 @@ public class MainController {
             }
             i++;
         }
-        if (cartResourceTypeSupported.contains(false)) {
-            return false; //Round failed
-        }
-        return true;
+        return !cartResourceTypeSupported.contains(false); //Round failed
     }
 
     /**
