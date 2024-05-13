@@ -153,7 +153,7 @@ public class SellScreenController {
     private void onSellUpgradeButtonClicked() {
         if (selectedUpgrade != null) {
             inventoryService.removeUserUpgrade(selectedUpgrade);
-            moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedUpgrade.getCost());
+            moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedUpgrade.getSellPrice());
             currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
             upgradeList.getItems().remove(selectedUpgrade);

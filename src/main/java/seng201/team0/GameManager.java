@@ -34,15 +34,8 @@ public class GameManager {
      * @param shopScreenLauncher Action to execute to display the shop screen
      * @param inventoryScreenLauncher Action to execute to display the inventory screen
      * @param inventorySellScreenLauncher Action to execute to display the inventory sell screen
-     * @param endScreenLauncher
+     * @param endScreenLauncher Action to execute to display the end screen
      * @param clearScreen Action to execute to clear the screen
-     * @param difficultyService Service for managing the selection of game difficulty
-     * @param nameService Service for managing the player's name
-     * @param roundsService Service for managing the selection of game rounds
-     * @param inventoryService Service for managing the players inventory
-     * @param moneyService Service for managing the player's money
-     * @param currentRoundService Service for managing the current round of the game
-     * @param shopAvailabilityService Service for managing the availability of items in the shop
      */
     public GameManager(Consumer<GameManager> menuScreenLauncher, Consumer<GameManager> mainScreenLauncher, Consumer<GameManager> shopScreenLauncher, Consumer<GameManager> inventoryScreenLauncher, Consumer<GameManager> inventorySellScreenLauncher, Consumer<GameManager> endScreenLauncher, Runnable clearScreen) {
         this.menuScreenLauncher = menuScreenLauncher;
@@ -94,7 +87,9 @@ public class GameManager {
         clearScreen.run();
         inventorySellScreenLauncher.accept(this);
     }
-
+    /**
+     * Method to call to clear the current screen and then opens the end screen
+     */
     public void resetAndOpenEndScreen() {
         clearScreen.run();
         endScreenLauncher.accept(this);
@@ -156,6 +151,10 @@ public class GameManager {
         return shopAvailabilityService;
     }
 
+    /**
+     * Method to retrieve the instance of PlayerScoreService to player score throughout the round
+     * @return instance of PlayerScoreService
+     */
     public PlayerScoreService getPlayerScoreService() { return playerScoreService; }
 
 }

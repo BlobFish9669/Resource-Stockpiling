@@ -11,8 +11,8 @@ import javafx.util.Callback;
 import seng201.team0.models.Tower;
 
 /**
- * Custom cell factory for Rockets to use in ListView
- * @author seng201 teaching team
+ * Custom cell factory for Towers to use in ListView
+ * @author seng201 teaching team, Caleb Cooper
  */
 public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Tower>> {
     @Override
@@ -24,28 +24,22 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                 if (empty || tower == null) {
                     setGraphic(null);
                 } else {
-                    // Create a new HBox to store the elements to be displayed
                     HBox hBox = new HBox(5);
-                    // Add a 'hero' image of a tower
                     //made the tower png
                     ImageView imageView = new ImageView("/images/tower.png");
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);
-                    // Add an inner VBox to hold rocket info
                     VBox vBox = new VBox(5);
-                    // Add rocket name label (separated from the others, so we can also change the font size)
                     Label nameLabel = new Label(tower.getResourceType());
                     nameLabel.setFont(new Font(20));
-                    // Add the fuel and cleanliness labels to the VBox
                     vBox.getChildren().addAll(
                             nameLabel,
                             new Label(String.format("Resource Amount: %s",tower.getResourceAmount())),
                             new Label(String.format("Reload Speed: %s", tower.getReloadSpeed())),
                             new Label(String.format("Level: %s", tower.getLevel())),
-                            new Label(String.format("Sell Back Price: $%s", tower.getSellPrice()))
+                            new Label(String.format("Sell-Back Price: $%s", tower.getSellPrice()))
                     );
-                    // Add the image and the VBox to the HBox
                     hBox.getChildren().addAll(
                             imageView,
                             vBox

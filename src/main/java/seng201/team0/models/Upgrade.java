@@ -8,6 +8,7 @@ public class Upgrade {
     private String upgradeTitle;
     private String upgradeModifying;
     private Integer cost;
+    private Integer sellPrice;
     private Double upgradeModifier;
     private String resourceType;
 
@@ -22,6 +23,7 @@ public class Upgrade {
         this.upgradeTitle = upgradeTitle;
         this.upgradeModifying = upgradeModifying;
         this.cost = cost;
+        this.sellPrice = (int) (cost * 0.75);
         this.upgradeModifier = upgradeModifier;
     }
 
@@ -37,6 +39,7 @@ public class Upgrade {
         this.upgradeTitle = upgradeTitle;
         this.upgradeModifying = upgradeModifying;
         this.cost = cost;
+        this.sellPrice = (int) (cost * 0.75);
         this.upgradeModifier = upgradeModifier;
         this.resourceType = resourceType;
     }
@@ -70,5 +73,9 @@ public class Upgrade {
      * @return the new resource type
      */
     public String getResourceType() { return resourceType; }
+
+    public int getSellPrice() {
+        return sellPrice;
+    }
 
 }

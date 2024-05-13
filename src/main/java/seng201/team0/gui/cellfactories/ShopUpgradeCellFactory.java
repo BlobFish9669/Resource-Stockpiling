@@ -12,8 +12,8 @@ import javafx.util.Callback;
 import seng201.team0.models.Upgrade;
 
 /**
- * Custom cell factory for Rockets to use in ListView
- * @author seng201 teaching team
+ * Custom cell factory for Upgrades available in the shop to use in ListView
+ * @author seng201 teaching team, Caleb Cooper
  */
 public class ShopUpgradeCellFactory implements Callback<ListView<Upgrade>, ListCell<Upgrade>> {
     @Override
