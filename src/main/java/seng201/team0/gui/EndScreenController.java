@@ -103,7 +103,7 @@ public class EndScreenController {
      * Method called if the restart game button is clicked, resets all the service classes so that a fresh game can be played.
      */
     @FXML
-    public void onRestartGameButtonClicked() {
+    private void onRestartGameButtonClicked() {
         currentRoundService.setDifficulty("reset");
         currentRoundService.setCurrentRound(1);
         inventoryService.resetInventory();
@@ -116,7 +116,7 @@ public class EndScreenController {
      * Method called when the exit button is clicked, closes the game window and exits
      */
     @FXML
-    public void onExitButtonClicked() {
+    private void onExitButtonClicked() {
         System.exit(0);
     }
 }

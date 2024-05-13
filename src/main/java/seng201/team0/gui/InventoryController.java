@@ -33,10 +33,10 @@ public class InventoryController {
 
     @FXML
     public Label inventoryLabel;
-    public Label currentRound;
     public Label roundsRemaining;
     public Label currentMoney;
     public Label currentMoneyLabel;
+    public Label currentRound;
     public Label currentRoundLabel;
     public Label roundsRemainingLabel;
     public ListView<Tower> mainTowerList;
