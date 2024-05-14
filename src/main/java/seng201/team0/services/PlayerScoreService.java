@@ -4,8 +4,10 @@ import seng201.team0.models.PlayerScore;
 
 /**
  * Service class used to store the value of the player's score throughout the game
+ * @author Quinn Le Lievre, Caleb Cooper
  */
 public class PlayerScoreService {
+
     private final PlayerScore playerScore;
 
     /**

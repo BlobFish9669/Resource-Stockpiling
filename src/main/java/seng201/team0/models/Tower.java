@@ -96,13 +96,13 @@ public class Tower {
         if (Objects.equals(upgrade.getUpgradeType(), "Resource Type")) {
             setResourceType(upgrade.getResourceType());
         } else if (Objects.equals(upgrade.getUpgradeType(), "Tower Points")) {
-            gainTowerPoints((upgrade.getUpgradeModifier().intValue()));
+            gainTowerPoints((upgrade.getUpgradeModifierAmount().intValue()));
         } else if (Objects.equals(upgrade.getUpgradeType(), "Resource Amount")) {
-            setResourceAmount((int) (getResourceAmount() * upgrade.getUpgradeModifier()));
+            setResourceAmount((int) (getResourceAmount() * upgrade.getUpgradeModifierAmount()));
         } else if (Objects.equals(upgrade.getUpgradeType(), "Reload Speed")) {
-            setReloadSpeed(getReloadSpeed() * upgrade.getUpgradeModifier());
+            setReloadSpeed(getReloadSpeed() * upgrade.getUpgradeModifierAmount());
         } else if (Objects.equals(upgrade.getUpgradeType(), "Price")) {
-            setCost((int) (getCost() * upgrade.getUpgradeModifier()));
+            setCost((int) (getCost() * upgrade.getUpgradeModifierAmount()));
         }
     }
 

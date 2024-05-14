@@ -9,7 +9,7 @@ public class Upgrade {
     private String upgradeModifying;
     private Integer cost;
     private Integer sellPrice;
-    private Double upgradeModifier;
+    private Double upgradeModifierAmount;
     private String resourceType;
 
     /**
@@ -17,14 +17,14 @@ public class Upgrade {
      * @param upgradeTitle Display title of the upgrade
      * @param upgradeModifying What the upgrade is modifying
      * @param cost Cost of the upgrade
-     * @param upgradeModifier Amount the upgrade affects the tower stat
+     * @param upgradeModifierAmount Amount the upgrade affects the tower stat
      */
-    public Upgrade(String upgradeTitle ,String upgradeModifying, Integer cost, Double upgradeModifier) {
+    public Upgrade(String upgradeTitle, String upgradeModifying, Integer cost, Double upgradeModifierAmount) {
         this.upgradeTitle = upgradeTitle;
         this.upgradeModifying = upgradeModifying;
         this.cost = cost;
+        this.upgradeModifierAmount = upgradeModifierAmount;
         this.sellPrice = (int) (cost * 0.75);
-        this.upgradeModifier = upgradeModifier;
     }
 
     /**
@@ -33,14 +33,14 @@ public class Upgrade {
      * @param resourceType The new resource type
      * @param upgradeModifying What the upgrade is modifying
      * @param cost Cost of the upgrade
-     * @param upgradeModifier Amount the upgrade affects the tower stat
+     * @param upgradeModifierAmount Amount the upgrade affects the tower stat
      */
-    public Upgrade(String upgradeTitle, String upgradeModifying, String resourceType, Integer cost, Double upgradeModifier) {
+    public Upgrade(String upgradeTitle, String upgradeModifying, String resourceType, Integer cost, Double upgradeModifierAmount) {
         this.upgradeTitle = upgradeTitle;
         this.upgradeModifying = upgradeModifying;
         this.cost = cost;
+        this.upgradeModifierAmount = upgradeModifierAmount;
         this.sellPrice = (int) (cost * 0.75);
-        this.upgradeModifier = upgradeModifier;
         this.resourceType = resourceType;
     }
 
@@ -66,7 +66,7 @@ public class Upgrade {
      * Method to return the amount that the upgrade will alter the tower stat by
      * @return upgrade modifier amount
      */
-    public Double getUpgradeModifier() { return upgradeModifier; }
+    public Double getUpgradeModifierAmount() { return upgradeModifierAmount; }
 
     /**
      * Method to return the new type of resource to change the tower to
@@ -74,8 +74,10 @@ public class Upgrade {
      */
     public String getResourceType() { return resourceType; }
 
-    public int getSellPrice() {
-        return sellPrice;
-    }
+    /**
+     * Returns the value to receive when the upgrade is sold
+     * @return sell price of the upgrade
+     */
+    public int getSellPrice() { return sellPrice; }
 
 }

@@ -4,11 +4,13 @@ import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 
 import java.util.ArrayList;
+
 /**
  * Service class used to store and retrieve the towers and upgrades in the users inventory
  * @author Caleb Cooper
  */
 public class InventoryService {
+
     private final Inventory inventory;
 
     /**
