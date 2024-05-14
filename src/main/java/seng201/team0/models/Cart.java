@@ -24,24 +24,33 @@ public class Cart {
     }
 
     /**
-     * Method to return the capacity of the cart
+     * Returns the capacity of the cart
      * @return cart size
      */
     public Integer getSize() { return size; }
 
     /**
-     * Method to return the type of resource of the cart
+     * Returns the type of resource of the cart
      * @return cart resource type
      */
     public String getResourceType() { return resourceType; }
 
     /**
-     * Method to return the speed that the cart will travel
+     * Returns the speed that the cart will travel
      * @return cart speed
      */
     public Integer getSpeed() { return speed; }
 
+    /**
+     * Returns how full the cart is
+     * @return the filled size of the cart
+     */
     public Integer getFilledSize() { return filledSize; }
+
+    /**
+     * Used to fill a cart up each round with resources
+     * @param amount of resources to fill cart with
+     */
     public void fill(int amount) {
         filledSize += amount;
         if (filledSize > size) {

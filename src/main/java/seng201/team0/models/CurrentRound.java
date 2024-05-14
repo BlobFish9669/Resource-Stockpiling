@@ -26,17 +26,70 @@ public class CurrentRound {
     }
 
     /**
-     * Get current round
-     *
-     * @return Current round
+     * Get the number of the current round
+     * @return Current round number
      */
     public Integer getRound() {
         return round;
     }
 
     /**
+     * Returns the difficulty of the current round
+     * @return the stored difficulty
+     */
+    public String getDifficulty() { return difficulty; }
+
+    /**
+     * Returns the distance that the cart has to travel
+     * @return the track distance
+     */
+    public Integer getDistance() { return distance; }
+
+    /**
+     * Returns the number of carts
+     * @return number of carts
+     */
+    public Integer getNumCarts() { return cartsNum; }
+
+    /**
+     * Returns whether the game is a success or not
+     * @return boolean value indicating game success
+     */
+    public boolean getGameSuccess() { return gameSuccess; }
+
+    /**
+     * Returns the list of carts to be displayed to the user
+     * @return list of carts
+     */
+    public ArrayList<Cart> getCarts() { return tempCarts; }
+
+    /**
+     * Returns the list of carts - tempCarts based on what the difficulty is currently selected
+     * @return list of carts based on difficulty selection
+     */
+    public ArrayList<Cart> getPotentialCarts() {
+        tempCarts = new ArrayList<>();
+        //Do this in order to have 3 different lists of potential carts
+        if (Objects.equals(difficulty, "Easy")) {
+            for (int i = 0; i < 3; i++) {
+                tempCarts.add(carts.get(i));
+            }
+        } else if (Objects.equals(difficulty, "Medium")) {
+            for (int i = 3; i < 8; i++) {
+                tempCarts.add(carts.get(i));
+            }
+        } else if (Objects.equals(difficulty, "Hard")) {
+            for (int i = 8; i < (3+5+hardCartsNum)-1; i++) {
+                tempCarts.add(carts.get(i));
+            }
+        }
+
+        return tempCarts;
+    }
+
+
+    /**
      * Set round equal to the value of the users input
-     *
      * @param input Value of the round the user wants to set
      */
     public void setRound(Integer input) {
@@ -62,10 +115,11 @@ public class CurrentRound {
         }
     }
 
-    public Integer getDistance() { return distance; }
-
-    public Integer getNumCarts() { return cartsNum; }
-
+    /**
+     * When called, generates a number of carts which increase with difficulty as the user completes more rounds, and with i - the higher the value of i, the tougher the cart
+     * is. The carts are retrieved based on difficulty, harder difficulty will retrieve carts from the lists at higher indexes, leading to tougher carts. Rarer resource types
+     * are available further throughout the game proportionate to the total number of rounds the user chooses.
+     */
     public void setCarts() {
         carts = new ArrayList<>();
         //generate carts amount of carts random stats
@@ -86,35 +140,20 @@ public class CurrentRound {
         }
     }
 
-    public ArrayList<Cart> getPotentialCarts() {
-        tempCarts = new ArrayList<>();
-        //Do this in order to have 3 different lists of potential carts
-        if (Objects.equals(difficulty, "Easy")) {
-            for (int i = 0; i < 3; i++) {
-                tempCarts.add(carts.get(i));
-            }
-        } else if (Objects.equals(difficulty, "Medium")) {
-            for (int i = 3; i < 8; i++) {
-                tempCarts.add(carts.get(i));
-            }
-        } else if (Objects.equals(difficulty, "Hard")) {
-            for (int i = 8; i < (3+5+hardCartsNum)-1; i++) {
-                tempCarts.add(carts.get(i));
-            }
-        }
+    /**
+     * Sets the game success value to true, indicating that the game has been completed successfully
+     */
+    public void setGameSuccess() { gameSuccess = true; }
 
-        return tempCarts;
-    }
-
-    public String getDifficulty() { return difficulty; }
-
-    public void storeCarts(ArrayList<Cart> input) { tempCarts = input; }
-
-    public ArrayList<Cart> getCarts() { return tempCarts; }
-
-    public void setGameSuccess(boolean input) { gameSuccess = input; }
-
-    public boolean getGameSuccess() { return gameSuccess; }
-
+    /**
+     * Sets the total rounds value to be the chosen number of rounds
+     * @param input the value of how many round the user wants to play
+     */
     public void setTotalRounds(int input) { totalRounds = input; }
+
+    /**
+     * Locks in the current selection of carts, based on the difficulty the user has chosen
+     * @param input the current choice of carts to be locked in.
+     */
+    public void storeCarts(ArrayList<Cart> input) { tempCarts = input; }
 }

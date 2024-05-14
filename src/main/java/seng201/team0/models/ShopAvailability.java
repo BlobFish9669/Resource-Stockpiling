@@ -81,6 +81,11 @@ public class ShopAvailability {
      */
     public void setPurchasedUpgrade(Integer input) { purchasedUpgrades.set(input, true); }
 
+    /**
+     * Resets the store when called based on inputted round. The store is proportional to what round the user is currently on, with better items
+     * available in the store later on in the game.
+     * @param round the round the user is currently on
+     */
     public void resetStore(int round) {
         List<Tower> potentialShopTowers = new ArrayList<>();
         List<Upgrade> potentialShopUpgrades = new ArrayList<>();
@@ -126,5 +131,9 @@ public class ShopAvailability {
         Collections.fill(purchasedUpgrades, false);
     }
 
+    /**
+     * Sets the total number of round to the value that the user chooses to play
+     * @param input number of round the user decides to play
+     */
     public void setTotalRounds(int input) { totalRounds = input; }
 }

@@ -5,12 +5,14 @@ package seng201.team0.models;
  */
 public class NameInput {
     private String name;
+
     /**
      * Constructor
      */
     public NameInput() {
         name = "";
     }
+
     /**
      * Get current name
      * @return Current name
@@ -18,6 +20,7 @@ public class NameInput {
     public String getName() {
         return name;
     }
+
     /**
      * Set name equal to the value of the users input
      * @param input Value of the users input of name

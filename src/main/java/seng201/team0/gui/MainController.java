@@ -183,7 +183,7 @@ public class MainController {
      */
     private void finishRound() {
         if (remainingRounds == 0) {
-            currentRoundService.setGameSuccess(true);
+            currentRoundService.setGameSuccess();
             gameOver();
         } else {
             if (remainingRounds > 0) {

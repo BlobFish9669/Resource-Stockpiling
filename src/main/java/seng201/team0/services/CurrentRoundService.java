@@ -83,9 +83,8 @@ public class CurrentRoundService {
 
     /**
      * Sets game success depending on whether user has won or lost
-     * @param input boolean for whether user has won the game or not
      */
-    public void setGameSuccess(boolean input) { currentRound.setGameSuccess(input); }
+    public void setGameSuccess() { currentRound.setGameSuccess(); }
 
     /**
      * Retrieves the game success boolean of whether the user has won the game or not

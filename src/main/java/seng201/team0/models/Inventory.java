@@ -8,6 +8,7 @@ public class Inventory {
     private ArrayList<Tower> mainTowers;
     private ArrayList<Tower> reserveTowers;
     private ArrayList<Upgrade> upgrades;
+
     /**
      * Constructor
      */
@@ -16,6 +17,7 @@ public class Inventory {
         reserveTowers = new ArrayList<>();
         upgrades = new ArrayList<>();
     }
+
     /**
      * Method to reset towers and upgrades
      */
@@ -24,6 +26,7 @@ public class Inventory {
         reserveTowers = new ArrayList<>();
         upgrades = new ArrayList<>();
     }
+
     /**
      * Get list of main towers
      * @return Current main towers in inventory

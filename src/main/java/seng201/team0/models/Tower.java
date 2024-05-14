@@ -1,11 +1,10 @@
 package seng201.team0.models;
 
-import javax.print.attribute.standard.JobKOctets;
 import java.util.Objects;
 
 /**
  * Class for towers that will be used to fill carts with resources.
- * @author Quinn Le Lievre
+ * @author Quinn Le Lievre, Caleb Cooper
  */
 public class Tower {
     private String resourceType;
@@ -17,20 +16,12 @@ public class Tower {
     private int towerPoints;
     private int roundsUsed;
 
-    /* public Tower() { // Constructor not needed if we just create a bunch of them manually?
-        setResourceType("None");
-        setResourceAmount(0);
-        setReloadSpeed(0);
-        setLevel(0);
-        setCost(0);
-    }*/
-
     public Tower(String resourceType, int resourceAmount, double reloadSpeed, int level, int cost) {
-        setResourceType(resourceType);
-        setResourceAmount(resourceAmount);
-        setReloadSpeed(reloadSpeed); // In mins
-        setLevel(level);
-        setCost(cost);
+        this.resourceType = resourceType;
+        this.resourceAmount = resourceAmount;
+        this.reloadSpeed = reloadSpeed; // In mins
+        this.level = level;
+        this.cost = cost;
         this.sellPrice = (int) (cost * 0.75); // Get 75% of cost back if sold
         this.towerPoints = 0;
         this.roundsUsed = 0;
@@ -53,9 +44,6 @@ public class Tower {
     }
     public double getReloadSpeed() {
         return reloadSpeed;
-    }
-    public void setLevel(int level) {
-        this.level = level;
     }
     public int getLevel() {
         return level;

@@ -5,10 +5,12 @@ package seng201.team0.models;
  */
 public class DifficultySelection {
     private String difficulty;
+
     /**
      * Constructor
      */
     public DifficultySelection() {difficulty = "Easy";}
+
     /**
      * Get current difficulty
      * @return Current difficulty
@@ -16,6 +18,7 @@ public class DifficultySelection {
     public String getDifficulty() {
         return difficulty;
     }
+
     /**
      * Set difficulty to a difficulty value
      * @param input Value of the users desired difficulty
