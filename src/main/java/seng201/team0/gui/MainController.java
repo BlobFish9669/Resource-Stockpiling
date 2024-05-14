@@ -27,23 +27,25 @@ public class MainController {
     private final PlayerScoreService playerScoreService;
 
     @FXML
-    public Label mainLabel;
-    public Label currentMoney;
-    public Label currentMoneyLabel;
-    public Label currentRound;
-    public Label currentRoundLabel;
-    public Label roundsRemaining;
-    public Label roundsRemainingLabel;
-    public Label roundDifficultyLabel;
-    public Label distanceLabel;
-    public Label distance;
-    public Label numberCartsLabel;
-    public Label numberCarts;
-    public ChoiceBox<String> roundDifficultyDropdown;
-    public ListView<Cart> cartList;
-    public Button playRound;
-    public Button shopButton;
-    public Button inventoryButton;
+    private Label currentMoneyLabel;
+    @FXML
+    private Label currentRoundLabel;
+    @FXML
+    private Label roundsRemainingLabel;
+    @FXML
+    private Label distance;
+    @FXML
+    private Label numberCarts;
+    @FXML
+    private ChoiceBox<String> roundDifficultyDropdown;
+    @FXML
+    private ListView<Cart> cartList;
+    @FXML
+    private Button playRound;
+    @FXML
+    private Button shopButton;
+    @FXML
+    private Button inventoryButton;
 
     private List<String> randomEventList = new ArrayList<>();
     private int remainingRounds;

@@ -26,18 +26,19 @@ public class EndScreenController {
     private final PlayerScoreService playerScoreService;
 
     @FXML
-    public Label title;
-    public Label gameMessage;
-    public Label roundsChosen;
-    public Label roundsChosenLabel;
-    public Label roundsCompleted;
-    public Label roundsCompletedLabel;
-    public Label moneyGained;
-    public Label moneyGainedLabel;
-    public Label score;
-    public Label scoreLabel;
-    public Button exitButton;
-    public Button restartGameButton;
+    private Label gameMessage;
+    @FXML
+    private Label roundsChosenLabel;
+    @FXML
+    private Label roundsCompletedLabel;
+    @FXML
+    private Label moneyGainedLabel;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Button restartGameButton;
 
 
     /**
