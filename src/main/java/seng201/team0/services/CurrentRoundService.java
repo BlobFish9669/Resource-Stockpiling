@@ -39,6 +39,12 @@ public class CurrentRoundService {
     public void setDifficulty(String input) { currentRound.setDifficulty(input); }
 
     /**
+     * Retrieve difficulty of the current round
+     * @return difficulty
+     */
+    public String getDifficulty() { return currentRound.getDifficulty(); }
+
+    /**
      * Retrieve the distance carts have to travel
      * @return distance
      */
@@ -60,12 +66,6 @@ public class CurrentRoundService {
      * @return ArrayList of potential carts
      */
     public ArrayList<Cart> getPotentialCarts() { return currentRound.getPotentialCarts(); }
-
-    /**
-     * Retrieve difficulty of the current round
-     * @return difficulty
-     */
-    public String getDifficulty() { return currentRound.getDifficulty(); }
 
     /**
      * Stores the list of carts for the round
