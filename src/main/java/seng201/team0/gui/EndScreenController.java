@@ -108,6 +108,7 @@ public class EndScreenController {
         currentRoundService.setCurrentRound(1);
         inventoryService.resetInventory();
         shopAvailabilityService.resetStore(1);
+        playerScoreService.setPlayerScore(0);
         currentRoundService.setCarts();
         gameManager.resetAndLaunchMenuScreen();
     }

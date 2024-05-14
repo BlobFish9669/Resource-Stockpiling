@@ -66,8 +66,16 @@ public class ShopAvailabilityService {
      */
     public void setUpgradePurchased(Integer input) { shopAvailability.setPurchasedUpgrade(input); }
 
+    /**
+     * Reset the store depending on the current round the player is on
+     * @param round the current round of the game
+     */
     public void resetStore(int round) { shopAvailability.resetStore(round); }
 
+    /**
+     * Sets the total number of rounds for the game
+     * @param rounds the total number of rounds
+     */
     public void setTotalRounds(int rounds) { shopAvailability.setTotalRounds(rounds); }
 
 }
