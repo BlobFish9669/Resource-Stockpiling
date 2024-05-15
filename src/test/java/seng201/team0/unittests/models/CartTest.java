@@ -14,7 +14,10 @@ class CartTest {
 
     @Test
     void fill() {
-        testCart = new Cart(5, null, 0);
+        testCart = new Cart(5, "Stone", 0);
+        assertEquals(5, testCart.getSize());
+        assertEquals("Stone", testCart.getResourceType());
+        assertEquals(0, testCart.getSpeed());
         assertEquals(0, testCart.getFilledSize());
         testCart.fill(2);
         assertEquals(2, testCart.getFilledSize());
