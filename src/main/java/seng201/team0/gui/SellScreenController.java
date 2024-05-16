@@ -28,22 +28,23 @@ public class SellScreenController {
     private final InventoryService inventoryService;
 
     @FXML
-    public Label title;
-    public Label currentMoney;
-    public Label currentMoneyLabel;
-    public Label currentRound;
-    public Label currentRoundLabel;
-    public Label roundsRemaining;
-    public Label roundsRemainingLabel;
-    public Label mainTowers;
-    public ListView<Tower> mainTowerList;
-    public Label reserveTowers;
-    public ListView<Tower> reserveTowerList;
-    public Label upgrades;
-    public ListView<Upgrade> upgradeList;
-    public Button sellTower;
-    public Button sellUpgrade;
-    public Button backButton;
+    private Label currentMoneyLabel;
+    @FXML
+    private Label currentRoundLabel;
+    @FXML
+    private Label roundsRemainingLabel;
+    @FXML
+    private ListView<Tower> mainTowerList;
+    @FXML
+    private ListView<Tower> reserveTowerList;
+    @FXML
+    private ListView<Upgrade> upgradeList;
+    @FXML
+    private Button sellTower;
+    @FXML
+    private Button sellUpgrade;
+    @FXML
+    private Button backButton;
 
     private Tower selectedMainTower;
     private Tower selectedReserveTower;

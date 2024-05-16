@@ -27,32 +27,45 @@ public class ShopController {
     private final ShopAvailabilityService shopAvailabilityService;
 
     @FXML
-    public Label shopLabel;
-    public Label currentMoney;
-    public Label currentRound;
-    public Label roundsRemaining;
-    public Label currentMoneyLabel;
-    public Label currentRoundLabel;
-    public Label roundsRemainingLabel;
-    public Label towersLabel;
-    public Button towerButton1;
-    public Button towerButton2;
-    public Button towerButton3;
-    public Button towerButton4;
-    public Button towerButton5;
-    public Label upgradesLabel;
-    public Button upgradeButton1;
-    public Button upgradeButton2;
-    public Button upgradeButton3;
-    public Button upgradeButton4;
-    public Button upgradeButton5;
-    public Button upgradeButton6;
-    public Button purchaseTowerButton;
-    public Button purchaseUpgradeButton;
-    public Button sellItemsButton;
-    public Button backButton;
-    public ListView<Tower> towersListView;
-    public ListView<Upgrade> upgradesListView;
+    private Label currentMoneyLabel;
+    @FXML
+    private Label currentRoundLabel;
+    @FXML
+    private Label roundsRemainingLabel;
+    @FXML
+    private Button towerButton1;
+    @FXML
+    private Button towerButton2;
+    @FXML
+    private Button towerButton3;
+    @FXML
+    private Button towerButton4;
+    @FXML
+    private Button towerButton5;
+    @FXML
+    private Button upgradeButton1;
+    @FXML
+    private Button upgradeButton2;
+    @FXML
+    private Button upgradeButton3;
+    @FXML
+    private Button upgradeButton4;
+    @FXML
+    private Button upgradeButton5;
+    @FXML
+    private Button upgradeButton6;
+    @FXML
+    private Button purchaseTowerButton;
+    @FXML
+    private Button purchaseUpgradeButton;
+    @FXML
+    private Button sellItemsButton;
+    @FXML
+    private Button backButton;
+    @FXML
+    private ListView<Tower> towersListView;
+    @FXML
+    private ListView<Upgrade> upgradesListView;
 
     private List<Tower> shopTowers;
     private List<Upgrade> shopUpgrades;

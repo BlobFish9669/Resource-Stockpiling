@@ -31,29 +31,37 @@ public class MenuController {
     private final ShopAvailabilityService shopAvailabilityService;
 
     @FXML
-    public Label gameTitle;
-    public Label nameInputLabel;
-    public TextField nameInput;
-    public Label nameInputNoteLabel;
-    public Label roundsLabel;
-    public Slider roundsSlider;
-    public Label difficultyLabel;
-    public ChoiceBox<String> difficultyDropdown;
-    public Label selectTowersLabel;
-    public Button towerButton1;
-    public Button towerButton2;
-    public Button towerButton3;
-    public Button towerButton4;
-    public Button towerButton5;
-    public Button towerButton6;
-    public Label selectedTowerTitle;
-    public Label selectedTowerResourcesLabel;
-    public Label selectedTowerReloadSpeedLabel;
-    public Label selectedTowerResourceTypeLabel;
-    public Label selectedTowerLevelLabel;
-    public Label selectedTowerCostLabel;
-    public Button submitButton;
-    public GridPane towerGrid;
+    private TextField nameInput;
+    @FXML
+    private Slider roundsSlider;
+    @FXML
+    private ChoiceBox<String> difficultyDropdown;
+    @FXML
+    private Button towerButton1;
+    @FXML
+    private Button towerButton2;
+    @FXML
+    private Button towerButton3;
+    @FXML
+    private Button towerButton4;
+    @FXML
+    private Button towerButton5;
+    @FXML
+    private Button towerButton6;
+    @FXML
+    private Label selectedTowerResourcesLabel;
+    @FXML
+    private Label selectedTowerReloadSpeedLabel;
+    @FXML
+    private Label selectedTowerResourceTypeLabel;
+    @FXML
+    private Label selectedTowerLevelLabel;
+    @FXML
+    private Label selectedTowerCostLabel;
+    @FXML
+    private Button submitButton;
+    @FXML
+    private GridPane towerGrid;
 
     private int selectedRounds = 5;
     private ArrayList<Tower> towerTypes = new ArrayList<>();

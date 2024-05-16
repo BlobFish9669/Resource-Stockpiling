@@ -32,22 +32,23 @@ public class InventoryController {
     private Upgrade selectedUpgrade;
 
     @FXML
-    public Label inventoryLabel;
-    public Label roundsRemaining;
-    public Label currentMoney;
-    public Label currentMoneyLabel;
-    public Label currentRound;
-    public Label currentRoundLabel;
-    public Label roundsRemainingLabel;
-    public ListView<Tower> mainTowerList;
-    public ListView<Tower> reserveTowerList;
-    public ListView<Upgrade> upgradeList;
-    public Button moveTowerButton;
-    public Button useUpgradeButton;
-    public Button backButton;
-    public Label upgrades;
-    public Label reserveTowers;
-    public Label mainTowers;
+    private Label currentMoneyLabel;
+    @FXML
+    private Label currentRoundLabel;
+    @FXML
+    private Label roundsRemainingLabel;
+    @FXML
+    private ListView<Tower> mainTowerList;
+    @FXML
+    private ListView<Tower> reserveTowerList;
+    @FXML
+    private ListView<Upgrade> upgradeList;
+    @FXML
+    private Button moveTowerButton;
+    @FXML
+    private Button useUpgradeButton;
+    @FXML
+    private Button backButton;
 
     private String towerSelected;
     private boolean upgradeSelected = false;

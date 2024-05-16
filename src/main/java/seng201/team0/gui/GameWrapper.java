@@ -14,8 +14,10 @@ import java.io.IOException;
  * @author Caleb Cooper
  */
 public class GameWrapper {
+
     @FXML
     private Pane pane;
+    @FXML
     private Stage stage;
 
     /**
