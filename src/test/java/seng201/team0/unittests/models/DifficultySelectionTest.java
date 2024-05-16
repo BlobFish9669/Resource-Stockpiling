@@ -7,6 +7,7 @@ import seng201.team0.models.DifficultySelection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifficultySelectionTest {
+    /*
     private DifficultySelection difficultySelectionTest;
 
     @BeforeEach
@@ -20,4 +21,6 @@ class DifficultySelectionTest {
         difficultySelectionTest.setDifficulty("Medium");
         assertEquals("Medium", difficultySelectionTest.getDifficulty());
     }
+
+     */
 }

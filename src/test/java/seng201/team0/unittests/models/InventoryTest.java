@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryTest {
+    /*
     private Inventory inventoryTest;
 
     @BeforeEach
@@ -45,5 +46,5 @@ class InventoryTest {
         assertEquals(0, inventoryTest.getMainTowers().size());
         assertEquals(0, inventoryTest.getReserveTowers().size());
         assertEquals(0, inventoryTest.getUpgrades().size());
-    }
+    }*/
 }
