@@ -21,8 +21,8 @@ class CartTest {
         assertEquals(0, testCart.getFilledSize());
         testCart.fill(2);
         assertEquals(2, testCart.getFilledSize());
-        testCart.fill(1);
-        assertEquals(3, testCart.getFilledSize());
+        testCart.fill(6);
+        assertEquals(5, testCart.getFilledSize());
     }
     @Test
     void fill_overflow() {

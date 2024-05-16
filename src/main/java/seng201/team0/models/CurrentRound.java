@@ -79,7 +79,7 @@ public class CurrentRound {
                 tempCarts.add(carts.get(i));
             }
         } else if (Objects.equals(difficulty, "Hard")) {
-            for (int i = 8; i < (3+5+hardCartsNum)-1; i++) {
+            for (int i = 8; i < (3+5+hardCartsNum); i++) {
                 tempCarts.add(carts.get(i));
             }
         }
