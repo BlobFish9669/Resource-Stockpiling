@@ -52,6 +52,10 @@ public class Tower {
         this.cost = cost;
         this.sellPrice = (int) (cost * 0.75);
     }
+    private void addCost(int cost) {
+        this.cost += cost;
+        this.sellPrice = (int) (this.cost * 0.75);
+    }
     public int getCost() {
         return cost;
     }
@@ -68,6 +72,10 @@ public class Tower {
         this.roundsUsed++;
     }
 
+    public int getTowerPoints() {
+        return towerPoints;
+    }
+
     public void gainTowerPoints(int points) {
         this.towerPoints += points;
         checkIfTowerLevelUp();
@@ -82,13 +90,12 @@ public class Tower {
                 level += 1;
                 i++;
             }
-            towerPoints = 0;
+            towerPoints = temp;
 
             // Increase stats
             resourceAmount += 5*i;
             reloadSpeed -= (double) i /4;
-            cost += 10*i;
-            sellPrice = (int) (cost * 0.75);
+            addCost(10*i);
         }
     }
 
