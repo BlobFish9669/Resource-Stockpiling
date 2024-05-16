@@ -2,7 +2,6 @@ package seng201.team0.unittests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seng201.team0.models.Inventory;
 import seng201.team0.models.Tower;
 import seng201.team0.models.Upgrade;
 import seng201.team0.services.InventoryService;
