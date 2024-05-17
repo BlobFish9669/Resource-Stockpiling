@@ -98,12 +98,13 @@ public class ShopAvailability {
         shopUpgrades = new ArrayList<>();
 
         // Change tower availability based on round the user is currently on, better tower later on, variable based on what third of the game the user is on
-        if (round > (totalRounds*2)/3+1) {
-            Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11(), new ShopTower12());
-        } else if (round > totalRounds/3+1 && round < (totalRounds*2)/3+1) {
+        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5());
+        if (round >= totalRounds/3+1) {
             Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11());
         }
-        Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5());
+        if (round >= (totalRounds*2)/3+1) {
+            Collections.addAll(potentialShopTowers, new ShopTower12());
+        }
 
         for (int i = 0; i < numTowersAvailable; i++) {
             int randomShopTower = r.nextInt(0, potentialShopTowers.size());
@@ -114,11 +115,11 @@ public class ShopAvailability {
         }
 
         // Change upgrade availability based on round the user is currently on, better upgrades later on
+        Collections.addAll(potentialShopUpgrades, new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10()); // worse upgrades to start with - also cheaper
         if (round > totalRounds/2) {
-            Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5(), new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10(), new Upgrade11());
-        } else {
-            Collections.addAll(potentialShopUpgrades, new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10()); // worse upgrades to start with - also cheaper
+            Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5(), new Upgrade11());
         }
+
 
         for (int i = 0; i < numUpgradesAvailable; i++) {
             int randomShopUpgrade = r.nextInt(0, potentialShopUpgrades.size());
