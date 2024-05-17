@@ -37,6 +37,22 @@ public class TowerTest {
         assertEquals(16, testTower.getResourceAmount());
         assertEquals(0.25, testTower.getReloadSpeed());
         assertEquals(64, testTower.getFillRate());
+
+        testTower.gainTowerPoints(270);
+        assertEquals(5, testTower.getLevel());
+        assertEquals(0, testTower.getTowerPoints());
+        assertEquals(70, testTower.getCost());
+        assertEquals(52, testTower.getSellPrice());
+        assertEquals(21, testTower.getResourceAmount());
+        assertEquals(0.1, testTower.getReloadSpeed());
+        assertEquals(210, testTower.getFillRate());
+    }
+    @Test
+    void testRoundsUsed() {
+        assertEquals(0, testTower.getRoundsUsed());
+        testTower.addRoundUsed();
+        testTower.addRoundUsed();
+        assertEquals(2, testTower.getRoundsUsed());
     }
     @Test
     void testUpgradeChangeResource() {
@@ -52,5 +68,36 @@ public class TowerTest {
         testTower.applyUpgrade(testUpgrade);
         assertEquals(50, testTower.getTowerPoints());
         assertEquals(2, testTower.getLevel());
+    }
+    @Test
+    void testUpgradeResourceAmount() {
+        testUpgrade = new Upgrade("TestUpgrade", "Resource Amount", 20, 2.0);
+        assertEquals(1, testTower.getResourceAmount());
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(2, testTower.getResourceAmount());
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(4, testTower.getResourceAmount());
+    }
+    @Test
+    void testUpgradeReloadSpeed() {
+        testUpgrade = new Upgrade("TestUpgrade", "Reload Speed", 20, 0.5);
+        assertEquals(1, testTower.getReloadSpeed());
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(0.5, testTower.getReloadSpeed());
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(0.25, testTower.getReloadSpeed());
+        testTower.applyUpgrade(testUpgrade);
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(0.1, testTower.getReloadSpeed());
+    }
+    @Test
+    void testUpgradePrice() {
+        testUpgrade = new Upgrade("TestUpgrade", "Price", 20, 0.5);
+        testTower.setCost(40);
+        assertEquals(40, testTower.getCost());
+        assertEquals(30, testTower.getSellPrice());
+        testTower.applyUpgrade(testUpgrade);
+        assertEquals(20, testTower.getCost());
+        assertEquals(15, testTower.getSellPrice());
     }
 }
