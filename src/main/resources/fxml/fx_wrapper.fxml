@@ -4,7 +4,7 @@
 
 <Pane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="seng201.team0.gui.GameWrapper"
+      fx:controller="seng201.team15.gui.GameWrapper"
       prefHeight="800.0" prefWidth="400.0"
       fx:id="pane">
 
