@@ -131,11 +131,11 @@ public class MainController {
      */
     @FXML
     private void onPlayRoundButtonClicked() {
-        if (roundDifficultyDropdown.getValue() != null && roundDifficultyDropdown.getValue() != "") {
+        if (roundDifficultyDropdown.getValue() != null && !Objects.equals(roundDifficultyDropdown.getValue(), "")) {
             currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
             startRound();
         } else {
-            openErrorDialog("Error - No difficulty selected");
+            openPopup("Error","No difficulty selected");
         }
     }
 
@@ -148,10 +148,10 @@ public class MainController {
         if (checkResources()) {
             //Round not failed yet - check distance
             for (Cart cart: currentRoundService.getCarts()) {
-                if (cart.getFilledSize() != cart.getSize()) {
+                if (!Objects.equals(cart.getFilledSize(), cart.getSize())) {
                     boolean cartFilled = false;
                     for (Tower tower : inventoryService.getMainTowerSelection()) {
-                        if (tower.getResourceType() == cart.getResourceType()) {
+                        if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
                             double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
                             double distanceRemaining = (cart.getSpeed()*((double) 1000/60)) * timeToFill; // Turn to m/min to be able to compare
                             if (distanceRemaining <= currentRoundService.getDistance()) {
@@ -163,7 +163,7 @@ public class MainController {
                     }
 
                     if (!cartFilled) {
-                        openErrorDialog("Error - Not filled in time");
+                        openPopup("Error", "Not filled in time");
                         gameOver();
                         break;
                     }
@@ -174,7 +174,7 @@ public class MainController {
 
         } else {
             gameOver();
-            openErrorDialog("Error - There was one or more carts that did not have a corresponding tower");
+            openPopup("Error", "There was one or more carts that did not have a corresponding tower");
 
         }
     }
@@ -191,6 +191,7 @@ public class MainController {
             if (remainingRounds > 0) {
                 randomTowerEvent();
             }
+            openPopup("Round Complete", "Congrats, round " + currentRoundService.getCurrentRound() + " was a success!");
             resetAndUpdateLabelsAndStats();
         }
     }
@@ -206,7 +207,7 @@ public class MainController {
         int i = 0;
         for (Cart cart: currentRoundService.getCarts()) {
             for (Tower tower: inventoryService.getMainTowerSelection()) {
-                if (tower.getResourceType() == cart.getResourceType()) {
+                if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
                     cartResourceTypeSupported.set(i, true);
                 }
             }
@@ -222,9 +223,8 @@ public class MainController {
      */
     private void randomTowerEvent() {
         Random r = new Random();
-        int randomEvents = 0;
         for (Tower tower : inventoryService.getMainTowerSelection()) {
-            int chanceOfTowerStatIncrease = r.nextInt(0, 3); // 1/3 chance
+            int chanceOfTowerStatIncrease = r.nextInt(0, 5); // 1/5 chance per tower
             if (chanceOfTowerStatIncrease == 0) {
                 int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
                 String stat = "";
@@ -246,22 +246,24 @@ public class MainController {
                         stat = "Cost";
                         break;
                 }
-                randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has changed!");
-                randomEvents += 1;
+                if (stat.equals("Reload Speed")) {
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased!");
+                } else {
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased!");
+                }
             }
 
             int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
             if (chanceOfTowerBreaking == 0) {
                 randomEventList.add("A " + tower.getResourceType() + " tower has broken! It has been removed from your inventory");
                 inventoryService.removeMainTower(tower);
-                randomEvents += 1;
                 // "Breaks" tower by removing from inventory - Might do the "Be placed in a broken state and require a specific item to be repaired to working order" bit later on
             }
 
             tower.addRoundUsed(); // Tracks how many times a tower has been used
         }
-        if (randomEvents > 0) {
-            openRandomEventDialog();
+        if (!randomEventList.isEmpty()) {
+            openPopup(randomEventList);
         }
     }
 
@@ -309,14 +311,14 @@ public class MainController {
     }
 
     /**
-     * Opens a dialog box to display each random event that has occurred within randomEventList
+     * Opens a dialog box to display each event that has occurred within a given list
+     * @param contentList The list of events to be displayed to the user
      */
-    private void openRandomEventDialog() {
-        //Tutorial 2 Extension
+    private void openPopup(List<String> contentList) {
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("A random event has occurred");
+        dialog.setTitle("Random Event");
         VBox dialogContent = new VBox(50);
-        for (String event: randomEventList) {
+        for (String event: contentList) {
             dialogContent.getChildren().add(new Label(event));
         }
         dialog.getDialogPane().setContent(dialogContent);
@@ -325,16 +327,18 @@ public class MainController {
     }
 
     /**
-     * Displays information about the provided error in a dialog box
-     * @param message the error that should be displayed to the user
+     * Displays information about a provided title in a dialog box
+     * @param title the title to be displayed to the user
+     * @param content the content message to be displayed to the user
      */
-    private void openErrorDialog(String message) {
+    private void openPopup(String title, String content) {
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Error");
+        dialog.setTitle(title);
         VBox dialogContent = new VBox(10);
-        dialogContent.getChildren().add(new Label(message));
+        dialogContent.getChildren().add(new Label(content));
         dialog.getDialogPane().setContent(dialogContent);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.show();
     }
+
 }
