@@ -159,6 +159,7 @@ public class MenuController {
 
         currentRoundService.setTotalRounds(selectedRounds);
         shopAvailabilityService.setTotalRounds(selectedRounds);
+        shopAvailabilityService.resetStore(1);
 
         /*
         Stores an int to check how many errors there are.

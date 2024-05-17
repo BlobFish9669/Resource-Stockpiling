@@ -22,13 +22,6 @@ public class ShopAvailability {
     private List<Boolean> purchasedUpgrades;
 
     /**
-     * Constructor to randomise the shop towers and upgrades
-     */
-    public ShopAvailability() {
-        resetStore(1);
-    }
-
-    /**
      * Retrieve the randomised number between 3 and 5 inclusive to see how many towers are available in the shop
      * @return the number of towers available
      */
@@ -98,10 +91,10 @@ public class ShopAvailability {
 
         // Change tower availability based on round the user is currently on, better tower later on, variable based on what third of the game the user is on
         Collections.addAll(potentialShopTowers, new ShopTower1(), new ShopTower2(), new ShopTower3(), new ShopTower4(), new ShopTower5());
-        if (round >= totalRounds/3+1) {
+        if (round > totalRounds/3+1) {
             Collections.addAll(potentialShopTowers, new ShopTower6(), new ShopTower7(), new ShopTower8(), new ShopTower9(), new ShopTower10(), new ShopTower11());
         }
-        if (round >= (totalRounds*2)/3+1) {
+        if (round > (totalRounds*2)/3+1) {
             Collections.addAll(potentialShopTowers, new ShopTower12());
         }
 
