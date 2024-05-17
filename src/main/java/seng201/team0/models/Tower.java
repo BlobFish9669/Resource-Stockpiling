@@ -41,6 +41,16 @@ public class Tower {
     }
     public void setReloadSpeed(double reloadSpeed) {
         this.reloadSpeed = reloadSpeed;
+        if (this.reloadSpeed < 0.1) {
+            this.reloadSpeed = 0.1;
+        }
+    }
+    public void reduceReloadSpeed(double reloadSpeed) {
+        this.reloadSpeed -= reloadSpeed;
+        if (this.reloadSpeed < 0.1) {
+            this.reloadSpeed = 0.1;
+        }
+
     }
     public double getReloadSpeed() {
         return reloadSpeed;
@@ -94,7 +104,7 @@ public class Tower {
 
             // Increase stats
             resourceAmount += 5*i;
-            reloadSpeed -= (double) i /4;
+            reduceReloadSpeed((double) i/4);
             addCost(10*i);
         }
     }
