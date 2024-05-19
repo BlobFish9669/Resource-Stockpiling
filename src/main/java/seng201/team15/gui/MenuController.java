@@ -217,6 +217,9 @@ public class MenuController {
                 moneyService.setNewBalance(25);
             }
 
+            //https://freesound.org/people/WolfOWI/sounds/588306/
+            //https://stackoverflow.com/questions/23202272/how-to-play-sounds-with-javafx
+            //https://stackoverflow.com/questions/49535824/java-lag-when-playing-short-audio-clip-frequently
             AudioClip audioClip = new AudioClip(new File("src/main/resources/audio/pickaxe.mp3").toURI().toString());
             audioClip.play();
 
