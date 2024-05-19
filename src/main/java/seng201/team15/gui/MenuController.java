@@ -169,7 +169,7 @@ public class MenuController {
         if (nameInput.getText().length() < 3 || nameInput.getText().length() > 15 || m.find()) {
             //If matcher finds a character not in a-z, A-Z or 0-9, or length is not between 3 and 15, run error
             //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please enter a valid name\n");
-            errorsList.add("Error - Please enter a valid name");
+            errorsList.add("Please enter a valid name");
             nameInput.setStyle("-fx-text-box-border: red");
             nameInput.setText("");
             errors += 1;
@@ -177,7 +177,7 @@ public class MenuController {
         }
         if (difficultyDropdown.getValue() == null) {
             //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
-            errorsList.add("Error - Please select a difficulty");
+            errorsList.add("Please select a difficulty");
             difficultyDropdown.setStyle("-fx-border-color: red");
             errors += 1;
 
@@ -186,7 +186,7 @@ public class MenuController {
         }
         if (tempSelectedTowers.size() != 3) {
             //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
-            errorsList.add("Error - Please select at least 3 Towers");
+            errorsList.add("Please select at least 3 Towers");
             towerGrid.setStyle("-fx-border-color: red");
             errors += 1;
 

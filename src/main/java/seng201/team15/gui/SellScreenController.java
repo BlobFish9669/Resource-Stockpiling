@@ -131,7 +131,7 @@ public class SellScreenController {
                     mainTowerList.getItems().remove(selectedMainTower);
                     clearSelections();
                 } else {
-                    openErrorDialog("Error - There must always be at least one main tower");
+                    openErrorDialog("There must always be at least one main tower");
                 }
             } else {
                 inventoryService.removeReserveTower(selectedReserveTower);
@@ -142,7 +142,7 @@ public class SellScreenController {
                 clearSelections();
             }
         } else {
-            openErrorDialog("Error - Please select a tower to sell");
+            openErrorDialog("Please select a tower to sell");
         }
     }
 
@@ -160,7 +160,7 @@ public class SellScreenController {
             upgradeList.getItems().remove(selectedUpgrade);
             clearSelections();
         } else {
-            openErrorDialog("Error - Please select an upgrade to sell");
+            openErrorDialog("Please select an upgrade to sell");
         }
     }
 

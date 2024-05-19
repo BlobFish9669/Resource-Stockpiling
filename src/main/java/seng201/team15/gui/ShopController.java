@@ -303,11 +303,11 @@ public class ShopController {
     @FXML
     private void onTowerPurchaseClicked() {
         if (towerToPurchase == null) {
-            openErrorDialog("Error - Please select a tower");
+            openErrorDialog("Please select a tower");
         } else if (moneyService.getCurrentBalance() - towerToPurchase.getCost() < 0) {
-            openErrorDialog("Error - Not enough money");
+            openErrorDialog("Not enough money");
         } else if (inventoryService.getMainTowerSelection().size() == 5 && inventoryService.getReserveTowerSelection().size() == 5) {
-            openErrorDialog("Error - Too many towers, sell one and try again");
+            openErrorDialog("Too many towers, sell one and try again");
         } else {
             switch (towerButton) {
                 case 1:
@@ -351,9 +351,9 @@ public class ShopController {
     @FXML
     private void onUpgradePurchaseClicked() {
         if (upgradeToPurchase == null) {
-            openErrorDialog("Error - Please select an upgrade");
+            openErrorDialog("Please select an upgrade");
         } else if (moneyService.getCurrentBalance() - upgradeToPurchase.getCost() < 0) {
-            openErrorDialog("Error - Not enough money");
+            openErrorDialog("Not enough money");
         } else {
             switch (upgradeButton) {
                 case 1:

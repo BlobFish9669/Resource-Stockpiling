@@ -224,7 +224,7 @@ public class MainController {
     private void randomTowerEvent() {
         Random r = new Random();
         for (Tower tower : inventoryService.getMainTowerSelection()) {
-            int chanceOfTowerStatIncrease = r.nextInt(0, 5); // 1/5 chance per tower
+            int chanceOfTowerStatIncrease = r.nextInt(0, 21); // 1/10 chance per tower for a positive or negative stat change (1/5 as chance to have an event is 2/20 -> 2 events possible)
             if (chanceOfTowerStatIncrease == 0) {
                 int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
                 String stat = "";
@@ -247,9 +247,35 @@ public class MainController {
                         break;
                 }
                 if (stat.equals("Reload Speed")) {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased!");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased! :)");
                 } else {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased!");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased! :)");
+                }
+            } else if (chanceOfTowerStatIncrease == 1) {
+                int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
+                String stat = "";
+                switch (whichStatIncrease) {
+                    case 1: // Tower Points
+                        tower.gainTowerPoints(-100);
+                        stat = "Tower Points";
+                        break;
+                    case 2: // Resource Amount
+                        tower.setResourceAmount(tower.getResourceAmount() - 5);
+                        stat = "Resource Amount";
+                        break;
+                    case 3: // Reload Speed
+                        tower.setReloadSpeed(tower.getReloadSpeed() + 0.5);
+                        stat = "Reload Speed";
+                        break;
+                    case 4: // Price
+                        tower.setCost(tower.getCost() - 10);
+                        stat = "Cost";
+                        break;
+                }
+                if (stat.equals("Reload Speed")) {
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased! :(");
+                } else {
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased! :(");
                 }
             }
 

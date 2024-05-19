@@ -5,7 +5,7 @@ plugins {
     id 'jacoco'
 }
 
-archivesBaseName = 'seng201_team0'
+archivesBaseName = 'seng201_team15'
 group = 'seng201.team15'
 version = '1.0-SNAPSHOT'
 mainClassName = 'seng201.team15.App'
