@@ -17,6 +17,8 @@ class ShopAvailabilityServiceTest {
     @Test
     void testingTowersBuyAndSell() {
         shopAvailabilityServiceTest.setTotalRounds(5);
+        shopAvailabilityServiceTest.resetStore(1);
+
         assertTrue(shopAvailabilityServiceTest.getNumberTowersAvailable() >= 3 && shopAvailabilityServiceTest.getNumberTowersAvailable() <= 5);
         assertEquals(shopAvailabilityServiceTest.getAvailableTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
         assertEquals(shopAvailabilityServiceTest.getPurchasedTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
@@ -61,6 +63,7 @@ class ShopAvailabilityServiceTest {
     @Test
     void testingUpgradesBuyAndSell() {
         shopAvailabilityServiceTest.setTotalRounds(5);
+        shopAvailabilityServiceTest.resetStore(1);
 
         assertTrue(shopAvailabilityServiceTest.getNumberUpgradesAvailable() >= 3 && shopAvailabilityServiceTest.getNumberUpgradesAvailable() <= 6);
         assertEquals(shopAvailabilityServiceTest.getAvailableUpgrades().size(), shopAvailabilityServiceTest.getNumberUpgradesAvailable());
