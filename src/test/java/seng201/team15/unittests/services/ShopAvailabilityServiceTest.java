@@ -7,99 +7,99 @@ import seng201.team15.services.ShopAvailabilityService;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopAvailabilityServiceTest {
-    ShopAvailabilityService shopAvailabilityService;
+    ShopAvailabilityService shopAvailabilityServiceTest;
 
     @BeforeEach
     void setUp() {
-        shopAvailabilityService = new ShopAvailabilityService();
+        shopAvailabilityServiceTest = new ShopAvailabilityService();
     }
 
     @Test
     void testingTowersBuyAndSell() {
-        shopAvailabilityService.setTotalRounds(5);
-        assertTrue(shopAvailabilityService.getNumberTowersAvailable() >= 3 && shopAvailabilityService.getNumberTowersAvailable() <= 5);
-        assertEquals(shopAvailabilityService.getAvailableTowers().size(), shopAvailabilityService.getNumberTowersAvailable());
-        assertEquals(shopAvailabilityService.getPurchasedTowers().size(), shopAvailabilityService.getNumberTowersAvailable());
-        assertFalse(shopAvailabilityService.getPurchasedTowers().contains(true));
+        shopAvailabilityServiceTest.setTotalRounds(5);
+        assertTrue(shopAvailabilityServiceTest.getNumberTowersAvailable() >= 3 && shopAvailabilityServiceTest.getNumberTowersAvailable() <= 5);
+        assertEquals(shopAvailabilityServiceTest.getAvailableTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
+        assertEquals(shopAvailabilityServiceTest.getPurchasedTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
+        assertFalse(shopAvailabilityServiceTest.getPurchasedTowers().contains(true));
 
-        shopAvailabilityService.setTowerPurchased(0);
-        shopAvailabilityService.setTowerPurchased(1);
+        shopAvailabilityServiceTest.setTowerPurchased(0);
+        shopAvailabilityServiceTest.setTowerPurchased(1);
 
         int tempOccurrences = 0;
-        for (Boolean bool: shopAvailabilityService.getPurchasedTowers()) {
+        for (Boolean bool: shopAvailabilityServiceTest.getPurchasedTowers()) {
             if (bool) {
                 tempOccurrences++;
             }
         }
         assertEquals(2, tempOccurrences);
-        assertTrue(shopAvailabilityService.getPurchasedTowers().get(0) && shopAvailabilityService.getPurchasedTowers().get(1));
+        assertTrue(shopAvailabilityServiceTest.getPurchasedTowers().get(0) && shopAvailabilityServiceTest.getPurchasedTowers().get(1));
     }
 
     @Test
     void testingTowerShopReset() {
-        shopAvailabilityService.setTotalRounds(5);
-        shopAvailabilityService.resetStore(5);
+        shopAvailabilityServiceTest.setTotalRounds(5);
+        shopAvailabilityServiceTest.resetStore(5);
 
-        assertTrue(shopAvailabilityService.getNumberTowersAvailable() >= 3 && shopAvailabilityService.getNumberTowersAvailable() <= 5);
-        assertEquals(shopAvailabilityService.getAvailableTowers().size(), shopAvailabilityService.getNumberTowersAvailable());
-        assertEquals(shopAvailabilityService.getPurchasedTowers().size(), shopAvailabilityService.getNumberTowersAvailable());
-        assertFalse(shopAvailabilityService.getPurchasedTowers().contains(true));
+        assertTrue(shopAvailabilityServiceTest.getNumberTowersAvailable() >= 3 && shopAvailabilityServiceTest.getNumberTowersAvailable() <= 5);
+        assertEquals(shopAvailabilityServiceTest.getAvailableTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
+        assertEquals(shopAvailabilityServiceTest.getPurchasedTowers().size(), shopAvailabilityServiceTest.getNumberTowersAvailable());
+        assertFalse(shopAvailabilityServiceTest.getPurchasedTowers().contains(true));
 
-        shopAvailabilityService.setTowerPurchased(0);
-        shopAvailabilityService.setTowerPurchased(1);
+        shopAvailabilityServiceTest.setTowerPurchased(0);
+        shopAvailabilityServiceTest.setTowerPurchased(1);
 
         int tempOccurrences = 0;
-        for (Boolean bool: shopAvailabilityService.getPurchasedTowers()) {
+        for (Boolean bool: shopAvailabilityServiceTest.getPurchasedTowers()) {
             if (bool) {
                 tempOccurrences++;
             }
         }
         assertEquals(2, tempOccurrences);
-        assertTrue(shopAvailabilityService.getPurchasedTowers().get(0) && shopAvailabilityService.getPurchasedTowers().get(1));
+        assertTrue(shopAvailabilityServiceTest.getPurchasedTowers().get(0) && shopAvailabilityServiceTest.getPurchasedTowers().get(1));
     }
 
     @Test
     void testingUpgradesBuyAndSell() {
-        shopAvailabilityService.setTotalRounds(5);
+        shopAvailabilityServiceTest.setTotalRounds(5);
 
-        assertTrue(shopAvailabilityService.getNumberUpgradesAvailable() >= 3 && shopAvailabilityService.getNumberUpgradesAvailable() <= 6);
-        assertEquals(shopAvailabilityService.getAvailableUpgrades().size(), shopAvailabilityService.getNumberUpgradesAvailable());
-        assertEquals(shopAvailabilityService.getPurchasedUpgrades().size(), shopAvailabilityService.getNumberUpgradesAvailable());
-        assertFalse(shopAvailabilityService.getPurchasedUpgrades().contains(true));
+        assertTrue(shopAvailabilityServiceTest.getNumberUpgradesAvailable() >= 3 && shopAvailabilityServiceTest.getNumberUpgradesAvailable() <= 6);
+        assertEquals(shopAvailabilityServiceTest.getAvailableUpgrades().size(), shopAvailabilityServiceTest.getNumberUpgradesAvailable());
+        assertEquals(shopAvailabilityServiceTest.getPurchasedUpgrades().size(), shopAvailabilityServiceTest.getNumberUpgradesAvailable());
+        assertFalse(shopAvailabilityServiceTest.getPurchasedUpgrades().contains(true));
 
-        shopAvailabilityService.setUpgradePurchased(0);
-        shopAvailabilityService.setUpgradePurchased(1);
+        shopAvailabilityServiceTest.setUpgradePurchased(0);
+        shopAvailabilityServiceTest.setUpgradePurchased(1);
 
         int tempOccurrences = 0;
-        for (Boolean bool: shopAvailabilityService.getPurchasedUpgrades()) {
+        for (Boolean bool: shopAvailabilityServiceTest.getPurchasedUpgrades()) {
             if (bool) {
                 tempOccurrences++;
             }
         }
         assertEquals(2, tempOccurrences);
-        assertTrue(shopAvailabilityService.getPurchasedUpgrades().get(0) && shopAvailabilityService.getPurchasedUpgrades().get(1));
+        assertTrue(shopAvailabilityServiceTest.getPurchasedUpgrades().get(0) && shopAvailabilityServiceTest.getPurchasedUpgrades().get(1));
     }
 
     @Test
     void testingUpgradesShopReset() {
-        shopAvailabilityService.setTotalRounds(5);
-        shopAvailabilityService.resetStore(5);
+        shopAvailabilityServiceTest.setTotalRounds(5);
+        shopAvailabilityServiceTest.resetStore(5);
 
-        assertTrue(shopAvailabilityService.getNumberUpgradesAvailable() >= 3 && shopAvailabilityService.getNumberUpgradesAvailable() <= 6);
-        assertEquals(shopAvailabilityService.getAvailableUpgrades().size(), shopAvailabilityService.getNumberUpgradesAvailable());
-        assertEquals(shopAvailabilityService.getPurchasedUpgrades().size(), shopAvailabilityService.getNumberUpgradesAvailable());
-        assertFalse(shopAvailabilityService.getPurchasedUpgrades().contains(true));
+        assertTrue(shopAvailabilityServiceTest.getNumberUpgradesAvailable() >= 3 && shopAvailabilityServiceTest.getNumberUpgradesAvailable() <= 6);
+        assertEquals(shopAvailabilityServiceTest.getAvailableUpgrades().size(), shopAvailabilityServiceTest.getNumberUpgradesAvailable());
+        assertEquals(shopAvailabilityServiceTest.getPurchasedUpgrades().size(), shopAvailabilityServiceTest.getNumberUpgradesAvailable());
+        assertFalse(shopAvailabilityServiceTest.getPurchasedUpgrades().contains(true));
 
-        shopAvailabilityService.setUpgradePurchased(0);
-        shopAvailabilityService.setUpgradePurchased(1);
+        shopAvailabilityServiceTest.setUpgradePurchased(0);
+        shopAvailabilityServiceTest.setUpgradePurchased(1);
 
         int tempOccurrences = 0;
-        for (Boolean bool: shopAvailabilityService.getPurchasedUpgrades()) {
+        for (Boolean bool: shopAvailabilityServiceTest.getPurchasedUpgrades()) {
             if (bool) {
                 tempOccurrences++;
             }
         }
         assertEquals(2, tempOccurrences);
-        assertTrue(shopAvailabilityService.getPurchasedUpgrades().get(0) && shopAvailabilityService.getPurchasedUpgrades().get(1));
+        assertTrue(shopAvailabilityServiceTest.getPurchasedUpgrades().get(0) && shopAvailabilityServiceTest.getPurchasedUpgrades().get(1));
     }
 }

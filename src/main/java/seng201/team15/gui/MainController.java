@@ -165,7 +165,7 @@ public class MainController {
                     if (!cartFilled) {
                         openPopup("Error", "Not filled in time");
                         gameOver();
-                        break;
+                        return;
                     }
                 }
             }
@@ -223,7 +223,10 @@ public class MainController {
      */
     private void randomTowerEvent() {
         Random r = new Random();
-        for (Tower tower : inventoryService.getMainTowerSelection()) {
+        Iterator<Tower> towerIterator = inventoryService.getMainTowerSelection().iterator(); // Using an iterator in order to avoid a ConcurrentModificationException
+
+        while (towerIterator.hasNext()) {
+            Tower tower = towerIterator.next();
             int chanceOfTowerStatIncrease = r.nextInt(0, 21); // 1/10 chance per tower for a positive or negative stat change (1/5 as chance to have an event is 2/20 -> 2 events possible)
             if (chanceOfTowerStatIncrease == 0) {
                 int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
@@ -282,7 +285,7 @@ public class MainController {
             int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
             if (chanceOfTowerBreaking == 0) {
                 randomEventList.add("A " + tower.getResourceType() + " tower has broken! It has been removed from your inventory");
-                inventoryService.removeMainTower(tower);
+                towerIterator.remove();
                 // "Breaks" tower by removing from inventory - Might do the "Be placed in a broken state and require a specific item to be repaired to working order" bit later on
             }
 
@@ -292,6 +295,7 @@ public class MainController {
             openPopup(randomEventList);
         }
     }
+
 
     /**
      * Resets the labels for current money, current round and rounds remaining to reflect updated values and also
