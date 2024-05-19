@@ -3,10 +3,15 @@ package seng201.team15.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import seng201.team15.GameManager;
 import seng201.team15.models.Tower;
 import seng201.team15.models.towertypes.*;
 import seng201.team15.services.*;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 import java.util.Collections;
 import java.util.ArrayList;
@@ -212,6 +217,9 @@ public class MenuController {
                 moneyService.setNewBalance(25);
             }
 
+            AudioClip audioClip = new AudioClip(new File("src/main/resources/audio/pickaxe.mp3").toURI().toString());
+            audioClip.play();
+
             gameManager.resetAndLaunchMainScreen();
         } else {
             openErrorDialog();
@@ -232,5 +240,6 @@ public class MenuController {
         dialog.getDialogPane().setContent(dialogContent);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.show();
+        errorsList.clear();
     }
 }
