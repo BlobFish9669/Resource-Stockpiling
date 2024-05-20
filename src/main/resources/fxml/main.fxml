@@ -147,7 +147,7 @@
                   <Font name="Chalkboard" size="15.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop." wrappingWidth="240.0">
+            <Text layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop for towers and upgrades to fill them." wrappingWidth="240.0">
                <font>
                   <Font name="Chalkboard" size="13.0" />
                </font>
