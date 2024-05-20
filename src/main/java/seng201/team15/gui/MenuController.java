@@ -3,15 +3,11 @@ package seng201.team15.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
 import seng201.team15.GameManager;
 import seng201.team15.models.Tower;
+import seng201.team15.models.Upgrade;
 import seng201.team15.models.towertypes.*;
 import seng201.team15.services.*;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
 import java.util.Collections;
 import java.util.ArrayList;
@@ -73,6 +69,7 @@ public class MenuController {
     private ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
     private ArrayList<Tower> selectedTowers = new ArrayList<>();
     private List<String> errorsList = new ArrayList<>();
+
 
 
     /**
@@ -206,22 +203,7 @@ public class MenuController {
             inventoryService.setMainTowerSelection(selectedTowers);
 
             String difficulty = difficultyService.getDifficultySelection();
-
-            if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
-                moneyService.setNewBalance(100);
-            } else if (Objects.equals(difficulty, "Medium")) {
-                moneyService.setNewBalance(75);
-            } else if (Objects.equals(difficulty, "Hard")) {
-                moneyService.setNewBalance(50);
-            } else  {
-                moneyService.setNewBalance(25);
-            }
-
-            //https://freesound.org/people/WolfOWI/sounds/588306/
-            //https://stackoverflow.com/questions/23202272/how-to-play-sounds-with-javafx
-            //https://stackoverflow.com/questions/49535824/java-lag-when-playing-short-audio-clip-frequently
-            AudioClip audioClip = new AudioClip(new File("src/main/resources/audio/pickaxe.mp3").toURI().toString());
-            audioClip.play();
+            setStartingAddons(difficulty);
 
             gameManager.resetAndLaunchMainScreen();
         } else {
@@ -244,5 +226,28 @@ public class MenuController {
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.show();
         errorsList.clear();
+    }
+
+    /**
+     * Based on the difficulty, gives the user a helping hand to give a noticeable assistance for easier difficulties - essentially makes it quite difficult to lose
+     * starting rounds with easy or medium as the user should be able to match all carts
+     * @param difficulty users choice of difficulty
+     */
+    private void setStartingAddons(String difficulty) {
+        if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
+            moneyService.setNewBalance(100);
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Silver", "Resource Type" , "Silver", 0, 1.0));
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
+        } else if (Objects.equals(difficulty, "Medium")) {
+            moneyService.setNewBalance(75);
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Silver", "Resource Type" , "Silver", 0, 1.0));
+        } else if (Objects.equals(difficulty, "Hard")) {
+            moneyService.setNewBalance(50);
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
+        } else  {
+            moneyService.setNewBalance(25);
+        }
     }
 }

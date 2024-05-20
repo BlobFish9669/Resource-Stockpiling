@@ -1,15 +1,18 @@
 package seng201.team15.gui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import seng201.team15.GameManager;
 import seng201.team15.gui.cellfactories.CartCellFactory;
 import seng201.team15.models.Cart;
 import seng201.team15.models.Tower;
 import seng201.team15.services.*;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -131,6 +134,11 @@ public class MainController {
      */
     @FXML
     private void onPlayRoundButtonClicked() {
+        AudioClip audioClip = new AudioClip(new File("src/main/resources/audio/pickaxe.wav").toURI().toString());
+        //https://freesound.org/people/WolfOWI/sounds/588306/
+        //https://stackoverflow.com/questions/23202272/how-to-play-sounds-with-javafx
+        //https://stackoverflow.com/questions/49535824/java-lag-when-playing-short-audio-clip-frequently
+        audioClip.play();
         if (roundDifficultyDropdown.getValue() != null && !Objects.equals(roundDifficultyDropdown.getValue(), "")) {
             currentRoundService.storeCarts(currentRoundService.getPotentialCarts());
             startRound();
