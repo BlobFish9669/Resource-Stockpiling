@@ -183,8 +183,6 @@ public class MenuController {
             difficultyDropdown.setStyle("-fx-border-color: red");
             errors += 1;
 
-
-
         }
         if (tempSelectedTowers.size() != 3) {
             //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");

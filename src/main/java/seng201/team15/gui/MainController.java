@@ -130,7 +130,7 @@ public class MainController {
 
     /**
      * Method called when the play round button is clicked, checks to see if difficulty is selected and starts the round,
-     * otherwise displays error message
+     * otherwise displays error message. Also plays a noise to indicate the button has been clicked
      */
     @FXML
     private void onPlayRoundButtonClicked() {
@@ -150,40 +150,46 @@ public class MainController {
     /**
      * Contains the maths to check if all the carts can be filled in time before they reach the end of the track after
      * checking if there is a corresponding tower for each cart. Calls finishRound() if yes, otherwise displays error message
-     * and ends game.
+     * and ends game. Also checks to see if there are working towers in the users main tower inventory, otherwise displays error
+     * messages accordingly.
      */
     private void startRound() {
-        if (checkResources()) {
-            //Round not failed yet - check distance
-            for (Cart cart: currentRoundService.getCarts()) {
-                if (!Objects.equals(cart.getFilledSize(), cart.getSize())) {
-                    boolean cartFilled = false;
-                    for (Tower tower : inventoryService.getMainTowerSelection()) {
-                        if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
-                            double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
-                            double distanceRemaining = (cart.getSpeed()*((double) 1000/60)) * timeToFill; // Turn to m/min to be able to compare
-                            if (distanceRemaining <= currentRoundService.getDistance()) {
-                                cart.fill((int) (tower.getFillRate() * timeToFill));
-                                cartFilled = true;  // Getting a Caused by: java.util.ConcurrentModificationException error here somewhere?
-                                break;
+        if (checkForTowers().equals("Continue")) {
+            if (checkResources()) {
+                //Round not failed yet - check distance
+                for (Cart cart : currentRoundService.getCarts()) {
+                    if (!Objects.equals(cart.getFilledSize(), cart.getSize())) {
+                        boolean cartFilled = false;
+                        for (Tower tower : inventoryService.getMainTowerSelection()) {
+                            if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
+                                double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
+                                double distanceRemaining = (cart.getSpeed() * ((double) 1000 / 60)) * timeToFill; // Turn to m/min to be able to compare
+                                if (distanceRemaining <= currentRoundService.getDistance()) {
+                                    cart.fill((int) (tower.getFillRate() * timeToFill));
+                                    cartFilled = true;  // Getting a Caused by: java.util.ConcurrentModificationException error here somewhere?
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if (!cartFilled) {
-                        openPopup("Error", "Not filled in time");
-                        gameOver();
-                        return;
+                        if (!cartFilled) {
+                            openPopup("Error", "Not filled in time");
+                            gameOver();
+                            return;
+                        }
                     }
                 }
+                //Round completed
+                finishRound();
+            } else {
+                gameOver();
+                openPopup("Error", "There was one or more carts that did not have a corresponding tower");
             }
-            //Round completed
-            finishRound();
-
+        } else if (checkForTowers().equals("Reserve")) {
+            openPopup("Error", "There are no working towers in your main selection, try moving some from your reserve inventory");
         } else {
             gameOver();
-            openPopup("Error", "There was one or more carts that did not have a corresponding tower");
-
+            openPopup("Error", "There are no working towers in your main selection and no reserve towers to replace them");
         }
     }
 
@@ -202,6 +208,21 @@ public class MainController {
             openPopup("Round Complete", "Congrats, round " + currentRoundService.getCurrentRound() + " was a success!");
             resetAndUpdateLabelsAndStats();
         }
+    }
+
+    /**
+     * Checks in the users inventory to see whether or not there are any working towers in the main selection and if not,
+     * if there are any reserve towers that could be used to replace them
+     * @return A string indicating whether to end the game, notify the user to use their reserves or continue as normal
+     */
+    private String checkForTowers() {
+        if (inventoryService.getMainTowerSelection().isEmpty()) {
+            if (inventoryService.getReserveTowerSelection().isEmpty()) {
+                return "End";
+            }
+            return "Reserve";
+        }
+        return "Continue";
     }
 
     /**
