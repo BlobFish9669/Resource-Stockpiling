@@ -93,10 +93,6 @@ public class MenuController {
      * Sets up all the elements that make up the menu page
      */
     public void initialize() {
-        // Background Image from Adobe Stock Ai thing
-        // https://stock.adobe.com/nz/generate/details?prompt=I+would+like+a+picture+with+the+perspective+of+looking+down+a+mine+where+there+are+gems+in+the+walls+to+each+side+and+lit+up+by+lanterns.+Maybe+have+a+pickaxe+and+a+helmet+with+a+torch+laying+against+the+wall.+Don%27t+include+any+people+and+have+a+minecart+track+going+deeper+in+the+mine.+Do+this+in+a+cartoony+style.+&aspectRatio=widescreen&contentType=none&style=vector_look&seed=71566
-        // Prompt: I would like a picture with the perspective of looking down a mine where there are gems in the walls to each side and lit up by lanterns. Maybe have a pickaxe and a helmet with a torch laying against the wall. Don't include any people and have a minecart track going deeper in the mine. Do this in a cartoony style.
-
         difficultyDropdown.getItems().addAll("Easy", "Medium", "Hard", "Impossible"); //https://www.youtube.com/watch?v=K3CenJ2bMok&ab_channel=thenewboston
 
         roundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {

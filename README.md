@@ -1,7 +1,29 @@
-# SENG201 Template Project Overview
-Welcome to the template project for SENG201 which you will transform into your own.
-This README file includes some useful information to help you get started.
-However, we expect that this README becomes your own
+# Team 15 SENG201 Project
+## Authors
+- Caleb Cooper, Quinn Le Lievre
+
+## Running the jar
+1. After building the application, open a terminal into the folder where the jar is located.
+2. Run `java -jar seng201_team15-1.0-SNAPSHOT.jar` to open the application
+
+## Building the application to a Jar file
+1. Open a terminal into the folder where the repository is saved and run `./gradlew jar` to create a packaged Jar file.
+
+**Note:** *The Jar file will be located at `build/libs/seng201_team15-1.0-SNAPSHOT.jar`*
+
+## Importing the application into IntelliJ
+1. Open intellij and from the landing page, open `Get from VCS`
+2. Ensure `git` is selected for the Version Control. 
+3. Under the blue `Code` dropdown on the GitLab repository, copy the `Clone with HTTPS` address and use that in the `url` textbox on Intellij. 
+4. Select a folder to save it in and then clone the repository.
+
+## Credit
+- Minecart Icon - https://www.freeimages.com/clipart/gold-lorry-5298117
+- Cog Icon - https://creazilla.com/nodes/3151369-cog-clipart
+- Pickaxe Sound Effect - https://freesound.org/people/WolfOWI/sounds/588306/
+- Game Background - Used Adobe Stock AI to generate with prompt: `I would like a picture with the perspective of looking down a mine where there are gems in the walls to each side and lit up by lanterns. Maybe have a pickaxe and a helmet with a torch laying against the wall. Don't include any people and have a minecart track going deeper in the mine. Do this in a cartoony style.`
+
+
 
 ## Notes
 Remember you are required to commit your code to the **main** branch of your repository before the deadline.
@@ -11,8 +33,7 @@ If you are interested you can update this to reflect your team number, however i
 This can be done by renaming any instance of `team0` with `team<x>` (where x is your number).
 IntelliJ can help with this using `ctrl+shift+f` to find all instances of a string, and `ctrl+shift+r` to replace them, though make sure to change the package names as well.
 
-## Authors
-- SENG201 Teaching team
+
 
 ## Prerequisites
 - JDK >= 17 [click here to get the latest stable OpenJDK release (as of writing this README)](https://jdk.java.net/18/)

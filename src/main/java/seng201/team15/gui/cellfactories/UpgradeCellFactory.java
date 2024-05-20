@@ -26,7 +26,6 @@ public class UpgradeCellFactory implements Callback<ListView<Upgrade>, ListCell<
                     setGraphic(null);
                 } else {
                     HBox hBox = new HBox(5);
-                    // https://creazilla.com/nodes/3151369-cog-clipart
                     ImageView imageView = new ImageView("/images/cog.png");
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(50);

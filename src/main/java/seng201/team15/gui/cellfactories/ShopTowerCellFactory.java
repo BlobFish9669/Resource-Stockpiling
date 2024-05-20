@@ -38,7 +38,6 @@ public class ShopTowerCellFactory implements Callback<ListView<Tower>, ListCell<
                             new Label(String.format("Resource Amount: %s",tower.getResourceAmount())),
                             new Label(String.format("Reload Speed: %s", tower.getReloadSpeed())),
                             new Label(String.format("Level: %s", tower.getLevel()))
-                            //new Label(String.format("Cost: $%s", tower.getCost()))
                     );
                     hBox.getChildren().addAll(
                             imageView,

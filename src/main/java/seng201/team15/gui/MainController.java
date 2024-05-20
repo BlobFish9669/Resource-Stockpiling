@@ -136,7 +136,7 @@ public class MainController {
     @FXML
     private void onPlayRoundButtonClicked() {
         // Used stack overflow to find how to do this
-        String audioFilePath = getClass().getResource("/audio/pickaxe.wav").toString(); ////https://freesound.org/people/WolfOWI/sounds/588306/
+        String audioFilePath = getClass().getResource("/audio/pickaxe.wav").toString();
         AudioClip audioClip = new AudioClip(audioFilePath);
 
         audioClip.play();
