@@ -236,14 +236,11 @@ public class MenuController {
             moneyService.setNewBalance(100);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Silver", "Resource Type" , "Silver", 0, 1.0));
-            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
         } else if (Objects.equals(difficulty, "Medium")) {
             moneyService.setNewBalance(75);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
-            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Silver", "Resource Type" , "Silver", 0, 1.0));
         } else if (Objects.equals(difficulty, "Hard")) {
             moneyService.setNewBalance(50);
-            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
         } else  {
             moneyService.setNewBalance(25);
         }
