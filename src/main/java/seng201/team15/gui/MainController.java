@@ -93,19 +93,23 @@ public class MainController {
 
         if (currentRoundService.getDifficulty() != null) { //If difficulty has previously been set
             roundDifficultyDropdown.setValue(currentRoundService.getDifficulty());
-            distance.setText(currentRoundService.getDistance() + " Metres");
-            numberCarts.setText(currentRoundService.getNumCarts().toString());
-            cartList.setCellFactory(new CartCellFactory());
-            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getPotentialCarts()));
+            updateRoundDetails();
         }
 
         roundDifficultyDropdown.setOnAction(event -> {
             currentRoundService.setDifficulty(roundDifficultyDropdown.getValue());
-            distance.setText(currentRoundService.getDistance() + " Metres");
-            numberCarts.setText(currentRoundService.getNumCarts().toString());
-            cartList.setCellFactory(new CartCellFactory());
-            cartList.setItems(FXCollections.observableArrayList(currentRoundService.getPotentialCarts()));
+            updateRoundDetails();
         });
+    }
+
+    /**
+     * Method to update round details based on the selected difficulty
+     */
+    private void updateRoundDetails() {
+        distance.setText(currentRoundService.getDistance() + " Metres");
+        numberCarts.setText(currentRoundService.getNumCarts().toString());
+        cartList.setCellFactory(new CartCellFactory());
+        cartList.setItems(FXCollections.observableArrayList(currentRoundService.getPotentialCarts()));
     }
 
     /**
