@@ -9,10 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerScoreTest {
     private PlayerScore testPlayerScore;
 
+    /**
+     * Initialise a PlayerScore object before each test.
+     */
     @BeforeEach
     void setupTest() {
         testPlayerScore = new PlayerScore();
     }
+
+    /**
+     * Test that ensures adding score updates the player score correctly.
+     */
     @Test
     void testAddScore() {
         testPlayerScore.setScore(3);

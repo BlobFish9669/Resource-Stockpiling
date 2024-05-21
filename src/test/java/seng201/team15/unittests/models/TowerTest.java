@@ -11,10 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TowerTest {
     private Tower testTower;
     private Upgrade testUpgrade;
+
+    /**
+     * Initialise a new Tower object before each test.
+     */
     @BeforeEach
     void setupTest() {
         testTower = new Tower("Stone", 1, 1, 1, 30);
     }
+
+    /**
+     * Test for updating tower points. Tests ensure that when tower points are gained, the level is updated correctly,
+     * along with the stats of the tower. The different blocks of code indicate different instances of updating tower points,
+     * with increments that cause zero, one, or more than one level increase at a time. The test also ensures that attributes of the tower,
+     * such as the reload speed, do not fall below their specified threshold.
+     */
     @Test
     void testTowerPoints() {
         assertEquals(0, testTower.getTowerPoints());
@@ -47,6 +58,10 @@ public class TowerTest {
         assertEquals(0.1, testTower.getReloadSpeed());
         assertEquals(210, testTower.getFillRate());
     }
+
+    /**
+     * Test to ensure that when a tower is used, the rounds used property is increased to indicate that the tower was used in that round.
+     */
     @Test
     void testRoundsUsed() {
         assertEquals(0, testTower.getRoundsUsed());
@@ -54,6 +69,11 @@ public class TowerTest {
         testTower.addRoundUsed();
         assertEquals(2, testTower.getRoundsUsed());
     }
+
+    /**
+     * Test for applying a change resource type upgrade to a tower. The test ensures that the resource type is changed according to the resource type
+     * specified by the upgrade that is applied.
+     */
     @Test
     void testUpgradeChangeResource() {
         testUpgrade = new Upgrade("TestUpgrade", "Resource Type", "Gold", 20, 1.0);
@@ -61,6 +81,11 @@ public class TowerTest {
         testTower.applyUpgrade(testUpgrade);
         assertEquals("Gold", testTower.getResourceType());
     }
+
+    /**
+     * Test for applying an upgrade that adds points to the tower. The test ensures that points are added correctly, and the tower
+     * level is updated accordingly.
+     */
     @Test
     void testUpgradeAddPoints() {
         testUpgrade = new Upgrade("TestUpgrade", "Tower Points", 20, 150.0);
@@ -69,6 +94,10 @@ public class TowerTest {
         assertEquals(50, testTower.getTowerPoints());
         assertEquals(2, testTower.getLevel());
     }
+
+    /**
+     * Test for applying an upgrade that increases the resource amount of a tower.
+     */
     @Test
     void testUpgradeResourceAmount() {
         testUpgrade = new Upgrade("TestUpgrade", "Resource Amount", 20, 2.0);
@@ -78,6 +107,11 @@ public class TowerTest {
         testTower.applyUpgrade(testUpgrade);
         assertEquals(4, testTower.getResourceAmount());
     }
+
+    /**
+     * Test for upgrade that reduces the reload speed of the tower. The reload speed modifier is applied multiplicatively, and
+     * the test ensures that the reload speed does not fall below the specified threshold.
+     */
     @Test
     void testUpgradeReloadSpeed() {
         testUpgrade = new Upgrade("TestUpgrade", "Reload Speed", 20, 0.5);
@@ -90,6 +124,10 @@ public class TowerTest {
         testTower.applyUpgrade(testUpgrade);
         assertEquals(0.1, testTower.getReloadSpeed());
     }
+
+    /**
+     * Test for appling a price reduction upgrade. Also checks that the sell price is updated appropriately when the cost price is changed.
+     */
     @Test
     void testUpgradePrice() {
         testUpgrade = new Upgrade("TestUpgrade", "Price", 20, 0.5);

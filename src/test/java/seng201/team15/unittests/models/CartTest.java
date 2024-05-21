@@ -10,6 +10,10 @@ class CartTest {
 
     private Cart testCart;
 
+    /**
+     * Test to fill the cart with resources. Checks that filling the cart updates the filled size correctly,
+     * and checks that the cart is not overfilled when the filled size reaches the size of the cart.
+     */
     @Test
     void fill() {
         testCart = new Cart(5, "Stone", 0);
@@ -22,6 +26,10 @@ class CartTest {
         testCart.fill(6);
         assertEquals(5, testCart.getFilledSize());
     }
+
+    /**
+     * Test to check the overflow handling of the cart, to ensure it is only filled to its max size even if more resources are added.
+     */
     @Test
     void fill_overflow() {
         testCart = new Cart(3, null, 0);
