@@ -18,8 +18,9 @@
 4. Select a folder to save it in and then clone the repository.
 
 ## Credit
-- Minecart Icon - https://www.freeimages.com/clipart/gold-lorry-5298117
+- Minecart Icons - https://www.freeimages.com/clipart/gold-lorry-5298117
 - Cog Icon - https://creazilla.com/nodes/3151369-cog-clipart
+- Tower Icons - https://clipart-library.com/clipart/free-cliparts-ore_15.htm
 - Pickaxe Sound Effect - https://freesound.org/people/WolfOWI/sounds/588306/
 - Game Background - Used Adobe Stock AI to generate with prompt: `I would like a picture with the perspective of looking down a mine where there are gems in the walls to each side and lit up by lanterns. Maybe have a pickaxe and a helmet with a torch laying against the wall. Don't include any people and have a minecart track going deeper in the mine. Do this in a cartoony style.`
 
