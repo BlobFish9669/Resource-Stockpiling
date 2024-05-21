@@ -28,8 +28,8 @@ public class ShopUpgradeCellFactory implements Callback<ListView<Upgrade>, ListC
                     HBox hBox = new HBox(5);
                     ImageView imageView = new ImageView("/images/cog.png");
                     imageView.setPreserveRatio(true);
-                    imageView.setFitWidth(50);
-                    imageView.setFitHeight(50);
+                    imageView.setFitWidth(75);
+                    imageView.setFitHeight(75);
                     VBox vBox = new VBox(10);
                     Label nameLabel = new Label(upgrade.getUpgradeTitle());
                     nameLabel.setFont(new Font(15));

@@ -27,8 +27,8 @@ public class CartCellFactory implements Callback<ListView<Cart>, ListCell<Cart>>
                     HBox hBox = new HBox(5);
                     ImageView imageView = new ImageView("/images/minecart-" + cart.getResourceType().toLowerCase() + ".png");
                     imageView.setPreserveRatio(true);
-                    imageView.setFitWidth(50);
-                    imageView.setFitHeight(50);
+                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(100);
                     VBox vBox = new VBox(5);
                     Label nameLabel = new Label(cart.getResourceType());
                     nameLabel.setFont(new Font(20));
