@@ -122,7 +122,7 @@
             </Button>
             <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#onInventoryButtonClicked" text="Inventory" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <font>
-                  <Font name="Comic Sans MS" size="20.0" />
+                  <Font name="Cabin-Regular" size="20.0" />
                </font>
             </Button>
             <Button fx:id="playRound" mnemonicParsing="false" onAction="#onPlayRoundButtonClicked" style="-fx-background-color: #d4af37;" text="Play Round" GridPane.columnIndex="1" GridPane.halignment="CENTER">
@@ -137,22 +137,22 @@
       </GridPane>
       <Pane layoutX="475.0" layoutY="203.0" opacity="0.9" prefHeight="290.0" prefWidth="250.0" style="-fx-background-color: #1a4480;">
          <children>
-            <Text layoutX="5.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill up the displayed carts before they reach the end of the track. Main towers will fill carts of the same resource type. Buy and sell towers and upgrades from the shop to complete the round." wrappingWidth="240.0">
+            <Text fill="WHITE" layoutX="5.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill up the displayed carts before they reach the end of the track. Main towers will fill carts of the same resource type. Buy and sell towers and upgrades from the shop to complete the round." wrappingWidth="240.0">
                <font>
                   <Font name="Chalkboard" size="13.0" />
                </font>
             </Text>
-            <Text layoutX="82.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to play:">
+            <Text fill="WHITE" layoutX="82.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to play:">
                <font>
                   <Font name="Chalkboard" size="15.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop for towers and upgrades to be able to fill them." wrappingWidth="240.0">
+            <Text fill="WHITE" layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop for towers and upgrades to be able to fill them." wrappingWidth="240.0">
                <font>
                   <Font name="Chalkboard" size="13.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A tower can fill up multiple carts at once." wrappingWidth="240.0">
+            <Text fill="WHITE" layoutX="5.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A tower can fill up multiple carts at once." wrappingWidth="240.0">
                <font>
                   <Font name="Chalkboard" size="13.0" />
                </font>
