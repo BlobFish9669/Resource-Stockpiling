@@ -22,7 +22,7 @@
       <Pane opacity="0.9" prefHeight="105.0" prefWidth="1200.0" style="-fx-background-color: #1a4480;" />
       <Pane layoutX="150.0" layoutY="148.0" prefHeight="354.0" prefWidth="914.0" style="-fx-background-color: #3d251e;">
          <children>
-            <ListView fx:id="towersListView" layoutX="52.0" layoutY="236.0" prefHeight="115.0" prefWidth="300.0" />
+            <ListView fx:id="towersListView" layoutX="25.0" layoutY="225.0" prefHeight="115.0" prefWidth="355.0" />
             <GridPane layoutX="52.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,7 +70,7 @@
                   <Button fx:id="upgradeButton6" disable="true" mnemonicParsing="false" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <ListView fx:id="upgradesListView" layoutX="558.0" layoutY="236.0" prefHeight="115.0" prefWidth="300.0" />
+            <ListView fx:id="upgradesListView" layoutX="531.0" layoutY="225.0" prefHeight="115.0" prefWidth="355.0" />
          </children></Pane>
       <GridPane prefHeight="100.0" prefWidth="1200.0">
          <columnConstraints>
