@@ -125,7 +125,7 @@ public class InventoryController {
         if (towerSelected != null) {
             if (towerSelected.equals("Main")) {
                 if (inventoryService.getMainTowerSelection().size() == 1) {
-                    openErrorDialog("There must always be at least one main tower");
+                    openErrorDialog("There must always be at least one main deposit");
                 } else if(inventoryService.getReserveTowerSelection().size() < 5) {
                     inventoryService.addToReserveTowerSelection(selectedMainTower);
                     reserveTowerList.getItems().add(selectedMainTower);
@@ -133,7 +133,7 @@ public class InventoryController {
                     inventoryService.removeMainTower(selectedMainTower);
                     mainTowerList.getItems().remove(selectedMainTower);
                 } else {
-                    openErrorDialog("Too many towers in reserve towers");
+                    openErrorDialog("Too many deposits in reserve deposits");
                 }
                     clearSelections();
             } else {
@@ -144,12 +144,12 @@ public class InventoryController {
                     inventoryService.removeReserveTower(selectedReserveTower);
                     reserveTowerList.getItems().remove(selectedReserveTower);
                 } else {
-                    openErrorDialog("Too many towers in main towers");
+                    openErrorDialog("Too many deposits in main deposits");
                 }
                 clearSelections();
             }
         } else {
-            openErrorDialog("Please select a tower");
+            openErrorDialog("Please select a deposit");
         }
     }
 
@@ -183,7 +183,7 @@ public class InventoryController {
             upgradeList.getItems().remove(selectedUpgrade);
             clearSelections();
         } else {
-            openErrorDialog("Please select both a tower AND an upgrade");
+            openErrorDialog("Please select both a deposit AND an upgrade");
         }
     }
 

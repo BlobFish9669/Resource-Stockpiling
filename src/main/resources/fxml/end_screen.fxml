@@ -41,8 +41,8 @@
                   </Label>
                   <GridPane GridPane.rowIndex="1">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.94427490234375" minWidth="10.0" percentWidth="30.0" prefWidth="117.94427490234375" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.58203125" minWidth="10.0" percentWidth="15.0" prefWidth="82.05572509765625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.94427490234375" minWidth="10.0" percentWidth="34.0" prefWidth="117.94427490234375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.58203125" minWidth="10.0" percentWidth="11.0" prefWidth="82.05572509765625" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />

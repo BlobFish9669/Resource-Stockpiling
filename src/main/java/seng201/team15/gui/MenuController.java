@@ -2,6 +2,8 @@ package seng201.team15.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import seng201.team15.GameManager;
 import seng201.team15.models.Tower;
@@ -9,6 +11,7 @@ import seng201.team15.models.Upgrade;
 import seng201.team15.models.towertypes.*;
 import seng201.team15.services.*;
 
+import javax.swing.*;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +48,6 @@ public class MenuController {
     private Button towerButton3;
     @FXML
     private Button towerButton4;
-    @FXML
-    private Button towerButton5;
-    @FXML
-    private Button towerButton6;
     @FXML
     private Label selectedTowerResourcesLabel;
     @FXML
@@ -102,12 +101,25 @@ public class MenuController {
         submitButton.setOnMouseEntered(event -> submitButton.setStyle("-fx-background-color: #A08B27"));
         submitButton.setOnMouseExited(event -> submitButton.setStyle("-fx-background-color: #D4AF37"));
 
-        Collections.addAll(towerTypes, new TowerOne(), new TowerTwo(), new TowerThree(), new TowerFour(), new TowerFive(), new TowerSix());
+        Collections.addAll(towerTypes, new StartingTowerOne(), new StartingTowerTwo(), new StartingTowerThree(), new StartingTowerFour());
 
         //Tutorial 2
-        List<Button> towerButtons = List.of(towerButton1, towerButton2, towerButton3, towerButton4, towerButton5, towerButton6);
+        List<Button> towerButtons = List.of(towerButton1, towerButton2, towerButton3, towerButton4);
 
-        for (int i = 0; i < 6; i++) {
+        //https://www.tutorialspoint.com/how-to-add-an-image-to-a-button-action-in-javafx
+
+        int tempIndex = 0;
+        for(Tower tower: towerTypes) {
+            ImageView imageView = new ImageView("/images/deposit-" + tower.getResourceType().toLowerCase() + ".png");
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(80);
+            imageView.setFitHeight(80);
+            towerButtons.get(tempIndex).setGraphic(imageView);
+            tempIndex++;
+        }
+
+
+        for (int i = 0; i < 4; i++) {
             final int finalI = i;
             towerButtons.get(i).setOnAction(event -> {
                 if (tempSelectedTowers.contains(finalI)) {
@@ -174,15 +186,13 @@ public class MenuController {
 
         }
         if (difficultyDropdown.getValue() == null) {
-            //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select a difficulty\n");
             errorsList.add("Please select a difficulty");
             difficultyDropdown.setStyle("-fx-border-color: red");
             errors += 1;
 
         }
         if (tempSelectedTowers.size() != 3) {
-            //errorsLabelResult.setText(errorsLabelResult.getText() + "Error - Please select at least 3 Towers");
-            errorsList.add("Please select at least 3 Towers");
+            errorsList.add("Please select at least 3 starting deposits");
             towerGrid.setStyle("-fx-border-color: red");
             errors += 1;
 
@@ -230,8 +240,9 @@ public class MenuController {
     private void setStartingAddons(String difficulty) {
         if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
             moneyService.setNewBalance(100);
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Diamond", "Resource Type" , "Diamond", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
-            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Silver", "Resource Type" , "Silver", 0, 1.0));
+            inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
         } else if (Objects.equals(difficulty, "Medium")) {
             moneyService.setNewBalance(75);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));

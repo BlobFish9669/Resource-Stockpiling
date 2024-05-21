@@ -103,12 +103,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label style="-fx-background-color: #1a4480;" text="Main Towers" textFill="WHITE">
+            <Label style="-fx-background-color: #1a4480;" text="Main Deposits::" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font></Label>
             <ListView fx:id="mainTowerList" minHeight="50.0" GridPane.rowIndex="1" />
-            <Label style="-fx-background-color: #1a4480;" text="Reserve Towers:" textFill="WHITE" GridPane.columnIndex="1">
+            <Label style="-fx-background-color: #1a4480;" text="Reserve Deposits:" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -141,7 +141,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="sellTower" mnemonicParsing="false" onAction="#onSellTowerButtonClicked" text="Sell Tower" GridPane.halignment="CENTER">
+            <Button fx:id="sellTower" mnemonicParsing="false" onAction="#onSellTowerButtonClicked" text="Sell Deposit" GridPane.halignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="20.0" />
                </font>

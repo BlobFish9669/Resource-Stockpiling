@@ -171,7 +171,7 @@ public class MainController {
                                 double distanceRemaining = (cart.getSpeed() * ((double) 1000 / 60)) * timeToFill; // Turn to m/min to be able to compare
                                 if (distanceRemaining <= currentRoundService.getDistance()) {
                                     cart.fill((int) (tower.getFillRate() * timeToFill));
-                                    cartFilled = true;  // Getting a Caused by: java.util.ConcurrentModificationException error here somewhere?
+                                    cartFilled = true;
                                     break;
                                 }
                             }
@@ -188,13 +188,13 @@ public class MainController {
                 finishRound();
             } else {
                 gameOver();
-                openPopup("Error", "There was one or more carts that did not have a corresponding tower");
+                openPopup("Error", "There was one or more carts that did not have a corresponding deposit");
             }
         } else if (checkForTowers().equals("Reserve")) {
-            openPopup("Error", "There are no working towers in your main selection, try moving some from your reserve inventory");
+            openPopup("Error", "There are no working deposits in your main selection, try moving some from your reserve inventory");
         } else {
             gameOver();
-            openPopup("Error", "There are no working towers in your main selection and no reserve towers to replace them");
+            openPopup("Error", "There are no working deposits in your main selection and no reserve deposits to replace them");
         }
     }
 
@@ -284,9 +284,9 @@ public class MainController {
                         break;
                 }
                 if (stat.equals("Reload Speed")) {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased! :)");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has decreased! :)");
                 } else {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased! :)");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has increased! :)");
                 }
             } else if (chanceOfTowerStatIncrease == 1) {
                 int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
@@ -310,15 +310,15 @@ public class MainController {
                         break;
                 }
                 if (stat.equals("Reload Speed")) {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has increased! :(");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has increased! :(");
                 } else {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " tower has decreased! :(");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has decreased! :(");
                 }
             }
 
             int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
             if (chanceOfTowerBreaking == 0) {
-                randomEventList.add("A " + tower.getResourceType() + " tower has broken! It has been removed from your inventory");
+                randomEventList.add("A " + tower.getResourceType() + " deposit has broken! It has been removed from your inventory");
                 towerIterator.remove();
                 // "Breaks" tower by removing from inventory - Might do the "Be placed in a broken state and require a specific item to be repaired to working order" bit later on
             }

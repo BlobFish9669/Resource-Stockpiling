@@ -131,7 +131,7 @@ public class SellScreenController {
                     mainTowerList.getItems().remove(selectedMainTower);
                     clearSelections();
                 } else {
-                    openErrorDialog("There must always be at least one main tower");
+                    openErrorDialog("There must always be at least one main deposit");
                 }
             } else {
                 inventoryService.removeReserveTower(selectedReserveTower);
@@ -142,7 +142,7 @@ public class SellScreenController {
                 clearSelections();
             }
         } else {
-            openErrorDialog("Please select a tower to sell");
+            openErrorDialog("Please select a deposit to sell");
         }
     }
 

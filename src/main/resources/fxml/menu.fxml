@@ -60,10 +60,10 @@
                <children>
                   <Label prefHeight="46.0" prefWidth="230.0" text="Enter a name between 3-15 characters:" textFill="WHITE" wrapText="true" />
                   <Label text="How many rounds (5-15):" textFill="WHITE" GridPane.rowIndex="1" />
-                  <Label text="Difficulty:" textFill="WHITE" GridPane.rowIndex="2" />
+                  <Label text="Select a Difficulty:" textFill="WHITE" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="difficultyDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Slider fx:id="roundsSlider" blockIncrement="1.0" majorTickUnit="1.0" max="15.0" min="5.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-text-fill: black;" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Select 3:" textFill="WHITE" GridPane.rowIndex="3" />
+                  <Label text="Select 3 starting deposits:" textFill="WHITE" GridPane.rowIndex="3" />
                   <GridPane GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="182.0" />
@@ -90,19 +90,27 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="towerButton1" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="1" GridPane.halignment="CENTER" />
-                        <Button fx:id="towerButton2" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                        <Button fx:id="towerButton3" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <Button fx:id="towerButton4" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="4" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-                        <Button fx:id="towerButton5" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="5" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                        <Button fx:id="towerButton6" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" text="6" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+                        <Button fx:id="towerButton1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin></Button>
+                        <Button fx:id="towerButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin></Button>
+                        <Button fx:id="towerButton3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin></Button>
+                        <Button fx:id="towerButton4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="40.0" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin></Button>
                      </children>
                   </GridPane>
                </children>
@@ -124,14 +132,14 @@
                   <RowConstraints maxHeight="161.0" minHeight="10.0" percentHeight="30.0" prefHeight="57.444854736328125" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Selected Tower Info" textFill="WHITE">
+                  <Label text="Selected Deposit Info" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="selectedTowerResourcesLabel" text="Resources:" textFill="WHITE" GridPane.rowIndex="1" />
-                  <Label fx:id="selectedTowerReloadSpeedLabel" text="Reload Speed:" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Label fx:id="selectedTowerResourceTypeLabel" text="Resource Type:" textFill="WHITE" GridPane.rowIndex="3" />
+                  <Label fx:id="selectedTowerResourcesLabel" text="Resources:" textFill="WHITE" GridPane.rowIndex="2" />
+                  <Label fx:id="selectedTowerReloadSpeedLabel" text="Reload Speed:" textFill="WHITE" GridPane.rowIndex="3" />
+                  <Label fx:id="selectedTowerResourceTypeLabel" text="Resource Type:" textFill="WHITE" GridPane.rowIndex="1" />
                   <Label fx:id="selectedTowerLevelLabel" text="Level:" textFill="WHITE" GridPane.rowIndex="4" />
                   <Label fx:id="selectedTowerCostLabel" text="Cost:" textFill="WHITE" GridPane.rowIndex="5" />
                   <Button fx:id="submitButton" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#onSubmitButtonClicked" style="-fx-background-color: #D4AF37;" text="Play" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
