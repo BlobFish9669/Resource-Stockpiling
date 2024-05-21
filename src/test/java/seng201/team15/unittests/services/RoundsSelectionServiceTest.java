@@ -9,11 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoundsSelectionServiceTest {
     private RoundsSelectionService roundsSelectionServiceTest;
 
+    /**
+     * Initialise a new RoundsSelectionService object before each test.
+     */
     @BeforeEach
     void setUp() {
         roundsSelectionServiceTest = new RoundsSelectionService();
     }
 
+    /**
+     * The test asserts that the number of rounds selected is initially set to 5, and that the number of rounds selected
+     * is updated correctly when it is changed.
+     */
     @Test
     void testRoundsSelection() {
         assertNotEquals(0, roundsSelectionServiceTest.getRoundsSelection());

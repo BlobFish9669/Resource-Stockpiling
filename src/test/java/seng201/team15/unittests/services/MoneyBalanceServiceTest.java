@@ -10,11 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoneyBalanceServiceTest {
     MoneyBalanceService moneyBalanceServiceTest;
 
+    /**
+     * Initialise a new MoneyBalanceService object before each test.
+     */
     @BeforeEach
     void setUp() {
         moneyBalanceServiceTest = new MoneyBalanceService();
     }
 
+    /**
+     * Test for setting a new balance for the user, and adding money to the balance through the getters and setters.
+     */
     @Test
     void testBalance() {
         assertEquals(0, moneyBalanceServiceTest.getCurrentBalance());
