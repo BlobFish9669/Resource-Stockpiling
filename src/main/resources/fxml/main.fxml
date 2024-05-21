@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team15.gui.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team15.gui.MainController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -135,7 +135,7 @@
             <Insets top="5.0" />
          </padding>
       </GridPane>
-      <Pane layoutX="475.0" layoutY="203.0" opacity="0.9" prefHeight="275.0" prefWidth="250.0" style="-fx-background-color: #1a4480;">
+      <Pane layoutX="475.0" layoutY="203.0" opacity="0.9" prefHeight="290.0" prefWidth="250.0" style="-fx-background-color: #1a4480;">
          <children>
             <Text layoutX="5.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill up the displayed carts before they reach the end of the track. Main towers will fill carts of the same resource type. Buy and sell towers and upgrades from the shop to complete the round." wrappingWidth="240.0">
                <font>
@@ -147,7 +147,7 @@
                   <Font name="Chalkboard" size="15.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop for towers and upgrades to fill them." wrappingWidth="240.0">
+            <Text layoutX="5.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint: Rarer carts will become available in the pool of possible carts later on in the game, so keep an eye out in the shop for towers and upgrades to be able to fill them." wrappingWidth="240.0">
                <font>
                   <Font name="Chalkboard" size="13.0" />
                </font>
