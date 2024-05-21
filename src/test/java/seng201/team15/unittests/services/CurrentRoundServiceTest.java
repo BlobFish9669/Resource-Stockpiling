@@ -9,11 +9,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class CurrentRoundServiceTest {
     private CurrentRoundService currentRoundServiceTest;
 
+    /**
+     * Initialise a CurrentRoundService object before each test.
+     */
     @BeforeEach
     void setupRound() {
         currentRoundServiceTest = new CurrentRoundService();
     }
 
+    /**
+     * Test to simulate the initialisation of a round.
+     * The test goes through each possible difficulty and ensures that the following attributes are assigned
+     * appropriate values: number of carts, size of potential carts list, and track distance.
+     * The test also checks that when the game is won, or reset, tha this is reflected appropriately in the current round service.
+     * When the game is reset, the number of carts should also be reset.
+     */
     @Test
     void simulateRound() {
         assertEquals(1, currentRoundServiceTest.getCurrentRound());

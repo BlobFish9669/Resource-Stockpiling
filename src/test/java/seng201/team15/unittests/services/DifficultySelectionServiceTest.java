@@ -9,11 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DifficultySelectionServiceTest {
     private DifficultySelectionService difficultySelectionServiceTest;
 
+    /**
+     * Initialise a DifficultlySelectionService object before each test.
+     */
     @BeforeEach
     void setupTest() {
         difficultySelectionServiceTest = new DifficultySelectionService();
     }
 
+    /**
+     * Test for obtaining the difficultly selected. The test checks that the difficulty is initialised to Easy, and that
+     * when the difficultly is updated, this is reflected in the difficulty selection attribute.
+     */
     @Test
     void testDifficultySelection() {
         assertEquals("Easy", difficultySelectionServiceTest.getDifficultySelection());
