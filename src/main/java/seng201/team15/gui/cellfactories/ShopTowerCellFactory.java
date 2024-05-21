@@ -27,7 +27,7 @@ public class ShopTowerCellFactory implements Callback<ListView<Tower>, ListCell<
                 } else {
                     HBox hBox = new HBox(5);
                     // made the tower png
-                    ImageView imageView = new ImageView("/images/tower.png");
+                    ImageView imageView = new ImageView("/images/deposit-" + tower.getResourceType().toLowerCase() + ".png");
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);

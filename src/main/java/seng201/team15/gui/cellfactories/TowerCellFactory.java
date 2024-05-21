@@ -10,6 +10,8 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import seng201.team15.models.Tower;
 
+import java.util.Locale;
+
 /**
  * Custom cell factory for Towers to use in ListView
  * @author seng201 teaching team, Caleb Cooper
@@ -26,7 +28,7 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                 } else {
                     HBox hBox = new HBox(5);
                     //made the tower png
-                    ImageView imageView = new ImageView("/images/tower.png");
+                    ImageView imageView = new ImageView("/images/deposit-" + tower.getResourceType().toLowerCase() + ".png");
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);

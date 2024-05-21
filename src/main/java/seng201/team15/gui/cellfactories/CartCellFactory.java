@@ -25,7 +25,7 @@ public class CartCellFactory implements Callback<ListView<Cart>, ListCell<Cart>>
                     setGraphic(null);
                 } else {
                     HBox hBox = new HBox(5);
-                    ImageView imageView = new ImageView("/images/minecart.png");
+                    ImageView imageView = new ImageView("/images/minecart-" + cart.getResourceType().toLowerCase() + ".png");
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);
