@@ -284,9 +284,9 @@ public class MainController {
                         break;
                 }
                 if (stat.equals("Reload Speed")) {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has decreased! :)");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " Deposit has decreased! :)");
                 } else {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has increased! :)");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " Deposit has increased! :)");
                 }
             } else if (chanceOfTowerStatIncrease == 1) {
                 int whichStatIncrease = r.nextInt(1, 5); // 4 stats to choose from
@@ -310,9 +310,9 @@ public class MainController {
                         break;
                 }
                 if (stat.equals("Reload Speed")) {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has increased! :(");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " Deposit has increased! :(");
                 } else {
-                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " deposit has decreased! :(");
+                    randomEventList.add("The " + stat + " of a " + tower.getResourceType() + " Deposit has decreased! :(");
                 }
             }
 

@@ -88,24 +88,30 @@ public class Tower {
 
     public void gainTowerPoints(int points) {
         this.towerPoints += points;
-        checkIfTowerLevelUp();
+        checkIfTowerLevelChange();
     }
 
-    private void checkIfTowerLevelUp() {
-        if (towerPoints >= 100 * level) { // Good to go for a level up
-            int temp = towerPoints;
-            int i = 0;
-            while (temp >= 100*level) { //Can do multiple level ups at once now
-                temp -= 100*level;
-                level += 1;
-                i++;
-            }
-            towerPoints = temp;
-
+    private void checkIfTowerLevelChange() {
+        while (towerPoints >= 100 * level) { // Good to go for a level up, can do multiple level ups
+            towerPoints -= 100 * level;
+            level++;
             // Increase stats
-            resourceAmount += 5*i;
-            reduceReloadSpeed((double) i/4);
-            addCost(10*i);
+            resourceAmount += 5;
+            reduceReloadSpeed(0.25);
+            addCost(10);
+        }
+        while (towerPoints < 0) {
+            level--;
+            if (level < 1) { // Make sure that 1 is always the lowest level a tower can go
+                level = 1;
+                towerPoints = 0;
+                break;
+            }
+            // Reverse the stats increase
+            towerPoints += 100 * level;
+            resourceAmount -= 5;
+            reduceReloadSpeed(-0.25);
+            addCost(-10);
         }
     }
 
