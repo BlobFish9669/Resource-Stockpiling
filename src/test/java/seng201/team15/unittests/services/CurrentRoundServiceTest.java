@@ -26,6 +26,7 @@ class CurrentRoundServiceTest {
      */
     @Test
     void simulateRound() {
+        currentRoundServiceTest.setCarts();
         assertEquals(1, currentRoundServiceTest.getCurrentRound());
         assertNull(currentRoundServiceTest.getCarts());
         currentRoundServiceTest.setTotalRounds(5);

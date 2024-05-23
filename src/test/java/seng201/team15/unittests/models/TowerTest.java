@@ -126,7 +126,7 @@ public class TowerTest {
     }
 
     /**
-     * Test for appling a price reduction upgrade. Also checks that the sell price is updated appropriately when the cost price is changed.
+     * Test for applying a price reduction upgrade. Also checks that the sell price is updated appropriately when the cost price is changed.
      */
     @Test
     void testUpgradePrice() {
@@ -137,5 +137,57 @@ public class TowerTest {
         testTower.applyUpgrade(testUpgrade);
         assertEquals(20, testTower.getCost());
         assertEquals(15, testTower.getSellPrice());
+    }
+
+    /**
+     * Test to see if the tower can be both broken and be repaired
+     */
+    @Test
+    void testFixTower() {
+        testUpgrade = new Upgrade("TestUpgrade", "Broken Tower", 20, 1.0);
+        testTower.breakTower();
+        assertTrue(testTower.getBrokenStatus());
+        testTower.applyUpgrade(testUpgrade);
+        assertFalse(testTower.getBrokenStatus());
+    }
+
+    /**
+     * Test to see if a tower levels down correctly and doesn't go below level 1
+     */
+    @Test
+    void testTowerDecreaseLevel() {
+        assertEquals(0, testTower.getTowerPoints());
+        testTower.gainTowerPoints(50);
+        assertEquals(50, testTower.getTowerPoints());
+        testTower.gainTowerPoints(80);
+        assertEquals(2, testTower.getLevel());
+        assertEquals(30, testTower.getTowerPoints());
+        assertEquals(40, testTower.getCost());
+        assertEquals(30, testTower.getSellPrice());
+        assertEquals(6, testTower.getResourceAmount());
+        assertEquals(0.75, testTower.getReloadSpeed());
+        assertEquals(8, testTower.getFillRate());
+
+        testTower.gainTowerPoints(170);
+        assertEquals(3, testTower.getLevel());
+        assertEquals(0, testTower.getTowerPoints());
+        assertEquals(50, testTower.getCost());
+        assertEquals(37, testTower.getSellPrice());
+        assertEquals(11, testTower.getResourceAmount());
+        assertEquals(0.5, testTower.getReloadSpeed());
+        assertEquals(22, testTower.getFillRate());
+
+        testTower.gainTowerPoints(-1);
+        assertEquals(2, testTower.getLevel());
+        assertEquals(199, testTower.getTowerPoints());
+        assertEquals(40, testTower.getCost());
+        assertEquals(30, testTower.getSellPrice());
+        assertEquals(6, testTower.getResourceAmount());
+        assertEquals(0.75, testTower.getReloadSpeed());
+        assertEquals(8, testTower.getFillRate());
+
+        testTower.gainTowerPoints(-1000);
+        assertEquals(1, testTower.getLevel());
+
     }
 }

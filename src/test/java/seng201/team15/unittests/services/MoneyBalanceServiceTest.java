@@ -24,8 +24,12 @@ class MoneyBalanceServiceTest {
     @Test
     void testBalance() {
         assertEquals(0, moneyBalanceServiceTest.getCurrentBalance());
-        moneyBalanceServiceTest.setNewBalance(100);
-        moneyBalanceServiceTest.setNewBalance(moneyBalanceServiceTest.getCurrentBalance() + 50);
+        moneyBalanceServiceTest.addBalance(100);
+        moneyBalanceServiceTest.addBalance(50);
         assertEquals(150, moneyBalanceServiceTest.getCurrentBalance());
+        moneyBalanceServiceTest.subtractBalance(50);
+        assertEquals(100, moneyBalanceServiceTest.getCurrentBalance());
+        assertNotEquals(100, moneyBalanceServiceTest.getTotalEarnings());
+        assertEquals(150, moneyBalanceServiceTest.getTotalEarnings());
     }
 }

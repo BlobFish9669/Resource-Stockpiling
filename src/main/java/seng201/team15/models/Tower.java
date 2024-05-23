@@ -234,7 +234,7 @@ public class Tower {
     public void breakTower() { this.isBroken = true; }
 
     /**
-     * "Fixes" tje tower by setting isBroken to false
+     * "Fixes" the tower by setting isBroken to false
      */
     public void fixTower() { this.isBroken = false; }
 
