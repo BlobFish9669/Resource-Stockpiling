@@ -175,25 +175,25 @@ public class InventoryController {
     private void onUseUpgradeButtonClicked() {
         if (upgradeSelected && towerSelected != null) {
             if (towerSelected.equals("Main")) {
-                if (selectedUpgrade.getResourceType().equals(selectedMainTower.getResourceType())) {
-                    openErrorDialog("Deposit already has resource type " + selectedMainTower.getResourceType());
-                } else {
-                    selectedMainTower.applyUpgrade(selectedUpgrade);
-                    inventoryService.removeUserUpgrade(selectedUpgrade);
-                    upgradeList.getItems().remove(selectedUpgrade);
-                }
+                applyUpgrade(selectedMainTower);
             } else {
-                if (selectedUpgrade.getResourceType().equals(selectedReserveTower.getResourceType())) {
-                    openErrorDialog("Deposit already has resource type " + selectedReserveTower.getResourceType());
-                } else {
-                    selectedReserveTower.applyUpgrade(selectedUpgrade);
-                    inventoryService.removeUserUpgrade(selectedUpgrade);
-                    upgradeList.getItems().remove(selectedUpgrade);
-                }
+                applyUpgrade(selectedReserveTower);
             }
             clearSelections();
         } else {
             openErrorDialog("Please select both a deposit AND an upgrade");
+        }
+    }
+
+    private void applyUpgrade(Tower selectedTower) {
+        if (selectedUpgrade.getUpgradeType().equals("Resource Type") && selectedUpgrade.getResourceType().equals(selectedTower.getResourceType())) {
+            openErrorDialog("Deposit already has resource type " + selectedTower.getResourceType());
+        } else if (selectedUpgrade.getUpgradeType().equals("Broken Tower") && !selectedTower.getBrokenStatus()) {
+            openErrorDialog("Deposit is not broken and does not require repair");
+        } else {
+            selectedTower.applyUpgrade(selectedUpgrade);
+            inventoryService.removeUserUpgrade(selectedUpgrade);
+            upgradeList.getItems().remove(selectedUpgrade);
         }
     }
 

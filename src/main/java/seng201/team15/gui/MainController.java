@@ -327,8 +327,7 @@ public class MainController {
                 }
             }
 
-            //int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
-            int chanceOfTowerBreaking = r.nextInt(0, 1);
+            int chanceOfTowerBreaking = r.nextInt(0, 16-tower.getRoundsUsed()); // 1/15 chance for tower to break, chance increases the more the tower is used
             if (chanceOfTowerBreaking == 0) {
                 int removeOrBreak = r.nextInt(0,2); // 0 for remove, 1 for break
                 if (removeOrBreak == 0) {
