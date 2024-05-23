@@ -5,14 +5,18 @@ package seng201.team15.models;
  */
 public class MoneyBalance {
     private Integer money;
+    private Integer totalMoneyGained;
 
     /**
      * Constructor
      */
-    public MoneyBalance() { money = 0; }
+    public MoneyBalance() {
+        money = 0;
+        totalMoneyGained = 0;
+    }
 
     /**
-     * Get current money
+     * Get users current money
      * @return Current money balance
      */
     public Integer getMoney() {
@@ -20,10 +24,26 @@ public class MoneyBalance {
     }
 
     /**
-     * Set money equal to the value of the users input
-     * @param input Value of the users input of money
+     * Adds an inputted amount of money to the users current money balance and adds the same amount to the users
+     * total money gained to track how much the user gains throughout the game
+     * @param input value of the input of money to add
      */
-    public void setMoney(Integer input) {
-        money = input;
+    public void addMoney(Integer input) {
+        money += input;
+        totalMoneyGained += input;
     }
+
+    /**
+     * Subtracts an inputted amount of money to the users current money balance
+     * @param input value of the input of money to subtract
+     */
+    public void minusBalance(Integer input) {
+        money -= input;
+    }
+
+    /**
+     * Returns how much money the user has earned throughout playing the game
+     * @return the value of the users total earnings
+     */
+    public Integer getTotalMoneyGained() { return totalMoneyGained; }
 }

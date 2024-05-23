@@ -15,16 +15,28 @@ public class MoneyBalanceService {
     public MoneyBalanceService() { moneyBalance = new MoneyBalance(); }
 
     /**
-     * Set stored balance to be the value of the users input
-     * @param input value of the users input
-     */
-    public void setNewBalance (Integer input) { moneyBalance.setMoney(input); }
-
-    /**
      * Retrieve the current stored balance
      * @return current balance
      */
     public Integer getCurrentBalance() {
         return moneyBalance.getMoney();
     }
+
+    /**
+     * Adds an inputted amount of money to the users current money balance
+     * @param input value of the input of money to add
+     */
+    public void addBalance(Integer input) { moneyBalance.addMoney(input); }
+
+    /**
+     * Subtracts an inputted amount of money to the users current money balance
+     * @param input value of the input of money to subtract
+     */
+    public void subtractBalance(Integer input) { moneyBalance.minusBalance(input); }
+
+    /**
+     * Returns how much money the user has earned throughout the game
+     * @return the users total earnings
+     */
+    public Integer getTotalEarnings() { return moneyBalance.getTotalMoneyGained(); }
 }

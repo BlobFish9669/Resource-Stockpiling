@@ -331,7 +331,7 @@ public class ShopController {
                     towerButton5.setStyle("");
                     break;
             }
-            moneyService.setNewBalance(moneyService.getCurrentBalance() - towerToPurchase.getCost());
+            moneyService.subtractBalance(towerToPurchase.getCost());
             if (inventoryService.getMainTowerSelection().size() == 5) {
                 inventoryService.addToReserveTowerSelection(towerToPurchase);
             } else {
@@ -381,7 +381,7 @@ public class ShopController {
                     upgradeButton6.setStyle("");
                     break;
             }
-            moneyService.setNewBalance(moneyService.getCurrentBalance() - upgradeToPurchase.getCost());
+            moneyService.subtractBalance(upgradeToPurchase.getCost());
             inventoryService.addUserUpgrade(upgradeToPurchase);
             shopAvailabilityService.setUpgradePurchased(upgradeButton-1);
             upgradeToPurchase = null;

@@ -237,17 +237,17 @@ public class MenuController {
      */
     private void setStartingAddons(String difficulty) {
         if (Objects.equals(difficulty, "Easy")) { //Used Object.equals instead of == just in case of null value
-            moneyService.setNewBalance(100);
+            moneyService.addBalance(100);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Diamond", "Resource Type" , "Diamond", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
         } else if (Objects.equals(difficulty, "Medium")) {
-            moneyService.setNewBalance(75);
+            moneyService.addBalance(75);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
         } else if (Objects.equals(difficulty, "Hard")) {
-            moneyService.setNewBalance(50);
+            moneyService.addBalance(50);
         } else  {
-            moneyService.setNewBalance(25);
+            moneyService.addBalance(25);
         }
     }
 }

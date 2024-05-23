@@ -91,11 +91,11 @@ public class EndScreenController {
 
         Integer roundsChosen = roundsService.getRoundsSelection();
         Integer remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
-        Integer currentBalance = moneyService.getCurrentBalance();
+        Integer totalEarnings = moneyService.getTotalEarnings();
 
         roundsChosenLabel.setText(roundsService.getRoundsSelection().toString());
         roundsCompletedLabel.setText(String.valueOf(roundsChosen - remainingRounds));
-        moneyGainedLabel.setText("$" + (currentBalance - startBalance));
+        moneyGainedLabel.setText("$" + totalEarnings);
         scoreLabel.setText(String.valueOf(playerScoreService.getPlayerScore()));
 
     }

@@ -125,7 +125,7 @@ public class SellScreenController {
             if (isTowerSelectedMain) {
                 if (inventoryService.getMainTowerSelection().size() != 1) {
                     inventoryService.removeMainTower(selectedMainTower);
-                    moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedMainTower.getSellPrice());
+                    moneyService.addBalance(selectedMainTower.getSellPrice());
                     currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
                     mainTowerList.getItems().remove(selectedMainTower);
@@ -135,7 +135,7 @@ public class SellScreenController {
                 }
             } else {
                 inventoryService.removeReserveTower(selectedReserveTower);
-                moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedReserveTower.getSellPrice());
+                moneyService.addBalance(selectedReserveTower.getSellPrice());
                 currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
                 reserveTowerList.getItems().remove(selectedReserveTower);
@@ -154,7 +154,7 @@ public class SellScreenController {
     private void onSellUpgradeButtonClicked() {
         if (selectedUpgrade != null) {
             inventoryService.removeUserUpgrade(selectedUpgrade);
-            moneyService.setNewBalance(moneyService.getCurrentBalance() + selectedUpgrade.getSellPrice());
+            moneyService.addBalance(selectedUpgrade.getSellPrice());
             currentMoneyLabel.setText("$" + moneyService.getCurrentBalance().toString());
 
             upgradeList.getItems().remove(selectedUpgrade);

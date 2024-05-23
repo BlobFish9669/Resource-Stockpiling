@@ -353,18 +353,17 @@ public class MainController {
      * the labels associated with carts. Calls services to reset the available carts and reset shop
      */
     private void resetAndUpdateLabelsAndStats() {
-        Integer currentMoney = moneyService.getCurrentBalance();
         String currentDifficulty = currentRoundService.getDifficulty();
         Integer currentRound = currentRoundService.getCurrentRound();
 
         if (Objects.equals(currentDifficulty, "Easy")) {
-            moneyService.setNewBalance(currentMoney + 100);
+            moneyService.addBalance(100);
             playerScoreService.addPlayerScore(50);
         } else if (Objects.equals(currentDifficulty, "Medium")) {
-            moneyService.setNewBalance(currentMoney + 250);
+            moneyService.addBalance(250);
             playerScoreService.addPlayerScore(100);
         } else if (Objects.equals(currentDifficulty, "Hard")) {
-            moneyService.setNewBalance(currentMoney + 500);
+            moneyService.addBalance(500);
             playerScoreService.addPlayerScore(150);
         }
 
