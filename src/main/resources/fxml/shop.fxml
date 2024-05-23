@@ -41,7 +41,7 @@
                   <Button fx:id="towerButton4" disable="true" mnemonicParsing="false" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane layoutX="558.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0">
+            <GridPane layoutX="554.0" layoutY="14.0" prefHeight="200.0" prefWidth="309.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -58,7 +58,7 @@
                   <Button fx:id="upgradeButton3" mnemonicParsing="false" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <Button fx:id="upgradeButton4" disable="true" mnemonicParsing="false" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                   <Button fx:id="upgradeButton5" disable="true" mnemonicParsing="false" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Label text="Upgrades" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Label prefHeight="25.0" prefWidth="112.0" text="Upgrades:" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
@@ -66,7 +66,7 @@
                </children>
             </GridPane>
             <ListView fx:id="upgradesListView" layoutX="531.0" layoutY="225.0" prefHeight="115.0" prefWidth="355.0" />
-            <Label layoutX="176.0" layoutY="45.0" text="Deposits:" textFill="WHITE">
+            <Label layoutX="156.0" layoutY="40.0" text="Deposits:" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

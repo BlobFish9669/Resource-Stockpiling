@@ -103,7 +103,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label style="-fx-background-color: #1a4480;" text="Main Deposits::" textFill="WHITE">
+            <Label style="-fx-background-color: #1a4480;" text="Main Deposits:" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font></Label>

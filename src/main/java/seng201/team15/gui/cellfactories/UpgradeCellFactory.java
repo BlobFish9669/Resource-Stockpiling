@@ -30,9 +30,9 @@ public class UpgradeCellFactory implements Callback<ListView<Upgrade>, ListCell<
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(75);
                     imageView.setFitHeight(75);
-                    VBox vBox = new VBox(5);
+                    VBox vBox = new VBox(10);
                     Label nameLabel = new Label(upgrade.getUpgradeTitle());
-                    nameLabel.setFont(new Font(20));
+                    nameLabel.setFont(new Font(15));
                     vBox.getChildren().addAll(
                             nameLabel,
                             new Label(String.format("Sell-Back Price: %s",upgrade.getSellPrice()))

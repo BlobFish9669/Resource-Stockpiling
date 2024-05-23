@@ -115,7 +115,7 @@
                </font>
             </Label>
             <ListView fx:id="reserveTowerList" minHeight="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label style="-fx-background-color: #1a4480;" text="Upgrades" textFill="WHITE" GridPane.columnIndex="2">
+            <Label style="-fx-background-color: #1a4480;" text="Upgrades:" textFill="WHITE" GridPane.columnIndex="2">
                <font>
                   <Font size="20.0" />
                </font>

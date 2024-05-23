@@ -62,7 +62,7 @@
                   <Label text="How many rounds (5-15):" textFill="WHITE" GridPane.rowIndex="1" />
                   <Label text="Select a Difficulty:" textFill="WHITE" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="difficultyDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Slider fx:id="roundsSlider" blockIncrement="1.0" majorTickUnit="1.0" max="15.0" min="5.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-text-fill: black;" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="roundsSlider" blockIncrement="1.0" majorTickUnit="1.0" max="15.0" min="5.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-background-color: white;" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Select 3 starting deposits:" textFill="WHITE" GridPane.rowIndex="3" />
                   <GridPane GridPane.columnIndex="1">
                      <columnConstraints>
