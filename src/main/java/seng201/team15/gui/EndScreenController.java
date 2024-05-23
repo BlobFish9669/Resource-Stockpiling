@@ -75,20 +75,6 @@ public class EndScreenController {
             gameMessage.setText(nameService.getCurrentName() + ", you Lost!");
         }
 
-        String difficulty = difficultyService.getDifficultySelection();
-        Integer startBalance;
-
-        if (Objects.equals(difficulty, "Easy")) {
-            startBalance = 100;
-        } else if (Objects.equals(difficulty, "Medium")) {
-            startBalance = 75;
-        } else if (Objects.equals(difficulty, "Hard")) {
-            startBalance = 50;
-        } else {
-            startBalance = 25;
-        }
-
-
         Integer roundsChosen = roundsService.getRoundsSelection();
         Integer remainingRounds = roundsService.getRoundsSelection() - currentRoundService.getCurrentRound();
         Integer totalEarnings = moneyService.getTotalEarnings();
