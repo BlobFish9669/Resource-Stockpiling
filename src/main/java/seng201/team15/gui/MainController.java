@@ -1,7 +1,5 @@
 package seng201.team15.gui;
 
-import javafx.application.HostServices;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,7 +11,6 @@ import seng201.team15.models.Cart;
 import seng201.team15.models.Tower;
 import seng201.team15.services.*;
 
-import java.io.File;
 import java.util.*;
 
 /**
