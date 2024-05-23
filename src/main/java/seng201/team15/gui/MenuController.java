@@ -9,6 +9,7 @@ import seng201.team15.GameManager;
 import seng201.team15.models.Tower;
 import seng201.team15.models.Upgrade;
 import seng201.team15.models.towertypes.*;
+import seng201.team15.models.upgradetypes.Upgrade12;
 import seng201.team15.services.*;
 
 import javax.swing.*;
@@ -243,6 +244,8 @@ public class MenuController {
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Diamond", "Resource Type" , "Diamond", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
+            inventoryService.addUserUpgrade(new Upgrade12());
+
         } else if (Objects.equals(difficulty, "Medium")) {
             moneyService.setNewBalance(75);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));

@@ -27,21 +27,39 @@ public class TowerCellFactory implements Callback<ListView<Tower>, ListCell<Towe
                     setGraphic(null);
                 } else {
                     HBox hBox = new HBox(5);
-                    //made the tower png
-                    ImageView imageView = new ImageView("/images/deposit-" + tower.getResourceType().toLowerCase() + ".png");
+                    VBox vBox = new VBox(5);
+
+                    Label nameLabel = new Label(tower.getResourceType());
+                    nameLabel.setFont(new Font(20));
+                    ImageView imageView;
+
+                    if (tower.getBrokenStatus()) { // Tower is broken!
+                        imageView = new ImageView("/images/broken-deposit-" + tower.getResourceType().toLowerCase() + ".png");
+                        Label statusLabel = new Label("BROKEN!");
+
+                        statusLabel.setFont(new Font(20));
+                        vBox.getChildren().addAll(
+                                nameLabel,
+                                statusLabel
+                        );
+                    } else { // Not Broken
+                        imageView = new ImageView("/images/deposit-" + tower.getResourceType().toLowerCase() + ".png");
+                        vBox.getChildren().add(
+                                nameLabel
+                        );
+                    }
+
                     imageView.setPreserveRatio(true);
                     imageView.setFitWidth(100);
                     imageView.setFitHeight(100);
-                    VBox vBox = new VBox(5);
-                    Label nameLabel = new Label(tower.getResourceType());
-                    nameLabel.setFont(new Font(20));
+
                     vBox.getChildren().addAll(
-                            nameLabel,
                             new Label(String.format("Resource Amount: %s",tower.getResourceAmount())),
                             new Label(String.format("Reload Speed: %s", tower.getReloadSpeed())),
                             new Label(String.format("Level: %s", tower.getLevel())),
                             new Label(String.format("Sell-Back Price: $%s", tower.getSellPrice()))
                     );
+
                     hBox.getChildren().addAll(
                             imageView,
                             vBox

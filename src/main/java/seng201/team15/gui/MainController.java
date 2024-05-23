@@ -160,12 +160,13 @@ public class MainController {
      */
     private void startRound() {
         if (checkForTowers().equals("Continue")) {
-            if (checkResources()) {
+            ArrayList<Tower> towersWithoutBroken = checkForBrokenTowers(inventoryService.getMainTowerSelection());
+            if (checkResources(towersWithoutBroken)) {
                 //Round not failed yet - check distance
                 for (Cart cart : currentRoundService.getCarts()) {
                     if (!Objects.equals(cart.getFilledSize(), cart.getSize())) {
                         boolean cartFilled = false;
-                        for (Tower tower : inventoryService.getMainTowerSelection()) {
+                        for (Tower tower : towersWithoutBroken) {
                             if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
                                 double timeToFill = (double) (cart.getSize() - cart.getFilledSize()) / tower.getFillRate(); // = time in mins
                                 double distanceRemaining = (cart.getSpeed() * ((double) 1000 / 60)) * timeToFill; // Turn to m/min to be able to compare
@@ -235,12 +236,12 @@ public class MainController {
      * selection with a matching resource type which will allow it to be filled
      * @return returns true if all carts have a corresponding tower, otherwise returns false
      */
-    private Boolean checkResources() {
+    private Boolean checkResources(ArrayList<Tower> towers) {
         ArrayList<Boolean> cartResourceTypeSupported = new ArrayList<>(Arrays.asList(new Boolean[currentRoundService.getCarts().size()]));
         Collections.fill(cartResourceTypeSupported, false); //https://stackoverflow.com/questions/20615448/set-all-values-of-arraylistboolean-to-false-on-instantiation
         int i = 0;
         for (Cart cart: currentRoundService.getCarts()) {
-            for (Tower tower: inventoryService.getMainTowerSelection()) {
+            for (Tower tower: towers) {
                 if (Objects.equals(tower.getResourceType(), cart.getResourceType())) {
                     cartResourceTypeSupported.set(i, true);
                 }
@@ -248,6 +249,16 @@ public class MainController {
             i++;
         }
         return !cartResourceTypeSupported.contains(false); //Round failed
+    }
+
+    private ArrayList<Tower> checkForBrokenTowers(ArrayList<Tower> towersToCheck) {
+        ArrayList<Tower> towerListWithoutBroken = new ArrayList<>();
+        for (Tower tower: towersToCheck) {
+            if (!tower.getBrokenStatus()) {
+                towerListWithoutBroken.add(tower);
+            }
+        }
+        return towerListWithoutBroken;
     }
 
     /**
@@ -316,13 +327,18 @@ public class MainController {
                 }
             }
 
-            int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
+            //int chanceOfTowerBreaking = r.nextInt(0, 21-tower.getRoundsUsed()); // 1/20 chance for tower to break, chance increases the more the tower is used
+            int chanceOfTowerBreaking = r.nextInt(0, 1);
             if (chanceOfTowerBreaking == 0) {
-                randomEventList.add("A " + tower.getResourceType() + " deposit has broken! It has been removed from your inventory");
-                towerIterator.remove();
-                // "Breaks" tower by removing from inventory - Might do the "Be placed in a broken state and require a specific item to be repaired to working order" bit later on
+                int removeOrBreak = r.nextInt(0,2); // 0 for remove, 1 for break
+                if (removeOrBreak == 0) {
+                    randomEventList.add("A " + tower.getResourceType() + " deposit has broken! There is no chance of repair so it has been removed from your inventory!");
+                    towerIterator.remove(); // "Breaks" tower by removing from inventory
+                } else if (removeOrBreak == 1) {
+                    randomEventList.add("A " + tower.getResourceType() + " deposit has broken! Use a 'Fix Deposit' upgrade on it to get it working again");
+                    tower.breakTower(); // The tower is placed in a broken state and requires a specific item to be used in order to continue using it
+                }
             }
-
             tower.addRoundUsed(); // Tracks how many times a tower has been used
         }
         if (!randomEventList.isEmpty()) {

@@ -15,6 +15,7 @@ public class Tower {
     private int sellPrice;
     private int towerPoints;
     private int roundsUsed;
+    private boolean isBroken;
 
     /**
      * Constructor
@@ -33,6 +34,7 @@ public class Tower {
         this.sellPrice = (int) (cost * 0.75); // Get 75% of cost back if sold
         this.towerPoints = 0;
         this.roundsUsed = 0;
+        this.isBroken = false;
     }
 
     /**
@@ -214,6 +216,8 @@ public class Tower {
             setReloadSpeed(getReloadSpeed() * upgrade.getUpgradeModifierAmount());
         } else if (Objects.equals(upgrade.getUpgradeType(), "Price")) {
             setCost((int) (getCost() * upgrade.getUpgradeModifierAmount()));
+        } else if (Objects.equals(upgrade.getUpgradeType(), "Broken Tower")) {
+            fixTower();
         }
     }
 
@@ -224,4 +228,9 @@ public class Tower {
      */
     public int getFillRate() { return (int) (this.resourceAmount/this.reloadSpeed); }
 
+    public void breakTower() { this.isBroken = true; }
+
+    public void fixTower() { this.isBroken = false; }
+
+    public boolean getBrokenStatus() { return isBroken; }
 }

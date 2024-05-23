@@ -107,7 +107,7 @@ public class ShopAvailability {
         }
 
         // Change upgrade availability based on round the user is currently on, better upgrades later on
-        Collections.addAll(potentialShopUpgrades, new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10()); // worse upgrades to start with - also cheaper
+        Collections.addAll(potentialShopUpgrades, new Upgrade6(), new Upgrade7(), new Upgrade8(), new Upgrade9(), new Upgrade10(), new Upgrade12()); // worse upgrades to start with - also cheaper
         if (round > totalRounds/2) {
             Collections.addAll(potentialShopUpgrades, new Upgrade1(), new Upgrade2(), new Upgrade3(), new Upgrade4(), new Upgrade5(), new Upgrade11());
         }
