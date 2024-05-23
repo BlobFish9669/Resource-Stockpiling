@@ -175,12 +175,22 @@ public class InventoryController {
     private void onUseUpgradeButtonClicked() {
         if (upgradeSelected && towerSelected != null) {
             if (towerSelected.equals("Main")) {
-                selectedMainTower.applyUpgrade(selectedUpgrade);
+                if (selectedUpgrade.getResourceType().equals(selectedMainTower.getResourceType())) {
+                    openErrorDialog("Deposit already has resource type " + selectedMainTower.getResourceType());
+                } else {
+                    selectedMainTower.applyUpgrade(selectedUpgrade);
+                    inventoryService.removeUserUpgrade(selectedUpgrade);
+                    upgradeList.getItems().remove(selectedUpgrade);
+                }
             } else {
-                selectedReserveTower.applyUpgrade(selectedUpgrade);
+                if (selectedUpgrade.getResourceType().equals(selectedReserveTower.getResourceType())) {
+                    openErrorDialog("Deposit already has resource type " + selectedReserveTower.getResourceType());
+                } else {
+                    selectedReserveTower.applyUpgrade(selectedUpgrade);
+                    inventoryService.removeUserUpgrade(selectedUpgrade);
+                    upgradeList.getItems().remove(selectedUpgrade);
+                }
             }
-            inventoryService.removeUserUpgrade(selectedUpgrade);
-            upgradeList.getItems().remove(selectedUpgrade);
             clearSelections();
         } else {
             openErrorDialog("Please select both a deposit AND an upgrade");
