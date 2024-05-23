@@ -1,6 +1,6 @@
 # Team 15 SENG201 Project
 ## Authors
-- Caleb Cooper, Quinn Le Lievre
+- SENG201 Teaching Team, Caleb Cooper, Quinn Le Lievre
 
 ## Running the jar
 1. After building the application, open a terminal into the folder where the jar is located.
