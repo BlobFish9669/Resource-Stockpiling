@@ -32,7 +32,7 @@ public class MoneyBalanceService {
      * Subtracts an inputted amount of money to the users current money balance
      * @param input value of the input of money to subtract
      */
-    public void subtractBalance(Integer input) { moneyBalance.minusBalance(input); }
+    public void subtractBalance(Integer input) { moneyBalance.minusMoney(input); }
 
     /**
      * Returns how much money the user has earned throughout the game

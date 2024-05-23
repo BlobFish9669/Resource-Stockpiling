@@ -21,7 +21,6 @@ public class EndScreenController {
     private final MoneyBalanceService moneyService;
     private final CurrentRoundService currentRoundService;
     private final InventoryService inventoryService;
-    private final DifficultySelectionService difficultyService;
     private final ShopAvailabilityService shopAvailabilityService;
     private final PlayerScoreService playerScoreService;
 
@@ -53,7 +52,6 @@ public class EndScreenController {
         this.currentRoundService = gameManager.getCurrentRoundService();
         this.inventoryService = gameManager.getInventoryService();
         this.nameService = gameManager.getNameService();
-        this.difficultyService = gameManager.getDifficultyService();
         this.shopAvailabilityService = gameManager.getShopAvailabilityService();
         this.playerScoreService = gameManager.getPlayerScoreService();
     }

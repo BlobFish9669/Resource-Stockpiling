@@ -37,7 +37,7 @@ public class MoneyBalance {
      * Subtracts an inputted amount of money to the users current money balance
      * @param input value of the input of money to subtract
      */
-    public void minusBalance(Integer input) {
+    public void minusMoney(Integer input) {
         money -= input;
     }
 
