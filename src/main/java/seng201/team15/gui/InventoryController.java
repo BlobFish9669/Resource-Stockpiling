@@ -185,6 +185,11 @@ public class InventoryController {
         }
     }
 
+    /**
+     * Method that applies a selected upgrade to the selected tower, checking that if it is modifying the resource type,
+     * the tower is not already that type, and if is repairing the tower, checks to see if it is broken or not.
+     * @param selectedTower tower that the upgrade is intended to be applied to
+     */
     private void applyUpgrade(Tower selectedTower) {
         if (selectedUpgrade.getUpgradeType().equals("Resource Type") && selectedUpgrade.getResourceType().equals(selectedTower.getResourceType())) {
             openErrorDialog("Deposit already has resource type " + selectedTower.getResourceType());

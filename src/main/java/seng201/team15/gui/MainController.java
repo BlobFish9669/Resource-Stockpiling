@@ -251,6 +251,11 @@ public class MainController {
         return !cartResourceTypeSupported.contains(false); //Round failed
     }
 
+    /**
+     * Method that filters the original tower list provided from the main tower selection, removing towers that are currently broken
+     * @param towersToCheck the original list of towers that may contain broken towers
+     * @return a new array list of Tower type that only contains working towers
+     */
     private ArrayList<Tower> checkForBrokenTowers(ArrayList<Tower> towersToCheck) {
         ArrayList<Tower> towerListWithoutBroken = new ArrayList<>();
         for (Tower tower: towersToCheck) {

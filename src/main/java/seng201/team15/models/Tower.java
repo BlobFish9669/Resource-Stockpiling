@@ -228,9 +228,19 @@ public class Tower {
      */
     public int getFillRate() { return (int) (this.resourceAmount/this.reloadSpeed); }
 
+    /**
+     * "Breaks" the tower by setting isBroken to true
+     */
     public void breakTower() { this.isBroken = true; }
 
+    /**
+     * "Fixes" tje tower by setting isBroken to false
+     */
     public void fixTower() { this.isBroken = false; }
 
+    /**
+     * Retrieves the current status of whether or not the tower is broken
+     * @return the isBroken status of the tower
+     */
     public boolean getBrokenStatus() { return isBroken; }
 }

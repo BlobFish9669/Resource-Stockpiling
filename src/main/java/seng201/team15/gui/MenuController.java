@@ -244,8 +244,6 @@ public class MenuController {
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Diamond", "Resource Type" , "Diamond", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Copper", "Resource Type" , "Copper", 0, 1.0));
-            inventoryService.addUserUpgrade(new Upgrade12());
-
         } else if (Objects.equals(difficulty, "Medium")) {
             moneyService.setNewBalance(75);
             inventoryService.addUserUpgrade(new Upgrade("Change Resource Type to Gold", "Resource Type" , "Gold", 0, 1.0));
