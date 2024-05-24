@@ -5,11 +5,11 @@ package seng201.team15.models;
  * @author Caleb Cooper
  */
 public class Upgrade {
-    private String upgradeTitle;
-    private String upgradeModifying;
-    private Integer cost;
-    private Integer sellPrice;
-    private Double upgradeModifierAmount;
+    private final String upgradeTitle;
+    private final String upgradeModifying;
+    private final Integer cost;
+    private final Integer sellPrice;
+    private final Double upgradeModifierAmount;
     private String resourceType;
 
     /**

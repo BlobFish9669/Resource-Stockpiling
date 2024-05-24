@@ -5,9 +5,9 @@ package seng201.team15.models;
  * @author Caleb Cooper
  */
 public class Cart {
-    private Integer size;
-    private String resourceType;
-    private Integer speed;
+    private final Integer size;
+    private final String resourceType;
+    private final Integer speed;
     private Integer filledSize;
 
     /**

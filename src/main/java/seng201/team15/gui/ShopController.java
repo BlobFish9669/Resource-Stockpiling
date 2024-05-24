@@ -69,8 +69,6 @@ public class ShopController {
 
     private List<Tower> shopTowers;
     private List<Upgrade> shopUpgrades;
-    private List<Boolean> purchasedTowers;
-    private List<Boolean> purchasedUpgrades;
 
     private Tower towerToPurchase;
     private Integer towerButton;
@@ -131,8 +129,8 @@ public class ShopController {
             upgradeButton6.setDisable(false);
         }
 
-        purchasedTowers = shopAvailabilityService.getPurchasedTowers();
-        purchasedUpgrades = shopAvailabilityService.getPurchasedUpgrades();
+        List<Boolean> purchasedTowers = shopAvailabilityService.getPurchasedTowers();
+        List<Boolean> purchasedUpgrades = shopAvailabilityService.getPurchasedUpgrades();
 
         for (int i = 0; i < purchasedTowers.size(); i++) {
             if (purchasedTowers.get(i)) {

@@ -48,7 +48,7 @@ public class MainController {
     @FXML
     private Button inventoryButton;
 
-    private List<String> randomEventList = new ArrayList<>();
+    private final List<String> randomEventList = new ArrayList<>();
     private int remainingRounds;
 
     /**

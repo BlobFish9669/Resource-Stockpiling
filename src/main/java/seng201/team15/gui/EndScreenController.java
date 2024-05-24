@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import seng201.team15.GameManager;
 import seng201.team15.services.*;
 
-import java.util.Objects;
-
 /**
  * Controller for the end_screen.fxml window
  * @author Caleb Cooper

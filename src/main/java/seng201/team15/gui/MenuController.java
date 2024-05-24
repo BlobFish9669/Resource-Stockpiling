@@ -62,10 +62,10 @@ public class MenuController {
     private GridPane towerGrid;
 
     private int selectedRounds = 5;
-    private ArrayList<Tower> towerTypes = new ArrayList<>();
-    private ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
-    private ArrayList<Tower> selectedTowers = new ArrayList<>();
-    private List<String> errorsList = new ArrayList<>();
+    private final ArrayList<Tower> towerTypes = new ArrayList<>();
+    private final ArrayList<Integer> tempSelectedTowers = new ArrayList<>();
+    private final ArrayList<Tower> selectedTowers = new ArrayList<>();
+    private final List<String> errorsList = new ArrayList<>();
 
 
 

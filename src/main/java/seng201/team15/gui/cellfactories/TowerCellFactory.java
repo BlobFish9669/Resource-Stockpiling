@@ -10,8 +10,6 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import seng201.team15.models.Tower;
 
-import java.util.Locale;
-
 /**
  * Custom cell factory for Towers to use in ListView
  * @author seng201 teaching team, Caleb Cooper
