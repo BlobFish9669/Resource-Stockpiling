@@ -2,6 +2,10 @@
 ## Authors
 - SENG201 Teaching Team, Caleb Cooper, Quinn Le Lievre
 
+## Prerequisites
+- JDK >= 17 [click here to get the latest stable OpenJDK release (as of writing this README)](https://jdk.java.net/18/)
+- *(optional)* Gradle [Download](https://gradle.org/releases/) and [Install](https://gradle.org/install/)
+
 ## Importing the Application Into IntelliJ
 1. Open intellij and from the landing page, open `Get from VCS`
 2. Ensure `git` is selected for the Version Control.
