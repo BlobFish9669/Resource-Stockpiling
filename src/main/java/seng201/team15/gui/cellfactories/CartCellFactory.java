@@ -11,8 +11,8 @@ import javafx.util.Callback;
 import seng201.team15.models.Cart;
 
 /**
- * Custom cell factory for Rockets to use in ListView
- * @author seng201 teaching team
+ * Custom cell factory for Carts to use in ListView
+ * @author seng201 teaching team, Caleb Cooper
  */
 public class CartCellFactory implements Callback<ListView<Cart>, ListCell<Cart>> {
     @Override

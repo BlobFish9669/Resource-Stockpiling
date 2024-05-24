@@ -96,10 +96,13 @@ public class CurrentRound {
         round = input;
     }
 
+    /**
+     * Based on the users decided difficulty, which is passed through as a String input, changes how far the carts will travel and how many carts
+     * there will be for that difficulty
+     * @param input the difficulty the user decides on
+     */
     public void setDifficulty(String input) {
-        Random r = new Random();
         difficulty = input;
-        hardCartsNum = r.nextInt(7, 11);
         if (difficulty.equals("Easy")) {
             distance = 5000;
             cartsNum = 3;
@@ -119,6 +122,7 @@ public class CurrentRound {
      * When called, generates a number of carts which increase with difficulty as the user completes more rounds, and with i - the higher the value of i, the tougher the cart
      * is. The carts are retrieved based on difficulty, harder difficulty will retrieve carts from the lists at higher indexes, leading to tougher carts. Rarer resource types
      * are available further throughout the game proportionate to the total number of rounds the user chooses.
+     * Also sets the number of hard carts, so it doesn't change every time the difficulty is changed from the dropdown on the main page
      */
     public void setCarts() {
         carts = new ArrayList<>();
@@ -138,6 +142,9 @@ public class CurrentRound {
             int randomSpeed = r.nextInt(1, 5 + (i/4)); // Harder for harder difficulty
             carts.add(new Cart(randomSize, availableResourceTypes.get(randomResource), randomSpeed));
         }
+
+        Random r = new Random();
+        hardCartsNum = r.nextInt(7, 11);
     }
 
     /**

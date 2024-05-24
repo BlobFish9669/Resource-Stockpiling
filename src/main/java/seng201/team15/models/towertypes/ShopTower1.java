@@ -3,7 +3,6 @@ import seng201.team15.models.Tower;
 
 /**
  * Class containing information for a tower that could be available in the shop
- * @author Caleb Cooper
  */
 public class ShopTower1 extends Tower {
     /**

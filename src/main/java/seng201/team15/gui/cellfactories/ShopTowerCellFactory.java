@@ -12,8 +12,8 @@ import javafx.util.Callback;
 import seng201.team15.models.Tower;
 
 /**
- * Custom cell factory for Rockets to use in ListView
- * @author seng201 teaching team
+ * Custom cell factory for Towers available in the shop to use in ListView
+ * @author seng201 teaching team, Caleb Cooper
  */
 public class ShopTowerCellFactory implements Callback<ListView<Tower>, ListCell<Tower>> {
     @Override
