@@ -20,7 +20,7 @@
 
 ## Running the Jar
 1. After building the application, open a new terminal into the folder where the jar is saved to.
-2. Run the command `java -jar seng201_team15-1.0-SNAPSHOT.jar` to open the application.
+2. Run the command `java -jar <filename>` to open the application, where `<filename>` is the name of the saved Jar.
 
 
 ## Credit
