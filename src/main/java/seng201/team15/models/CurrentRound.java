@@ -125,18 +125,17 @@ public class CurrentRound {
      * Also sets the number of hard carts, so it doesn't change every time the difficulty is changed from the dropdown on the main page
      */
     public void setCarts() {
+        Random r = new Random();
+        hardCartsNum = r.nextInt(7, 11);
+
         carts = new ArrayList<>();
-        for (int i = 0; i < (3+5+hardCartsNum)-1; i++) { // Generate 19 possible carts as there are 3 easy, 5 medium and up to hardCartsNum (7-10) hard carts
-            Random r = new Random();
+        for (int i = 0; i < (3+5+hardCartsNum); i++) { // Generate 19 possible carts as there are 3 easy, 5 medium and up to hardCartsNum (7-10) hard carts
             List<String> availableResourceTypes = getAvailableResourceTypes();
             int randomSize = r.nextInt(5, 10+i + (round/2)); // Harder for later rounds and harder difficulty
             int randomResource = r.nextInt(0, availableResourceTypes.size());
             int randomSpeed = r.nextInt(1, 5 + (i/4)); // Harder for harder difficulty
             carts.add(new Cart(randomSize, availableResourceTypes.get(randomResource), randomSpeed));
         }
-
-        Random r = new Random();
-        hardCartsNum = r.nextInt(7, 11);
     }
 
     /**
