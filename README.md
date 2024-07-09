@@ -1,4 +1,7 @@
 # Team 15 SENG201 Project
+
+SENG201 project that focused on creating a game where you purchase, upgrade, and maintain resource towers, play through rounds of varying difficulty, and earn money/points by successfully filling carts with materials from your towers.
+
 ## Authors
 - SENG201 Teaching Team, Caleb Cooper, Quinn Le Lievre
 
